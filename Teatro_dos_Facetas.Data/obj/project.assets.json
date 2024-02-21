@@ -1,0 +1,89 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "Teatro_dos_facetas.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Teatro_dos_facetas.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Teatro_dos_facetas.Model.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Teatro_dos_facetas.Model/1.0.0": {
+      "type": "project",
+      "path": "../Teatro_dos_Facetas.Model/Teatro_dos_facetas.Model.csproj",
+      "msbuildProject": "../Teatro_dos_Facetas.Model/Teatro_dos_facetas.Model.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "Teatro_dos_facetas.Model >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\javit\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
+      "projectName": "Teatro_dos_Facetas.Data",
+      "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
+      "packagesPath": "C:\\Users\\javit\\.nuget\\packages\\",
+      "outputPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Data\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\javit\\AppData\\Roaming\\NuGet\\NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {
+            "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Model\\Teatro_dos_facetas.Model.csproj": {
+              "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Model\\Teatro_dos_facetas.Model.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.403\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
