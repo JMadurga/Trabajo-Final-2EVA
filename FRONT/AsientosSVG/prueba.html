@@ -65,6 +65,15 @@
     </div>
 
     <script>
+        function cambiarColor(id) {
+            var svg = document.getElementById(id);
+            if (svg.getAttribute('fill') === '#43a047') {
+                svg.setAttribute('fill', '#ff0000');
+            } else {
+                svg.setAttribute('fill', '#43a047');
+            }
+        }
+
         function crearSVGs() {
             var container = document.getElementById('svgContainer');
             container.innerHTML = '';
@@ -73,7 +82,7 @@
             var numColumnas = document.getElementById('numColumnas').value;
 
             var svgHTML = `
-                <svg id="svgElement" width="80px" height="80px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet">
+                <svg id="svgElement" width="80px" height="80px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione" preserveAspectRatio="xMidYMid meet" onclick="cambiarColor(this.id)">
                     <path id="1" d="M54.5 32c.2 2.2-1.3 4-3.4 4H12.9c-2.1 0-3.6-1.8-3.4-4l2.1-22.2c.2-2.2 2.1-4 4.2-4h32.4c2.1 0 4 1.8 4.2 4L54.5 32" fill="#b4d7aa"></path>
                     <g fill="#3e4347">
                         <path d="M8.9 30.5h6v8h-6z"></path>
@@ -99,7 +108,7 @@
                 var rowDiv = document.createElement('div');
                 rowDiv.classList.add('svg-container');
                 for (var j = 0; j < numColumnas; j++) {
-                    rowDiv.innerHTML += svgHTML;
+                    rowDiv.innerHTML += svgHTML.replace(/id="svgElement"/g, 'id="svgElement' + i + j + '"');
                 }
                 container.appendChild(rowDiv);
             }
