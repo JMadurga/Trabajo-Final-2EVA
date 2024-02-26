@@ -11,3 +11,6 @@ import Foot from '../components/Foot.vue'
     <Foot/>
   </main>
 </template>
+
+<style>
+</style>

@@ -2,13 +2,6 @@
 <script setup lang="ts">
 import HomeView from './views/HomeView.vue'
 
-// export default {
-//   components: {
-//     Head,
-//     Bodi,
-//     Foot
-//   }
-// }
 </script>
 
 <template>
@@ -18,5 +11,5 @@ import HomeView from './views/HomeView.vue'
 </template>
 
 <style>
-/* Estilos globales si es necesario */
+
 </style>
