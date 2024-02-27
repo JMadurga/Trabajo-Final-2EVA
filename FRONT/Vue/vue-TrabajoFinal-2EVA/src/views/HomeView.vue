@@ -6,11 +6,21 @@ import Foot from '../components/Foot.vue'
 
 <template>
   <main>
-    <Cabecera/>
-    <Bodi/>
-    <Foot/>
+    <div class="grid-container">
+      <div class="cabecera"><Cabecera/></div>
+      <div><Bodi/></div>
+      <div><Foot/></div>
+    </div>
   </main>
 </template>
 
-<style>
+<style scoped>
+.grid-container {
+  display: grid;
+  grid-template-rows: auto;
+}
+
+.cabecera {
+  z-index: 1;
+}
 </style>
