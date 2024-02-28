@@ -7,6 +7,8 @@ namespace Teatro_dos_facetas.Model
         [Key]
         public int id {get; set;}
 
+
+
         [Required]
         public Boolean ocuppied {get; set;}
     }

@@ -11,6 +11,8 @@ namespace Teatro_dos_facetas.Model
         [Required]
         public string Mail{get; set;}
         [Required]
+        public string Password{get; set;}
+        [Required]
         public int Phone{get; set;}
     }
 }
