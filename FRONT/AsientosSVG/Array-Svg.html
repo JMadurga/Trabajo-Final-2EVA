@@ -7,7 +7,7 @@
     <style>
         .grid-container {
             display: grid;
-            grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+            grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto auto auto auto;
             grid-gap: 10px;
             justify-items: center;
             margin-inline: 400px;
@@ -143,16 +143,31 @@
                     var newFill = '';
                     switch(currentFill) {
                             case '#c4c4c4':
-                                newFill = '#ffa6d0';
+                                newFill = '#f9ffb8';
                                 break;
                             case '#949494':
-                                newFill = '#f558a3';
+                                newFill = '#d6de7c';
                                 break;
                             case '#5e5e5e':
-                                newFill = '#C72271';
+                                newFill = '#E6F457';
                                 break;
                     }
                     elemento.setAttribute('fill', newFill);
+                } else if(elemento.getAttribute('fill') == '#f9ffb8' || elemento.getAttribute('fill') == '#d6de7c' || elemento.getAttribute('fill') == '#E6F457'){
+                    var newFill = elemento.getAttribute('fill');
+                    var currentFill = '';
+                    switch(newFill) {
+                        case '#f9ffb8':
+                            currentFill = '#ffa6d0';
+                            break;
+                        case '#d6de7c':
+                            currentFill = '#f558a3';
+                            break;
+                        case '#E6F457':
+                            currentFill = '#C72271';
+                            break;
+                    }                    
+                    elemento.setAttribute('fill', currentFill);
                 } else if(elemento.getAttribute('fill') == '#ffa6d0' || elemento.getAttribute('fill') == '#f558a3' || elemento.getAttribute('fill') == '#C72271'){
                     var newFill = elemento.getAttribute('fill');
                     var currentFill = '';
@@ -168,12 +183,12 @@
                             break;
                     }                    
                     elemento.setAttribute('fill', currentFill);
-                }                
+                }              
             });
         }       
 
         // Llama a la función agregarSVG con el número de SVGs que deseas generar
-        agregarSVG(1); // Por ejemplo, para generar 5 SVGs
+        agregarSVG(112); // Por ejemplo, para generar 5 SVGs
     </script>    
 </body>
 </html>
