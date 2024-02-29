@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+            grid-gap: 10px;
+            justify-items: center;
+            margin-inline: 400px;
+            margin-top: 200px;
+        }
+
+        .svg-container {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container" id="gridContainer">
+        <!-- Los SVG se agregarán aquí dinámicamente mediante JavaScript -->
+    </div>
+
+    <script>
+        let svgCounter = 0; // Contador para el id autoincremental
+
+        function agregarSVG(numSVGs) {
+            var gridContainer = document.getElementById('gridContainer');
+            for (var i = 0; i < numSVGs; i++) {
+                svgCounter++; // Incrementa el contador para el siguiente id
+
+                // Crea el elemento SVG
+                var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+                svgElement.setAttribute("id", "svgElement" + svgCounter); // Usa el id autoincremental
+                svgElement.setAttribute("width", "80px");
+                svgElement.setAttribute("height", "80px");
+                svgElement.setAttribute("viewBox", "0 0 64 64");
+                svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                svgElement.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+                svgElement.setAttribute("aria-hidden", "true");
+                svgElement.setAttribute("role", "img");
+                svgElement.setAttribute("class", "iconify iconify--emojione");
+                svgElement.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+                // Crea el primer path
+                var path1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path1.setAttribute("id", "1");
+                path1.setAttribute("d", "M54.5 32c.2 2.2-1.3 4-3.4 4H12.9c-2.1 0-3.6-1.8-3.4-4l2.1-22.2c.2-2.2 2.1-4 4.2-4h32.4c2.1 0 4 1.8 4.2 4L54.5 32");
+                path1.setAttribute("fill", "#c4c4c4");
+                svgElement.appendChild(path1);
+
+                // Crea el grupo g
+                var group1 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                group1.setAttribute("fill", "#3e4347");
+
+                // Crea los paths dentro del grupo g
+                var path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path2.setAttribute("d", "M8.9 30.5h6v8h-6z");
+                group1.appendChild(path2);
+
+                var path3 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path3.setAttribute("d", "M49.1 30.5h6v8h-6z");
+                group1.appendChild(path3);
+
+                var path4 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path4.setAttribute("d", "M14.6 50.9h6V61h-6z");
+                group1.appendChild(path4);
+
+                var path5 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path5.setAttribute("d", "M43.4 50.9h6V61h-6z");
+                group1.appendChild(path5);
+
+                svgElement.appendChild(group1);
+
+                // Crea el segundo path
+                var path6 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path6.setAttribute("id", "2");
+                path6.setAttribute("d", "M41.4 25c-.3 2.6-2.4 4.8-4.5 4.8h-9.8c-2.2 0-4.2-2.1-4.5-4.8l-1.8-14.6c-.3-2.6 1.2-4.8 3.3-4.8h15.7c2.2 0 3.7 2.2 3.3 4.8L41.4 25");
+                path6.setAttribute("fill", "#949494");
+                svgElement.appendChild(path6);
+
+                // Crea el grupo g
+                var group2 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                group2.setAttribute("fill", "#94989b");
+
+                // Crea los paths dentro del grupo g
+                var path7 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path7.setAttribute("d", "M23 58.9c-.2-.5-.8-1-1.3-1h-8c-.6 0-1.1.4-1.3 1L10.9 63c-.2.5.1 1 .7 1h12c.6 0 .9-.4.7-1L23 58.9");
+                group2.appendChild(path7);
+
+                var path8 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path8.setAttribute("d", "M53.1 63l-1.4-4.1c-.2-.5-.8-1-1.3-1h-8c-.6 0-1.1.4-1.3 1L39.7 63c-.2.5.1 1 .7 1h12c.5 0 .8-.4.7-1");
+                group2.appendChild(path8);
+
+                svgElement.appendChild(group2);
+
+                // Crea el grupo g
+                var group3 = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                group3.setAttribute("id", "3");
+                group3.setAttribute("fill", "#5e5e5e");
+
+                // Crea los paths dentro del grupo g
+                var path9 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path9.setAttribute("d", "M46.2 6c0 2.2-1.7 4-3.8 4H21.5c-2.1 0-3.8-1.8-3.8-4V4c0-2.2 1.7-4 3.8-4h20.9c2.1 0 3.8 1.8 3.8 4v2");
+                group3.appendChild(path9);
+
+                var path10 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path10.setAttribute("d", "M15.5 29.2l-.3-2.1c-.2-1.1-1.1-2-2.1-2h-2.7c-1 0-1.9.9-2.1 2L8 29.2c-.2 1.1.5 2 1.5 2H14c1 0 1.7-.9 1.5-2");
+                group3.appendChild(path10);
+
+                var path11 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path11.setAttribute("d", "M55.8 29.2l-.3-2.1c-.2-1.1-1.1-2-2.1-2h-2.7c-1 0-1.9.9-2.1 2l-.3 2.1c-.2 1.1.5 2 1.5 2h4.5c1 0 1.6-.9 1.5-2");
+                group3.appendChild(path11);
+
+                var path12 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                path12.setAttribute("d", "M51.5 36h-39c-3.1 0-5 3-4.4 6.7l.4 2.6c.6 3.7 3.7 6.7 6.7 6.7h33.4c3.1 0 6.1-3 6.7-6.7l.5-2.6c.7-3.6-1.3-6.7-4.3-6.7");
+                group3.appendChild(path12);
+
+                svgElement.appendChild(group3);
+
+                // Agrega el SVG al documento
+                gridContainer.appendChild(svgElement);
+
+                // Agrega el evento click para cambiar el color al SVG actual
+                svgElement.addEventListener('click', function() {
+                    cambiarColor(this); // Utilizamos 'this' para referirnos al SVG que ha sido clicado
+                });
+            }
+        }
+
+        // Función para cambiar el color de un SVG específico
+        function cambiarColor(svgElement) {
+            var elementos = svgElement.querySelectorAll('[id^="1"], [id^="2"], [id^="3"]');
+            
+            elementos.forEach(function(elemento) {
+                // Cambiar entre los tres colores alternos
+                if(elemento.getAttribute('fill') == '#c4c4c4' || elemento.getAttribute('fill') == '#949494' || elemento.getAttribute('fill') == '#5e5e5e'){
+                    var currentFill = elemento.getAttribute('fill');
+                    var newFill = '';
+                    switch(currentFill) {
+                            case '#c4c4c4':
+                                newFill = '#ffa6d0';
+                                break;
+                            case '#949494':
+                                newFill = '#f558a3';
+                                break;
+                            case '#5e5e5e':
+                                newFill = '#C72271';
+                                break;
+                    }
+                    elemento.setAttribute('fill', newFill);
+                } else if(elemento.getAttribute('fill') == '#ffa6d0' || elemento.getAttribute('fill') == '#f558a3' || elemento.getAttribute('fill') == '#C72271'){
+                    var newFill = elemento.getAttribute('fill');
+                    var currentFill = '';
+                    switch(newFill) {
+                        case '#ffa6d0':
+                            currentFill = '#c4c4c4';
+                            break;
+                        case '#f558a3':
+                            currentFill = '#949494';
+                            break;
+                        case '#C72271':
+                            currentFill = '#5e5e5e';
+                            break;
+                    }                    
+                    elemento.setAttribute('fill', currentFill);
+                }                
+            });
+        }       
+
+        // Llama a la función agregarSVG con el número de SVGs que deseas generar
+        agregarSVG(1); // Por ejemplo, para generar 5 SVGs
+    </script>    
+</body>
+</html>
+
+<!--
+    Out Selected:
+    c1: c4c4c4
+    c2: 949494
+    c3: 5e5e5e
+
+    Selected:
+    c1: f9ffb8
+    c2: d6de7c
+    c3: E6F457
+
+    Occupied:
+    c1: ffa6d0
+    c2: f558a3
+    c3: C72271
+
+-->
