@@ -23,9 +23,12 @@
         <v-spacer></v-spacer>
 
         <v-btn icon style="margin-right: 40px;" class="glow-on-hover">
-          <v-icon z-index="1"><img src="../media/ticket_icon.png" alt="carrito" height="30px" width="30px"></v-icon>
+          <v-icon z-index="1"><img src="../media/ticket_icon.png" alt="tickets" height="30px" width="30px"></v-icon>
         </v-btn>
 
+        <RouterLink to="/login"><v-btn icon style="margin-right: 40px;" class="glow-on-hover">
+          <v-icon z-index="1"><img src="../media/login.png" alt="tickets" height="30px" width="30px"></v-icon>
+        </v-btn></RouterLink>
         
       </v-app-bar>
     </v-layout>

@@ -1,19 +1,13 @@
 <script setup lang="ts">
-import Cabecera from '../components/Head.vue'
-import Bodi from '../components/Bodi.vue'
-import Foot from '../components/Foot.vue'
+import pruebas from '../components/pruebas.vue'
 </script>
-
 <template>
-  <main>
+<main>
     <div class="grid-container">
-      <div class="cabecera"><Cabecera/></div>
-      <div><Bodi/></div>
-      <div><Foot/></div>
+      <div class="cabecera"><pruebas/></div>
     </div>
   </main>
 </template>
-
 <style scoped>
 .grid-container {
   display: grid;
@@ -26,4 +20,15 @@ import Foot from '../components/Foot.vue'
 .cabecera {
   z-index: 1;
 }
+
 </style>
+
+
+<!--<script setup lang="ts">
+const props = defineProps({
+  first: String,
+  email: String,
+  password: String,
+  terms: Boolean
+});
+</script>-->
