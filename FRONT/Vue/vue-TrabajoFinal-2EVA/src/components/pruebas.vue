@@ -1,12 +1,12 @@
 <!-- Header.vue -->
 <template>
-  <v-card max-width="448" class="mx-auto" color="grey-lighten-3">
+  <v-card max-width="448" class="mx-auto">
     <v-layout row wrap align-center>
       
-      <v-app-bar color="blue-grey-darken-4" flat>
+      <v-app-bar color="blue-grey-darken-4" flat class="herobgcolor">
 
         <v-col class="d-flex justify-start" cols="auto">
-          <v-btn class="bg-image-button" rounded="xl" size="x-large" width="180px"></v-btn>
+          <RouterLink to="/"><v-btn class="bg-image-button" rounded="xl" size="x-large" width="180px"></v-btn></RouterLink>
         </v-col>
 
         <v-col cols="auto" class="d-flex justify-center">
@@ -51,11 +51,24 @@
 </template>
 <script setup lang="ts">
 const items = [
+        { title: 'Obras' },
+        { title: 'Promociones' },
         { title: 'Login' },
         { title: 'Carrito' }
       ]
 </script>
   <style scoped>
+
+  .herobgcolor {
+    background-color: linear-gradient(to right, rgba(62,78,98,.8), rgba(34,46,67,.8));
+    -webkit-animation: nebulahero 20s infinite linear;
+  }
+
+  @-webkit-keyframes nebulahero {
+    0% {-webkit-filter: hue-rotate(0deg);}
+    100% {-webkit-filter: hue-rotate(-360deg);}
+  }
+
   @media only screen and (max-width: 650px) {
     
     .ham-icon {

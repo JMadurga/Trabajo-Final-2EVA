@@ -129,6 +129,8 @@
   <style scoped>
   .v-carousel {
     margin-block: 100px;
+    margin-inline: 5%;
+    width: auto;
   }
 
   .cards-area {

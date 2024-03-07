@@ -1,8 +1,8 @@
 <!-- Footer.vue -->
 <template>
   <v-app>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1490.6931469128258!2d-0.9064205079732257!3d41.647395063737505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd596b2d806bcaf1%3A0xf5f3b0506578e1f2!2sTeatro%20de%20las%20Esquinas!5e0!3m2!1ses!2ses!4v1709318938810!5m2!1ses!2ses" width="600" height="450" style="margin: 20px; align-self: center;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     <v-footer dark padless>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1490.6931469128258!2d-0.9064205079732257!3d41.647395063737505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd596b2d806bcaf1%3A0xf5f3b0506578e1f2!2sTeatro%20de%20las%20Esquinas!5e0!3m2!1ses!2ses!4v1709318938810!5m2!1ses!2ses" width="600" height="450" style="margin: 20px; align-self: center;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       <v-card flat tile width="100%" class="primary white--text text-center">
         <v-card-text>
           <h1 class="pb-2 white--text" style="margin-block: 20px;"> You can find us at</h1>
@@ -92,6 +92,7 @@ const items = [
 .v-footer {
   background: rgba(62,78,98,1);
   flex: 1 1 auto;
+  flex-direction: column;
 }
 
 .v-card-text {
