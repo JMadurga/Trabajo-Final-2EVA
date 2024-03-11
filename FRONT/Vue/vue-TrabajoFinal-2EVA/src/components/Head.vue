@@ -120,8 +120,7 @@ const hamitem = [
 
   .bg-image-button { 
     /* Other button styles */ 
-    background-image: url('../media/logo-BC-animated.svg'); 
-    background-size: cover;
+    background-image: url('../media/Logoanimacion.svg'); 
     background-color: white;
     background-position: center; 
   } 
