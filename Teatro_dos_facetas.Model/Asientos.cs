@@ -7,9 +7,10 @@ namespace Teatro_dos_facetas.Model
         [Key]
         public int id {get; set;}
 
-
-
+        
         [Required]
-        public Boolean ocuppied {get; set;}
+        public bool isFree {get; set;} = true;
+
+        public List<SesionAsiento> SesionAsientos { get; set; }
     }
 }

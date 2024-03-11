@@ -35,13 +35,13 @@ namespace Teatro_dos_facetas.Controller
         public IActionResult Create(Users user)
         {
             _userService.Add(user);
-            return CreatedAtAction(nameof(Get), new { id = user.Id }, user);
+            return CreatedAtAction(nameof(Get), new { id = user.id }, user);
         }
 
         [HttpPut("{id}")]
         public IActionResult Update(int id, Users user)
         {
-            if (id != user.Id)
+            if (id != user.id)
                 return BadRequest();
 
             var existingUser = _userService.Get(id);

@@ -5,14 +5,14 @@ namespace Teatro_dos_facetas.Model
     public class Users{
 
         [Key]
-        public int Id {get; set;}
+        public int id {get; set;}
         [Required]
-        public string Name {get; set;}
+        public string name {get; set;}
         [Required]
-        public string Mail{get; set;}
+        public string mail{get; set;}
         [Required]
-        public string Password{get; set;}
+        public string password{get; set;}
         [Required]
-        public int Phone{get; set;}
+        public int phone{get; set;}
     }
 }

@@ -5,12 +5,17 @@ namespace Teatro_dos_facetas.Model
     public class Obras{
 
         [Key]
-        public int Id {get; set;}
+        public int id {get; set;}
 
         [Required]
-        public string Name {get; set;}
+        public string name {get; set;}
 
         [Required]
-        public string Synopsis{get; set ;}
+        public string categoria {get; set;}
+
+        [Required]
+        public string synopsis{get; set ;}
+
+        public List<SesionObra> SesionObras { get; set; }
     }
 }

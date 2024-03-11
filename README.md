@@ -2,7 +2,7 @@
 
 # Comandos-necesarios
     Comando para realizar un plan de migración:
-    dotnet ef migrations add MigracionConstosso -p ./Data/Data.csproj -s ./Api/Api.csproj
+    dotnet ef migrations add Migraciones -p ./Teatro_dos_Facetas.Data/Teatro_dos_Facetas.Data.csproj -s ./Teatro_dos_Facetas.Api/Teatro_dos_Facetas.Api.csproj
 
     Update el plan de migración:
     dotnet ef database update  -p ./Data/Data.csproj -s ./Api/Api.csproj

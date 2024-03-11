@@ -5,11 +5,11 @@ namespace Teatro_dos_facetas.Data{
     public class ObrasRepository: IObrasRepository
     {
 
-        private readonly   ObrasContext _context;
+        private readonly   TeatroContext _context;
         public List<Obras> AllObras => _context.Obras.ToList();
 
 
-        public ObrasRepository(ObrasContext context)
+        public ObrasRepository(TeatroContext context)
         {
             _context = context;
         }
@@ -18,10 +18,16 @@ namespace Teatro_dos_facetas.Data{
             _context.Obras.Add(obras);
             SaveChanges();
         }
-        public Obras GetObra (int Id)
+        public Obras GetObra (int id)
         {
-            return _context.Obras.FirstOrDefault(obras => obras.Id == Id);
+            return _context.Obras.FirstOrDefault(obras => obras.id == id);
         }
+
+        public Obras GetObraCategoria (string categoria)
+        {
+            return _context.Obras.FirstOrDefault(obras => obras.categoria == categoria);
+        }
+
 
         public void ChangeObra(Obras obra)
         {

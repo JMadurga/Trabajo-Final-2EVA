@@ -10,10 +10,15 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddControllers();
 builder.Services.AddScoped<ObraService>();
+builder.Services.AddControllers();
+builder.Services.AddScoped<AsientoService>();
 var connectionString = builder.Configuration.GetConnectionString("ServerDB");
 builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddDbContext<ObrasContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AsientoContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IObrasRepository, ObrasRepository>();
+builder.Services.AddScoped<IAsientoRepository, AsientosRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

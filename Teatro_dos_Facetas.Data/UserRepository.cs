@@ -5,11 +5,11 @@ namespace Teatro_dos_facetas.Data{
     public class UserRepository: IUserRepository
     {
 
-        private readonly   UserContext _context;
+        private readonly   TeatroContext _context;
         public List<Users> AllUser => _context.Users.ToList();
 
 
-        public UserRepository(UserContext context)
+        public UserRepository(TeatroContext context)
         {
             _context = context;
         }
@@ -18,9 +18,9 @@ namespace Teatro_dos_facetas.Data{
             _context.Users.Add(user);
             SaveChanges();
         }
-        public Users GetUser (int Id)
+        public Users GetUser (int id)
         {
-            return _context.Users.FirstOrDefault(user => user.Id == Id);
+            return _context.Users.FirstOrDefault(user => user.id == id);
         }
 
         public void ChangeUser(Users user)

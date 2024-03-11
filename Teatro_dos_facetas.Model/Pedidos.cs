@@ -9,9 +9,9 @@ namespace Teatro_dos_facetas.Model
 
         public PedidoUser pedidoUser{get; set;}
 
-        public PedidoSesion pedidoSesion{get; set;}
+        public PedidoSesion pedidoSesion{get; set;} 
 
-
+        public List<Asientos> pedidoAsientos {get; set;}
 
     }
 }

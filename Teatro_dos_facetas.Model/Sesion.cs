@@ -10,9 +10,9 @@ namespace Teatro_dos_facetas.Model
         [Required]
         public DateTime date{get; set;}
         [Required]
-        public List<Obras> obraSesion{get; set;}
+        public List<SesionObra> SesionObra {get; set;}
         [Required]
-        public List<Asientos> asientos {get; set;}
+        public List<SesionAsiento> SesionAsientos{get; set;}
 
     }
 }
