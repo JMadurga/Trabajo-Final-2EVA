@@ -14,3 +14,23 @@ RUN <additional_commands>
 
 # Specify the command to run when the container starts
 CMD <command_to_start_your_application>
+
+# FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+# WORKDIR /app
+
+# COPY *.sln .
+# COPY Teatro_dos_facetas.Model/*.csproj Models/
+# COPY Teatro_dos_Facetas.Business/*.csproj Business/
+# COPY Teatro_dos_Facetas.Data/*.csproj Data/
+# COPY Teatro_dos_Facetas.Api/*.csproj Api/
+# RUN dotnet restore
+
+# COPY . .
+# RUN dotnet publish -c Release -o Api/out
+
+# FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS runtime
+# WORKDIR /app
+# COPY --from=build /app/Api/out .
+
+# EXPOSE 80
+# ENTRYPOINT ["dotnet", "Teatro_dos_facetas.Api.dll"]
