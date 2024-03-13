@@ -11,6 +11,7 @@ import { aliases, mdi } from "vuetify/iconsets/mdi";
 import '@mdi/font/css/materialdesignicons.css' // Ensure you are using css-loader
 //import VueGoogleMaps from '@fawmi/vue-google-maps';
 
+
 const vuetify = createVuetify({
     components,
     directives,

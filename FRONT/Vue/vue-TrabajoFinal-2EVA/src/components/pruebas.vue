@@ -1,180 +1,255 @@
-<!-- Header.vue -->
+<!-- Header.vue 
 <template>
-  <v-card max-width="448" class="mx-auto">
-    <v-layout row wrap align-center>
-      
-      <v-app-bar color="blue-grey-darken-4" flat class="herobgcolor">
-
-        <v-col class="d-flex justify-start" cols="auto">
-          <RouterLink to="/"><v-btn class="bg-image-button" rounded="xl" size="x-large" width="180px"></v-btn></RouterLink>
-        </v-col>
-
-        <v-col cols="auto" class="d-flex justify-center">
-          <v-tabs fixed-tabs bg-color="transparent">
-            <v-tab class="ds boton flex display-4 font-weight-black">Obras</v-tab>
-            <v-tab class="ds boton flex display-4 font-weight-black">Promociones</v-tab>
-          </v-tabs>
-        </v-col>
-
-        <v-spacer></v-spacer>
-
-        <v-col cols="auto" class="ds d-flex justify-end">
-          <v-btn icon class="ds glow-on-hover mr-5">
-            <v-icon z-index="1"><img src="../media/ticket_icon.png" alt="tickets" height="30px" width="30px"></v-icon>
-          </v-btn>
-          <RouterLink to="/login">
-            <v-btn icon class="ds glow-on-hover mr-2">
-              <v-icon z-index="1"><img src="../media/login.png" alt="login" height="30px" width="30px"></v-icon>
-            </v-btn>
-          </RouterLink>
-        </v-col>
-
-        <v-col class="ham-icon d-flex justify-start" cols="auto">
-          <v-menu>
-            <template v-slot:activator="{ props }">
-              <v-btn v-bind="props" icon class="ham-icon glow-on-hover mr-2">
-                  <v-icon z-index="1"><img src="../media/ham-icon.png" alt="login" height="30px" width="30px"></v-icon>
-              </v-btn>
-            </template>
-
-            <v-list>
-              <v-list-item v-for="(item, i) in items" :key="i">
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
-        </v-col>
-
-      </v-app-bar>
-    </v-layout>
-  </v-card>
+  <v-btn @mouseover="onMouseEnter" @mouseleave="onMouseLeave" id="canvasFull" ref="canvasFull" rounded="xl" size="x-large" width="180px" class="ma-2" color="white">
+    <div id="canvasFull" style="align-items: center;">
+      <canvas ref="canvasLine1" width="180" height="30"></canvas>
+      <canvas id="canvasText" ref="canvasText" width="180" height="15"></canvas>
+      <canvas ref="canvasLine2" width="180" height="30"></canvas>
+    </div>
+  </v-btn>
 </template>
+<style scoped> 
+
+#canvasFull {
+  display: flex;
+  flex-direction: column;
+}
+
+#canvasText {
+  transition: all 2s ease;
+}
+
+</style>
 <script setup lang="ts">
-const items = [
-        { title: 'Obras' },
-        { title: 'Promociones' },
-        { title: 'Login' },
-        { title: 'Carrito' }
-      ]
-</script>
-  <style scoped>
 
-  .herobgcolor {
-    background-color: linear-gradient(to right, rgba(62,78,98,.8), rgba(34,46,67,.8));
-    -webkit-animation: nebulahero 20s infinite linear;
-  }
+import { ref, onMounted } from 'vue';
+import type { Ref } from 'vue';
 
-  @-webkit-keyframes nebulahero {
-    0% {-webkit-filter: hue-rotate(0deg);}
-    100% {-webkit-filter: hue-rotate(-360deg);}
-  }
+// Inicializa tus referencias de canvas como Ref<HTMLCanvasElement | null>
+const canvasFull: Ref<HTMLCanvasElement | null> = ref(null);
+const canvasLine1: Ref<HTMLCanvasElement | null> = ref(null);
+const canvasText: Ref<HTMLCanvasElement | null> = ref(null);
+const canvasLine2: Ref<HTMLCanvasElement | null> = ref(null);
 
-  @media only screen and (max-width: 650px) {
-    
-    .ham-icon {
-      display: block;
-    }
+// Esta función se llamará una vez que los componentes estén montados
+onMounted(() => {
+  // Asegúrate de que todos los elementos del canvas no son nulos antes de continuar.
+  if (canvasLine1.value && canvasText.value && canvasLine2.value) {
+    const ctxLine1 = canvasLine1.value.getContext('2d');
+    const ctxText = canvasText.value.getContext('2d');
+    const ctxLine2 = canvasLine2.value.getContext('2d');
 
-    .ds {
-      display: none;
-    }
+    // Asegúrate de que los contextos también se han obtenido correctamente.
+    if (ctxLine1 && ctxText && ctxLine2) {
+      const loadFont = new FontFace('Lato', 'url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh50XSwiPGQ.woff2)', {
+        weight: '900'
+      });
 
-  }
+      loadFont.load().then(function(loadedFont) {
+        document.fonts.add(loadedFont);
+        redrawText(); // Asegúrate de que esta función se llama dentro de un contexto seguro.
+      });
 
-  @media only screen and (min-width: 650px) {
-    
-    .ham-icon {
-      display: none;
-    }
+      function redrawText() {
+        if (ctxText && canvasText.value) {
+        // Aquí no necesitas comprobaciones adicionales porque estás dentro de un contexto donde canvasText y ctxText ya están asegurados como no nulos.
+        ctxText.clearRect(0, 0, canvasText.value.width, canvasText.value.height);
+        ctxText.fillStyle = '#414768';
+        ctxText.font = '12.5px Lato Black, Lato, sans-serif';
 
-    .ds {
-      display: block;
-    }
+        const text = 'TEATRO DOS FACETAS';
+        const textMetrics = ctxText.measureText(text);
+        const x = (canvasText.value.width - textMetrics.width) / 2;
+        const y = (canvasText.value.height / 2) + (textMetrics.actualBoundingBoxAscent / 2);
 
-  }
-  .v-app-bar {
-    height: 64px;
-  }
+        ctxText.fillText(text, x, y);
+        }
+      }
+      ctxLine1.strokeStyle = '#ff00cc';
+        ctxLine1.lineWidth = 5; 
 
-  .bg-image-button { 
-    /* Other button styles */ 
-    background-image: url('../media/logo-BC.png'); 
-    background-size: cover; 
-    background-position: center; 
-  } 
-  .boton::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: #fff;
-    transition: width 0.3s ease;
-  }
+        ctxLine2.strokeStyle = '#ff00cc';
+        ctxLine2.lineWidth = 5; 
+
+        ctxLine1.beginPath();
+        ctxLine1.moveTo(0, 0);
+        ctxLine1.lineTo(0, 100);
+        ctxLine1.stroke();
+
+        ctxLine1.beginPath();
+        ctxLine1.moveTo(360, 65);
+        ctxLine1.lineTo(655, 65);
+        ctxLine1.stroke();
+
+        ctxLine1.beginPath();
+        ctxLine1.moveTo(655, 60);
+        ctxLine1.lineTo(655, 100);
+        ctxLine1.stroke();
         
-  .boton:hover::before {
-    width: 100%;
+        /////////////////////////////
+        
+        ctxLine2.beginPath();
+        ctxLine2.moveTo(360, 0);
+        ctxLine2.lineTo(360, 40);
+        ctxLine2.stroke();
+
+        ctxLine2.beginPath();
+        ctxLine2.moveTo(360, 35);
+        ctxLine2.lineTo(655, 35);
+        ctxLine2.stroke();
+
+        ctxLine2.beginPath();
+        ctxLine2.moveTo(655, 0);
+        ctxLine2.lineTo(655, 40);
+        ctxLine2.stroke();
+    }    
+  }  
+});
+
+function onMouseEnter() {
+  if (canvasText.value && canvasLine1.value && canvasLine2.value) {
+    // Solo modifica las propiedades si los elementos no son nulos.
+    canvasText.value.style.transform = 'scale(0.3)';
+    canvasLine1.value.style.transition = 'transform 3.2s ease';
+    canvasLine1.value.style.transform = 'translateY(81px)';
+    canvasLine2.value.style.transition = 'transform 3.2s ease';
+    canvasLine2.value.style.transform = 'translateY(-81px)';
   }
-  
-  .glow-on-hover {
-          width: 50px;
-          height: 50px;
-          border: none;
-          outline: none;
-          color: #fff;
-          background: #000;
-          cursor: pointer;
-          position: relative;
-          z-index: 0;
-          border-radius: 50px;
+}
+
+function onMouseLeave() {
+  if (canvasText.value && canvasLine1.value && canvasLine2.value) {
+    // Solo modifica las propiedades si los elementos no son nulos.
+    canvasText.value.style.transform = 'scale(1)';
+    canvasLine1.value.style.transition = 'transform 0.8s ease';
+    canvasLine1.value.style.transform = 'translateY(0px)';
+    canvasLine2.value.style.transition = 'transform 0.8s ease';
+    canvasLine2.value.style.transform = 'translateY(0px)';
+  }
+}
+</script>
+-->
+
+<template>
+  <v-btn @mouseover="onMouseEnter" @mouseleave="onMouseLeave" id="canvasFull" ref="canvasFull" rounded="xl" size="x-large" width="250px" class="ma-2" color="white">
+    <div id="canvasFull">
+      <canvas ref="canvasLine1" width="250" height="40"></canvas>
+      <canvas id="canvasText" ref="canvasText" width="250" height="15"></canvas>
+      <canvas ref="canvasLine2" width="250" height="40"></canvas>
+    </div>
+  </v-btn>
+</template>
+
+<script setup lang="ts">
+import { ref, onMounted } from 'vue';
+import type { Ref } from 'vue';
+
+const canvasFull: Ref<HTMLCanvasElement | null> = ref(null);
+const canvasLine1: Ref<HTMLCanvasElement | null> = ref(null);
+const canvasText: Ref<HTMLCanvasElement | null> = ref(null);
+const canvasLine2: Ref<HTMLCanvasElement | null> = ref(null);
+
+onMounted(() => {
+  if (canvasLine1.value && canvasText.value && canvasLine2.value) {
+    const ctxLine1 = canvasLine1.value.getContext('2d');
+    const ctxText = canvasText.value.getContext('2d');
+    const ctxLine2 = canvasLine2.value.getContext('2d');
+
+    if (ctxLine1 && ctxText && ctxLine2) {
+      const loadFont = new FontFace('Lato', 'url(https://fonts.gstatic.com/s/lato/v20/S6u9w4BMUTPHh50XSwiPGQ.woff2)', {
+        weight: '900'
+      });
+
+      loadFont.load().then(function(loadedFont) {
+        document.fonts.add(loadedFont);
+        redrawText();
+      });
+
+      function redrawText() {
+        if (ctxText && canvasText.value) {
+        // Aquí no necesitas comprobaciones adicionales porque estás dentro de un contexto donde canvasText y ctxText ya están asegurados como no nulos.
+        ctxText.clearRect(0, 0, canvasText.value.width, canvasText.value.height);
+        ctxText.fillStyle = '#414768';
+        ctxText.font = '12.5px Lato Black, Lato, sans-serif';
+
+        const text = 'TEATRO DOS FACETAS';
+        const textMetrics = ctxText.measureText(text);
+        const x = (canvasText.value.width - textMetrics.width) / 2;
+        const y = (canvasText.value.height / 2) + (textMetrics.actualBoundingBoxAscent / 2);
+
+        ctxText.fillText(text, x, y);
+        }
       }
+      ctxLine1.strokeStyle = '#ff00cc';
+      ctxLine1.lineWidth = 4; 
+
+      ctxLine2.strokeStyle = '#ff00cc';
+      ctxLine2.lineWidth = 4; 
+
+      ctxLine1.beginPath();
+      ctxLine1.moveTo(55, 28);
+      ctxLine1.lineTo(55, 40);
+      ctxLine1.stroke();
+
+      ctxLine1.beginPath();
+      ctxLine1.moveTo(53, 28);
+      ctxLine1.lineTo(195, 28);
+      ctxLine1.stroke();
+
+      ctxLine1.beginPath();
+      ctxLine1.moveTo(193, 28);
+      ctxLine1.lineTo(193, 40);
+      ctxLine1.stroke();
       
-      .glow-on-hover:before {
-          content: '';
-          background: linear-gradient(45deg, #818181, rgba(62,78,98,.8), #000, #818181, rgba(62,78,98,.8), #000, #818181, rgba(62,78,98,.8), #000);
-          position: absolute;
-          top: -2px;
-          left:-2px;
-          background-size: 400%;
-          z-index: -1;
-          filter: blur(5px);
-          width: calc(100% + 4px);
-          height: calc(100% + 4px);
-          animation: glowing 20s linear infinite;
-          opacity: 0;
-          transition: opacity .3s ease-in-out;
-          border-radius: 50px;
-      }
-      
-      .glow-on-hover:active {
-          color: #000
-      }
-      
-      .glow-on-hover:active:after {
-          background: transparent;
-      }
-      
-      .glow-on-hover:hover:before {
-          opacity: 1;
-      }
-      
-      .glow-on-hover:after {
-          z-index: -1;
-          content: '';
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: #000;
-          left: 0;
-          top: 0;
-          border-radius: 50px;
-      }
-      
-      @keyframes glowing {
-          0% { background-position: 0 0; }
-          50% { background-position: 400% 0; }
-          100% { background-position: 0 0; }
-      }
-  </style>
-    
+        /////////////////////////////
+        
+      ctxLine2.beginPath();
+      ctxLine2.moveTo(55, 0);
+      ctxLine2.lineTo(55, 12);
+      ctxLine2.stroke();
+
+      ctxLine2.beginPath();
+      ctxLine2.moveTo(53, 12);
+      ctxLine2.lineTo(195, 12);
+      ctxLine2.stroke();
+
+      ctxLine2.beginPath();
+      ctxLine2.moveTo(193, 0);
+      ctxLine2.lineTo(193, 12);
+      ctxLine2.stroke();
+    }
+  }
+});
+
+function onMouseEnter() {
+  if (canvasText.value && canvasLine1.value && canvasLine2.value) {
+    canvasText.value.style.transform = 'scale(0.6)';
+    canvasLine1.value.style.transition = 'transform 3.2s ease';
+    canvasLine1.value.style.transform = 'translateY(7px)';
+    canvasLine2.value.style.transition = 'transform 3.2s ease';
+    canvasLine2.value.style.transform = 'translateY(-7px)';
+  }
+}
+
+function onMouseLeave() {
+  if (canvasText.value && canvasLine1.value && canvasLine2.value) {
+    canvasText.value.style.transform = 'scale(1)';
+    canvasLine1.value.style.transition = 'transform 0.8s ease';
+    canvasLine1.value.style.transform = 'translateY(0px)';
+    canvasLine2.value.style.transition = 'transform 0.8s ease';
+    canvasLine2.value.style.transform = 'translateY(0px)';
+  }
+}
+</script>
+
+<style scoped>
+#canvasFull {
+  display: flex;
+  flex-direction: column;
+}
+
+#canvasText {
+  transition: all 2s ease;
+}
+</style>
+
