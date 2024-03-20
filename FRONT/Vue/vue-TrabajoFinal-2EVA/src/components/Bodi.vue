@@ -18,114 +18,48 @@
       </v-carousel>
     </div>
     <div class="cards-area">
-      <v-card class="mx-auto" width="300px">
-        <v-img src="https://www.clasicodesevilla.com/images/media/Romeo-Y-Julieta-12.jpg" height="200px" cover></v-img>
-  
-        <v-card-title>Romeo y Julieta</v-card-title>
-        <v-card-subtitle>27 de Septiembre 2024</v-card-subtitle>
-  
+      <v-card width="300px" v-for="card in cards" :key="card.id">
+        <v-img :src="card.imgSrc" height="200px" cover></v-img>
+        <v-card-title>{{ card.title }}</v-card-title>
+        <v-card-subtitle>{{ card.subtitle }}</v-card-subtitle>
         <v-card-actions>
-          <v-btn color="blue darken-4" variant="text">Comprar</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show">↓</v-btn>
+          <v-btn color="blue darken-4" variant="text" @click="selectPlay(play)">Comprar</v-btn>
         </v-card-actions>
-  
-        <v-expand-transition>
-          <div v-show="show">
-            <v-divider></v-divider>
-            <v-card-text>
-                Una apasionante tragedia que sigue el romance prohibido entre Romeo y Julieta, dos jóvenes de familias rivales en Verona. Amor, odio, traición y destino se entrelazan en esta emblemática historia de Shakespeare, llevando a los amantes a un final desgarrador que conmueve al público.
-            </v-card-text>
-          </div>
-        </v-expand-transition>
-      </v-card>
-      <v-card class="mx-auto" width="300px">
-        <v-img src="https://www.clasicodesevilla.com/images/media/Romeo-Y-Julieta-12.jpg" height="200px" cover></v-img>
-  
-        <v-card-title>Romeo y Julieta</v-card-title>
-        <v-card-subtitle>27 de Septiembre 2024</v-card-subtitle>
-  
         <v-card-actions>
-          <v-btn color="blue darken-4" variant="text">Comprar</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show">↓</v-btn>
+          <v-expansion-panels>
+            <v-expansion-panel elevation="0">
+              <v-expansion-panel-title collapse-icon="mdi-minus" expand-icon="mdi-plus">
+              Más información
+              </v-expansion-panel-title>
+              <v-expansion-panel-text> {{ card.content }} </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
         </v-card-actions>
-  
-        <v-expand-transition>
-          <div v-show="show">
-            <v-divider></v-divider>
-            <v-card-text>
-                Una apasionante tragedia que sigue el romance prohibido entre Romeo y Julieta, dos jóvenes de familias rivales en Verona. Amor, odio, traición y destino se entrelazan en esta emblemática historia de Shakespeare, llevando a los amantes a un final desgarrador que conmueve al público.
-            </v-card-text>
-          </div>
-        </v-expand-transition>
-      </v-card>
-      <v-card class="mx-auto" width="300px">
-        <v-img src="https://www.clasicodesevilla.com/images/media/Romeo-Y-Julieta-12.jpg" height="200px" cover></v-img>
-  
-        <v-card-title>Romeo y Julieta</v-card-title>
-        <v-card-subtitle>27 de Septiembre 2024</v-card-subtitle>
-  
-        <v-card-actions>
-          <v-btn color="blue darken-4" variant="text">Comprar</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show">↓</v-btn>
-        </v-card-actions>
-  
-        <v-expand-transition>
-          <div v-show="show">
-            <v-divider></v-divider>
-            <v-card-text>
-                Una apasionante tragedia que sigue el romance prohibido entre Romeo y Julieta, dos jóvenes de familias rivales en Verona. Amor, odio, traición y destino se entrelazan en esta emblemática historia de Shakespeare, llevando a los amantes a un final desgarrador que conmueve al público.
-            </v-card-text>
-          </div>
-        </v-expand-transition>
-      </v-card>
-      <v-card class="mx-auto" width="300px">
-        <v-img src="https://www.clasicodesevilla.com/images/media/Romeo-Y-Julieta-12.jpg" height="200px" cover></v-img>
-  
-        <v-card-title>Romeo y Julieta</v-card-title>
-        <v-card-subtitle>27 de Septiembre 2024</v-card-subtitle>
-  
-        <v-card-actions>
-          <v-btn color="blue darken-4" variant="text">Comprar</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show">↓</v-btn>
-        </v-card-actions>
-  
-        <v-expand-transition>
-          <div v-show="show">
-            <v-divider></v-divider>
-            <v-card-text>
-                Una apasionante tragedia que sigue el romance prohibido entre Romeo y Julieta, dos jóvenes de familias rivales en Verona. Amor, odio, traición y destino se entrelazan en esta emblemática historia de Shakespeare, llevando a los amantes a un final desgarrador que conmueve al público.
-            </v-card-text>
-          </div>
-        </v-expand-transition>
-      </v-card>
-      <v-card class="mx-auto" width="300px">
-        <v-img src="https://www.clasicodesevilla.com/images/media/Romeo-Y-Julieta-12.jpg" height="200px" cover></v-img>
-  
-        <v-card-title>Romeo y Julieta</v-card-title>
-        <v-card-subtitle>27 de Septiembre 2024</v-card-subtitle>
-  
-        <v-card-actions>
-          <v-btn color="blue darken-4" variant="text">Comprar</v-btn>
-          <v-spacer></v-spacer>
-          <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show">↓</v-btn>
-        </v-card-actions>
-  
-        <v-expand-transition>
-          <div v-show="show">
-            <v-divider></v-divider>
-            <v-card-text>
-                Una apasionante tragedia que sigue el romance prohibido entre Romeo y Julieta, dos jóvenes de familias rivales en Verona. Amor, odio, traición y destino se entrelazan en esta emblemática historia de Shakespeare, llevando a los amantes a un final desgarrador que conmueve al público.
-            </v-card-text>
-          </div>
-        </v-expand-transition>
       </v-card>
     </div>
-  </template>
-  
+  </template>  
+  <script setup lang="ts">
+  import { ref } from 'vue';
+  import { usePlaysStore } from '@/stores/obraSeleccionada';
+
+  const playsStore = usePlaysStore();
+
+  const selectPlay = (play: object) => { // Asegúrate de reemplazar 'any' con el tipo específico de tus obras de teatro
+    playsStore.selectPlay(play);
+  };
+
+const cards = ref([
+  { id: 1, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 2, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 3, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 4, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 5, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 6, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 7, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 8, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' }
+]);
+
+  </script>
   <style scoped>
   .v-carousel {
     margin-block: 100px;
@@ -162,12 +96,4 @@
     }
   }
   
-  </style>
-  
-  <script setup lang="ts">
-  import { ref } from 'vue';
-  
-  const show = ref(false);  
-  const slides = ['First', 'Second', 'Third', 'Fourth', 'Fifth'];
-  </script>
-  
+  </style>@/stores/obraSeleccionada../stores/obraSeleccionada.js

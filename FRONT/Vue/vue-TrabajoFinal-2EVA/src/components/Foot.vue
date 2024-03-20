@@ -15,13 +15,16 @@
 
         <v-expansion-panels>
           <v-expansion-panel
-            v-for="i in items"
+            v-for="(item, index) in items"
+            :key="index"
           >
-            <v-expansion-panel-title expand-icon="mdi-menu-down">
-              {{ i.name }}
-            </v-expansion-panel-title>
+            <v-expansion-panel-title>{{ item.name }}</v-expansion-panel-title>
             <v-expansion-panel-text>
-              {{ i.tags }}
+              <ul class="tags-list">
+                <li v-for="(tag, tagIndex) in item.tags" :key="tagIndex">
+                  <a :href="tag.url" class="tag">{{ tag.urlname }}</a>
+                </li>
+              </ul>
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -104,6 +107,32 @@ const items = [
   padding-inline: 200px;
   background: rgba(34,46,67,1);
   padding-bottom: 20px;
+}
+
+.tags-list {
+  list-style-type: none; /* Removes the default list style */
+  padding: 0; /* Removes the default list padding */
+  margin: 0; /* Removes the default list margin */
+  display: flex; /* Displays the list items in a row */
+  flex-wrap: wrap; /* Allows list items to wrap onto the next line if there's not enough space */
+}
+
+.tag {
+  display: inline-flex; /* Ensures the tags are inline and can benefit from flex properties */
+  align-items: center; /* Centers the tags vertically */
+  background-color: #f0f0f0; /* Light grey background */
+  border-radius: 15px; /* Rounds the corners */
+  padding: 5px 15px; /* Adds space inside the tags */
+  margin: 5px; /* Adds space between the tags */
+  text-decoration: none; /* Removes underline from links */
+  color: #333333; /* Dark grey text color */
+  font-size: 14px; /* Sets the font size */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+.tag:hover {
+  background-color: #555555; /* Darker background on hover */
+  color: #ffffff; /* White text on hover */
 }
 
 </style>

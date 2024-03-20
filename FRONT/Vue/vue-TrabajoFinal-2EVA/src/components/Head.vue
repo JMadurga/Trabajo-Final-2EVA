@@ -34,9 +34,11 @@
           <div class="d-flex justify-space-around">
             <v-menu transition="slide-x-reverse-transition">
               <template v-slot:activator="{ props }">
-                <v-btn icon class="ds glow-on-hover mr-2" v-bind="props" @click.stop="drawer = !drawer">
-                  <v-icon z-index="1"><img src="../media/ticket_icon.png" alt="tickets" height="30px" width="30px"></v-icon>
-                </v-btn>
+                <RouterLink to="/compras">
+                  <v-btn icon class="ds glow-on-hover mr-2" v-bind="props" @click.stop="drawer = !drawer">
+                    <v-icon z-index="1"><img src="../media/ticket_icon.png" alt="tickets" height="30px" width="30px"></v-icon>
+                  </v-btn>
+                </RouterLink>
               </template>
             </v-menu>
           </div>
