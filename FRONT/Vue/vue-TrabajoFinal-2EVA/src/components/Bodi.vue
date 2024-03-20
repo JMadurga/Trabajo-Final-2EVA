@@ -23,7 +23,7 @@
         <v-card-title>{{ card.title }}</v-card-title>
         <v-card-subtitle>{{ card.subtitle }}</v-card-subtitle>
         <v-card-actions>
-          <v-btn color="blue darken-4" variant="text" @click="selectPlay(play)">Comprar</v-btn>
+          <RouterLink to="/compras"><v-btn color="blue darken-4" variant="text" @click="comprar(card)">Comprar</v-btn></RouterLink>
         </v-card-actions>
         <v-card-actions>
           <v-expansion-panels>
@@ -40,25 +40,27 @@
   </template>  
   <script setup lang="ts">
   import { ref } from 'vue';
-  import { usePlaysStore } from '@/stores/obraSeleccionada';
 
-  const playsStore = usePlaysStore();
+  import { useObraSeleccionadaStore } from '@/stores/obraSeleccionada';
 
-  const selectPlay = (play: object) => { // Asegúrate de reemplazar 'any' con el tipo específico de tus obras de teatro
-    playsStore.selectPlay(play);
-  };
+// Importamos la store que hemos definido
+
+const obraSeleccionadaStore = useObraSeleccionadaStore(); // Instanciamos la store
 
 const cards = ref([
-  { id: 1, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 2, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 3, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 4, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 5, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 6, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 7, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 8, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' }
+  { id: 1, price: 12, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 2, price: 12, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 3, price: 12, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 4, price: 12, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 5, price: 12, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 6, price: 12, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 7, price: 12, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
+  { id: 8, price: 12, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' }
 ]);
 
+const comprar = (obra: any) => {
+  obraSeleccionadaStore.seleccionarObra(obra);
+};
   </script>
   <style scoped>
   .v-carousel {
@@ -96,4 +98,4 @@ const cards = ref([
     }
   }
   
-  </style>@/stores/obraSeleccionada../stores/obraSeleccionada.js
+  </style>

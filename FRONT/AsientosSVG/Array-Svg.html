@@ -18,6 +18,15 @@
             width: 100px;
             height: 100px;
         }
+        @keyframes scaleAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.5); }
+            100% { transform: scale(1); }
+        }
+    
+        .animated {
+            animation: scaleAnimation 500ms;
+        }
     </style>
 </head>
 <body>
@@ -135,10 +144,24 @@
         // Función para cambiar el color de un SVG específico
         function cambiarColor(svgElement) {
             var elementos = svgElement.querySelectorAll('[id^="1"], [id^="2"], [id^="3"]');
-            
+            var colorsChanged = false;
+            var elemento1 = document.getElementById('1');
+            var elemento2 = document.getElementById('2');
+            var elemento3 = document.getElementById('3');
             elementos.forEach(function(elemento) {
+                if (colorsChanged) {
+                    elemento1.setAttribute('fill', '#b4d7aa');
+                    elemento2.setAttribute('fill', '#7cb342');
+                    elemento3.setAttribute('fill', '#43a047');
+                    colorsChanged = false;
+                } else {
+                    elemento1.setAttribute('fill', '#ffabbe');
+                    elemento2.setAttribute('fill', '#ff5042a6');
+                    elemento3.setAttribute('fill', '#ff3242');
+                    colorsChanged = true;
+                }
                 // Cambiar entre los tres colores alternos
-                if(elemento.getAttribute('fill') == '#c4c4c4' || elemento.getAttribute('fill') == '#949494' || elemento.getAttribute('fill') == '#5e5e5e'){
+                /*if(elemento.getAttribute('fill') == '#c4c4c4' || elemento.getAttribute('fill') == '#949494' || elemento.getAttribute('fill') == '#5e5e5e'){
                     var currentFill = elemento.getAttribute('fill');
                     var newFill = '';
                     switch(currentFill) {
@@ -183,7 +206,21 @@
                             break;
                     }                    
                     elemento.setAttribute('fill', currentFill);
-                }              
+                }  */            
+            });
+            document.getElementById('svgElement').addEventListener('click', function() {
+                var svg = this;
+                if (!svg.classList.contains('animated')) {
+                    svg.classList.add('animated');
+                    setTimeout(cambiarColor, 250); // Cambia los colores a la mitad de la animación
+    
+                    // Opcional: eliminar la clase después de que la animación haya terminado
+                    setTimeout(() => {
+                        svg.classList.remove('animated');
+                        // Si quieres revertir los colores al estado original automáticamente, descomenta la siguiente línea
+                        // cambiarColor();
+                    }, 600); // 2000 ms = duración de la animación
+                }
             });
         }       
 

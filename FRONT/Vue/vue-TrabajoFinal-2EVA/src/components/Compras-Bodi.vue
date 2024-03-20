@@ -1,28 +1,40 @@
 <template>
 <div class="container">
-    <div></div>
+    <div style="color: white; padding-top: 50px;">
+        <div class="contenido">
+            <h2>Detalles de la obra seleccionada</h2>
+            <div v-if="obraSeleccionada">
+            <p><strong>Título:</strong> {{ obraSeleccionada.title }}</p>
+            <p><strong>Fecha:</strong> {{ obraSeleccionada.subtitle }}</p>
+            <p><strong>Descripción:</strong> {{ obraSeleccionada.content }}</p>
+            <!-- Puedes mostrar cualquier otra información de la obra aquí -->
+            </div>
+            <div v-else>
+            <p>No se ha seleccionado ninguna obra.</p>
+            </div>
+        </div>
+    </div>
     <div class="center-cont">
         <div class="grid-container" id="gridContainer"></div>
     </div>        
-    <div>
+    <div style="padding-top: 50px;">
         <v-data-table
+        style="max-height: 780px;"
         v-model:page="page"
-        :headers="headers"
         :items="items"
         :items-per-page="itemsPerPage"
         hide-default-footer
+        hide-default-header
         >
             <template v-slot:top>
-                <div class="d-flex justify-space-around py-2">
-                    <span class="subheading" style="font-size: large;">Asientos seleccionados</span>
-                </div>
+                <div class="d-flex justify-space-around py-2" style="height: 0px; background-color: rgba(38,50,58,1); border: 2px solid white"></div>
             </template>
             <template v-slot:item="{ item }">
                 <tr>
-                    <td>{{ item.col1 }}</td>
-                    <td>{{ item.col2 }}</td>
-                    <td>{{ item.col3 }}</td>
-                    <td>{{ item.col4 }}</td>-
+                    <td>{{ item.obra }}</td>
+                    <td>{{ item.fecha }}</td>
+                    <td>{{ item.precio }}€</td>
+                    <td>{{ item.asiento }}</td>
                 </tr>
             </template>
             <template v-slot:bottom>
@@ -38,21 +50,56 @@
                     ></v-text-field>
                     </v-col>
                 </v-col>
-                <v-btn class="mt-3" color="primary" @click="addItem" style="display: none;">Añadir Ítem</v-btn>
+                <v-dialog max-width="500">
+                    <template v-slot:activator="{ props: activatorProps }">
+                    <v-btn style="width: 200px; align-self: center; margin: 20px;"
+                        v-bind="activatorProps"
+                        color="surface-variant"
+                        text="COMPRAR"
+                        variant="flat"
+                        :disabled="!obraSeleccionada || items.length === 0"
+                    ></v-btn>
+                    </template>
+
+                    <template v-slot:default="{ isActive }">
+                    <v-card title="¡ATENCIÓN!">
+                        <v-card-text>
+                            Antes de proceder con tu compra, asegurate de que los asientos seleccionados son los correctos, si es así, puede prodeceder a la compra/reserva pulsando
+                            el boton comprar, si no es así, pulse el boton "Seguir comprando", para completar su selección.
+                        </v-card-text>
+
+                        <v-card-actions>
+                        <v-spacer></v-spacer>
+                        <v-btn
+                            style="background-color: #C72271;"
+                            color="white"
+                            text="REALIZAR COMPRA"
+                            @click="isActive.value = false"
+                        ></v-btn>
+                        <v-btn
+                            text="SEGUIR COMPRANDO"
+                            @click="isActive.value = false"
+                        ></v-btn>
+                        </v-card-actions>
+                    </v-card>
+                    </template>
+                </v-dialog>
             </template>
         </v-data-table>
     </div>
 </div>
 </template>
 <style scoped>
+
 .container {
-    padding-top: 100px;
-    height: 1080px;
+    height: auto;
     width: auto;
     display: grid;
-    grid-template-columns: 300px auto 300px;
+    grid-template-columns: 300px auto 550px;
     margin-block: 2%;
     margin-inline: 5%;
+    font-size: 20px;
+    gap: 20px;
 }
 
 .grid-container {
@@ -62,6 +109,9 @@
     margin-inline: 50px;
     margin-top: 50px;
     height: fit-content;
+    background-color: rgba(38,50,56,1);
+    padding: 20px;
+    border: 2px solid white;
 }
 
 .center-cont {
@@ -69,14 +119,24 @@
     flex-direction: column;
 }
 
-.svg-container {
-    width: 60px;
-    height: 60px;
+@media (max-width: 1670px) {
+
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
 }
+
 </style>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
+import { useObraSeleccionadaStore } from '@/stores/obraSeleccionada';
 
+const obraSeleccionadaStore = useObraSeleccionadaStore(); // Instanciamos la store
+
+// Obtenemos la obra seleccionada de la store
+const obraSeleccionada = obraSeleccionadaStore.obraSeleccionada;
 const svgCounter = ref(0);
 
 const agregarSVG = (numSVGs: number) => {
@@ -191,7 +251,7 @@ const agregarSVG = (numSVGs: number) => {
     texto.setAttribute("y", "80"); // Posición en el eje Y, coloca el texto debajo del gráfico
     texto.setAttribute("font-size", "15"); // Tamaño del texto, ajusta según sea necesario
     texto.setAttribute("text-anchor", "middle"); // Asegura que el texto se centre respecto a `x`
-    texto.setAttribute("fill", "black"); // Establece el color del texto para asegurar contraste
+    texto.setAttribute("fill", "white"); // Establece el color del texto para asegurar contraste
     texto.textContent = `${fila}${columna}`; // Texto que se mostrará
     svgElement.setAttribute('data-asiento-id', `Fila ${fila} Col ${columna}`);
     svgElement.appendChild(texto);
@@ -209,9 +269,10 @@ const agregarSVG = (numSVGs: number) => {
     const escenario = document.createElement('div');
     escenario.style.height = '60px';
     escenario.style.fontSize = '30px';
-    escenario.style.backgroundColor = 'black';
+    escenario.style.backgroundColor = 'rgba(38,50,56,1)';
     escenario.style.color = 'white';
     escenario.style.display = 'flex';
+    escenario.style.border = '2px solid white'
     escenario.style.justifyContent = 'center';
     escenario.style.alignItems = 'center';
     escenario.style.marginTop = '20px';
@@ -225,12 +286,15 @@ const agregarSVG = (numSVGs: number) => {
 
 const cambiarColor = (svgElement: Element) => {
     const asientoID = svgElement.getAttribute('data-asiento-id'); // Asegúrate de haber asignado este atributo al crear el SVG
+    const obra = obraSeleccionada?.title;
+    const fecha = obraSeleccionada?.subtitle;
+    const precio = obraSeleccionada?.price;
     if (asientoID) {
         items.value.push({
-        col1: '', // Modifica según corresponda
-        col2: '', // Modifica según corresponda
-        col3: '', // Modifica según corresponda
-        col4: asientoID, // Aquí usamos el ID del asiento que hemos guardado
+        obra: obra, // Modifica según corresponda
+        fecha: fecha, // Modifica según corresponda
+        precio: precio, // Modifica según corresponda
+        asiento: asientoID, // Aquí usamos el ID del asiento que hemos guardado
         });
     }
     
@@ -276,7 +340,7 @@ const elementos = svgElement.querySelectorAll('[id^="1"], [id^="2"], [id^="3"]')
             const asientoID = svgElement.getAttribute('data-asiento-id'); // Asegúrate de haber asignado este atributo
             if (asientoID) {
                 // Encuentra el índice del item en la lista que coincide con el asientoID
-                const index = items.value.findIndex(item => item.col4 === asientoID);
+                const index = items.value.findIndex(item => item.asiento === asientoID);
                 if (index !== -1) {
                 // Elimina el item de la lista si se encuentra
                 items.value.splice(index, 1);
@@ -322,20 +386,14 @@ onMounted(() => {
 });
 
 interface Item {
-  col1: string;
-  col2: string;
-  col3: string;
-  col4: string;
+  obra: any;
+  fecha: any;
+  precio: any;
+  asiento: any;
 }
 
 const page = ref(1);
-const itemsPerPage = ref(5); // Puedes ajustar esto según tus necesidades
-const headers = ref([
-  { text: 'OBRA', value: 'col1' },
-  { text: 'FECHA', value: 'col2' },
-  { text: 'PRECIO', value: 'col3' },
-  { text: 'ASIENTO', value: 'col4' }
-]);
+const itemsPerPage = ref(70); // Puedes ajustar esto según tus necesidades
 const items = ref<Item[]>([]);
 const inputs = ref([
   { label: 'OBRA', model: '' },
@@ -346,10 +404,10 @@ const inputs = ref([
 
 const addItem = () => {
   items.value.push({
-    col1: inputs.value[0].model,
-    col2: inputs.value[1].model,
-    col3: inputs.value[2].model,
-    col4: inputs.value[3].model,
+    obra: inputs.value[0].model,
+    fecha: inputs.value[1].model,
+    precio: inputs.value[2].model,
+    asiento: inputs.value[3].model,
   });
   // Limpiar inputs después de añadir
   inputs.value.forEach(input => {

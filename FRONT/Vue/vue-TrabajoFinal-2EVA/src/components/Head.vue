@@ -17,10 +17,9 @@
         </v-col>
 
         <v-col cols="auto" class="d-flex justify-center">
-          <v-tabs fixed-tabs bg-color="transparent">
-            <RouterLink to="/" style="text-decoration: none;"><v-tab class="ds boton flex display-4 font-weight-black">Obras</v-tab></RouterLink>
-            <RouterLink to="/promociones" style="text-decoration: none;"><v-tab class="ds boton flex display-4 font-weight-black">Promociones</v-tab></RouterLink>
-          </v-tabs>
+          
+            <RouterLink to="/" style="text-decoration: none;"><v-btn class="ds boton flex display-4 font-weight-black" style="height: 64px;">Obras</v-btn></RouterLink>
+            <RouterLink to="/promociones" style="text-decoration: none;"><v-btn class="ds boton flex display-4 font-weight-black" style="height: 64px;">Promociones</v-btn></RouterLink>
         </v-col>
 
         <v-spacer></v-spacer>
