@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Cabecera from '../components/Head.vue'
-import Login from '../components/Login-Component.vue'
+import Login from '../components/Login.vue'
 import Foot from '../components/Foot.vue'
 </script>
 <template>

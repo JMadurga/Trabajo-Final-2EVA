@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div style="color: white; padding-top: 50px;">
-        <div class="contenido">
+        <div>
             <h2>Detalles de la obra seleccionada</h2>
             <div v-if="obraSeleccionada">
             <p><strong>Título:</strong> {{ obraSeleccionada.title }}</p>
@@ -71,6 +71,7 @@
                         <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn
+                            id="btn-enviar"
                             style="background-color: #C72271;"
                             color="white"
                             text="REALIZAR COMPRA"

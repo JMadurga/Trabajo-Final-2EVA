@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import Cabecera from '../components/Head.vue'
-import Bodi from '../components/Bodi.vue'
 import Foot from '../components/Foot.vue'
+import Carrousel from '../components/Carrousel.vue'
+import Cards from '../components/Cards-Obras.vue'
 </script>
 
 <template>
@@ -12,7 +13,9 @@ import Foot from '../components/Foot.vue'
     </video>
     <div class="grid-container">
       <div class="cabecera"><Cabecera/></div>
-      <div><Bodi/></div>
+      <!--<div><Bodi/></div>-->
+      <div><Carrousel/></div>
+      <div><Cards/></div>
       <div><Foot/></div>
     </div>
   </main>
