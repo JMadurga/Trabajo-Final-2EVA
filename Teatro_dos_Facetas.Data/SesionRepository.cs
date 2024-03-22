@@ -22,6 +22,7 @@ namespace Teatro_dos_facetas.Data{
         {
             return _context.Sesiones.FirstOrDefault(sesion => sesion.id == id);
         }
+ 
 
         public void ChangeSesion(Sesion sesion)
         {

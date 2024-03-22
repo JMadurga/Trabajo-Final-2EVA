@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Teatro_dos_facetas.Data
 {
-    public class TeatroContext : DbContext
-    {
+public class TeatroContext : DbContext
+{
         public TeatroContext(DbContextOptions<TeatroContext> options)
             : base(options)
         {
 
         }
-        // ...
+      
 
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -21,48 +21,47 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.Property(o => o.isFree).IsRequired();
     });
 
-    modelBuilder.Entity<Asientos>().HasData(
-                new Asientos    {id = 1, isFree = true},
-                new Asientos    {id = 2, isFree = true},
-                new Asientos    {id = 3, isFree = true},
-                new Asientos    {id = 4, isFree = true},
-                new Asientos    {id = 5, isFree = true},
-                new Asientos    {id = 6, isFree = true},
-                new Asientos    {id = 7, isFree = true},
-                new Asientos    {id = 8, isFree = true},
-                new Asientos    {id = 9, isFree = true},
-                new Asientos    {id = 10, isFree = true},
-                new Asientos    {id = 11, isFree = true},
-                new Asientos    {id = 12, isFree = true},
-                new Asientos    {id = 13, isFree = true},
-                new Asientos    {id = 14, isFree = true},
-                new Asientos    {id = 15, isFree = true},
-                new Asientos    {id = 16, isFree = true},
-                new Asientos    {id = 17, isFree = true},
-                new Asientos    {id = 18, isFree = true},
-                new Asientos    {id = 19, isFree = true},
-                new Asientos    {id = 20, isFree = true},
-                new Asientos    {id = 21, isFree = true},
-                new Asientos    {id = 22, isFree = true},
-                new Asientos    {id = 23, isFree = true},
-                new Asientos    {id = 24, isFree = true},
-                new Asientos    {id = 25, isFree = true},
-                new Asientos    {id = 26, isFree = true},
-                new Asientos    {id = 27, isFree = true},
-                new Asientos    {id = 28, isFree = true},
-                new Asientos    {id = 29, isFree = true},
-                new Asientos    {id = 30, isFree = true},
-                new Asientos    {id = 31, isFree = true},
-                new Asientos    {id = 32, isFree = true},
-                new Asientos    {id = 33, isFree = true},
-                new Asientos    {id = 34, isFree = true},
-                new Asientos    {id = 35, isFree = true},
-                new Asientos    {id = 36, isFree = true},
-                new Asientos    {id = 37, isFree = true},
-                new Asientos    {id = 38, isFree = true},
-                new Asientos    {id = 39, isFree = true},
-                new Asientos    {id = 40, isFree = true}
-           
+    modelBuilder.Entity<Asientos>().HasData(              
+                new Asientos    {id = 1, isFree = true, price = 10.50},
+                new Asientos    {id = 2, isFree = true, price = 10.50},
+                new Asientos    {id = 3, isFree = true, price = 10.50},
+                new Asientos    {id = 4, isFree = true, price = 10.50},
+                new Asientos    {id = 5, isFree = true, price = 10.50},
+                new Asientos    {id = 6, isFree = true, price = 10.50},
+                new Asientos    {id = 7, isFree = true, price = 10.50},
+                new Asientos    {id = 8, isFree = true, price = 10.50},
+                new Asientos    {id = 9, isFree = true, price = 10.50},
+                new Asientos    {id = 10, isFree = true, price = 10.50},
+                new Asientos    {id = 11, isFree = true, price = 10.50},
+                new Asientos    {id = 12, isFree = true, price = 10.50},
+                new Asientos    {id = 13, isFree = true, price = 10.50},
+                new Asientos    {id = 14, isFree = true, price = 10.50},
+                new Asientos    {id = 15, isFree = true, price = 10.50},
+                new Asientos    {id = 16, isFree = true, price = 10.50},
+                new Asientos    {id = 17, isFree = true, price = 10.50},
+                new Asientos    {id = 18, isFree = true, price = 10.50},
+                new Asientos    {id = 19, isFree = true, price = 10.50},
+                new Asientos    {id = 20, isFree = true, price = 10.50},
+                new Asientos    {id = 21, isFree = true, price = 10.50},
+                new Asientos    {id = 22, isFree = true, price = 10.50},
+                new Asientos    {id = 23, isFree = true, price = 10.50},
+                new Asientos    {id = 24, isFree = true, price = 10.50},
+                new Asientos    {id = 25, isFree = true, price = 10.50},
+                new Asientos    {id = 26, isFree = true, price = 10.50},
+                new Asientos    {id = 27, isFree = true, price = 10.50},
+                new Asientos    {id = 28, isFree = true, price = 10.50},
+                new Asientos    {id = 29, isFree = true, price = 10.50},
+                new Asientos    {id = 30, isFree = true, price = 10.50},
+                new Asientos    {id = 31, isFree = true, price = 10.50},
+                new Asientos    {id = 32, isFree = true, price = 10.50},
+                new Asientos    {id = 33, isFree = true, price = 10.50},
+                new Asientos    {id = 34, isFree = true, price = 10.50},
+                new Asientos    {id = 35, isFree = true, price = 10.50},
+                new Asientos    {id = 36, isFree = true, price = 10.50},
+                new Asientos    {id = 37, isFree = true, price = 10.50},
+                new Asientos    {id = 38, isFree = true, price = 10.50},
+                new Asientos    {id = 39, isFree = true, price = 10.50},
+                new Asientos    {id = 40, isFree = true, price = 10.50}
     );
 
     // Configuración de Obras
@@ -93,31 +92,33 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.HasKey(s => s.id);
         entity.Property(s => s.date).IsRequired();
 
-        // Relación Sesiones - SesionObras
-        entity.HasMany(s => s.SesionObra)
+        // Relación  SesionObras
+        entity.HasMany(s => s.SesionObras)
               .WithOne(so => so.sesion)
-              .HasForeignKey(so => so.sesionId);
+              .HasForeignKey(so => so.obraId);
 
-        // Relación Sesiones - SesionAsientos
+        // Relación  SesionAsientos
         entity.HasMany(s => s.SesionAsientos)
               .WithOne(sa => sa.sesion)
-              .HasForeignKey(sa => sa.sesionId);
+              .HasForeignKey(sa => sa.asientoId);
     });
 
     modelBuilder.Entity<SesionObra>(entity =>
     {
+        entity.HasKey(s => s.obraId);
         // Relación SesionObras - Obras
-        entity.HasOne(so => so.obra)
-              .WithMany(o => o.SesionObras)
-              .HasForeignKey(so => so.obraId);
+        // entity.HasOne(so => so.obra)
+        //       .WithMany(o => o.SesionObras)
+        //       .HasForeignKey(so => so.obraId);
     });
 
     modelBuilder.Entity<SesionAsiento>(entity =>
     {
+        entity.HasKey(s => s.asientoId);
         // Relación SesionAsientos - Asientos
-        entity.HasOne(sa => sa.asiento)
-              .WithMany(a => a.SesionAsientos)
-              .HasForeignKey(sa => sa.asientoId);
+        entity.HasOne(sa => sa.asiento);
+             // .WithMany(a => a.SesionAsientos)
+             // .HasForeignKey(sa => sa.asientoId);
     });
 
     // Configuración de Usuarios
@@ -131,14 +132,12 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
     });
 
     modelBuilder.Entity<Users>().HasData(
-        new Users {id = 0, name = "admin", mail="teatrodosfacetas@gmail.com", password="admin", phone = 655455232 },
-        new Users {id = 1, name = "John Doe", mail="johndoe@example.com", password="password123", phone = 123456789 },
-        new Users {id = 2, name = "Jane Smith", mail="janesmith@example.com", password="password456", phone = 987654321 }
+        new Users {id = 1, name = "admin", mail="teatrodosfacetas@gmail.com", password="admin", phone = 655455232 },
+        new Users {id = 2, name = "John Doe", mail="johndoe@example.com", password="password123", phone = 123456789 },
+        new Users {id = 3, name = "Jane Smith", mail="janesmith@example.com", password="password456", phone = 987654321 }
             
     );
 }
-
-// ...
 
 
 

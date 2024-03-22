@@ -11,6 +11,11 @@ namespace Teatro_dos_facetas.Model
         [Required]
         public bool isFree {get; set;} = true;
 
-        public List<SesionAsiento> SesionAsientos { get; set; }
+                
+        [Required]
+        public double price {get; set;} 
+
+        
+        //public List<SesionAsiento> SesionAsientos { get; set; }
     }
 }

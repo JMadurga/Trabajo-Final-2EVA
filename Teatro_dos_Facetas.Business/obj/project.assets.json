@@ -3416,8 +3416,8 @@
     },
     "Teatro_dos_facetas.Model/1.0.0": {
       "type": "project",
-      "path": "../Teatro_dos_Facetas.Model/Teatro_dos_facetas.Model.csproj",
-      "msbuildProject": "../Teatro_dos_Facetas.Model/Teatro_dos_facetas.Model.csproj"
+      "path": "../Teatro_dos_facetas.Model/Teatro_dos_facetas.Model.csproj",
+      "msbuildProject": "../Teatro_dos_facetas.Model/Teatro_dos_facetas.Model.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -3454,8 +3454,8 @@
             "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj": {
               "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj"
             },
-            "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Model\\Teatro_dos_facetas.Model.csproj": {
-              "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_Facetas.Model\\Teatro_dos_facetas.Model.csproj"
+            "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj": {
+              "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj"
             }
           }
         }

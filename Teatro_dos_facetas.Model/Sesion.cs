@@ -8,9 +8,11 @@ namespace Teatro_dos_facetas.Model
         public int id {get; set;}
 
         [Required]
-        public DateTime date{get; set;}
+        public DateTime date {get; set;}
+
         [Required]
-        public List<SesionObra> SesionObra {get; set;}
+        public List<SesionObra> SesionObras {get; set;}
+        
         [Required]
         public List<SesionAsiento> SesionAsientos{get; set;}
 

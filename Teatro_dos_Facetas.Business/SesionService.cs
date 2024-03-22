@@ -22,6 +22,7 @@ namespace Teatro_dos_Facetas.Business
         {
             return _sesionRepository.GetSesion(id);
         }
+        
 
         public void CreateSesion(Sesion sesion)
         {

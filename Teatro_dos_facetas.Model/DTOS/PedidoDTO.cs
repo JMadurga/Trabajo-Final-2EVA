@@ -14,5 +14,5 @@ public class PedidoCreateDTO
 
     [Required]
     public int asientoId { get; set; }
-
+    
 }

@@ -16,6 +16,8 @@ namespace Teatro_dos_facetas.Business
 
         public Users? Get(int id) => _usuarioRepository.GetUser(id);
 
+        public Users? GetByCorreo(string correo) => _usuarioRepository.GetUserByCorreo(correo);
+
         public void Add(Users usuario) => _usuarioRepository.AddUser(usuario);
 
         public void Update(Users usuario) => _usuarioRepository.ChangeUser(usuario);

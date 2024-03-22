@@ -23,6 +23,10 @@ namespace Teatro_dos_facetas.Data{
             return _context.Users.FirstOrDefault(user => user.id == id);
         }
 
+        public Users GetUserByCorreo (string correo)
+        {
+            return _context.Users.FirstOrDefault(user => user.mail == correo);
+        }
         public void ChangeUser(Users user)
         {
             // En EF Core, si el objeto ya está siendo rastreado, actualizar sus propiedades

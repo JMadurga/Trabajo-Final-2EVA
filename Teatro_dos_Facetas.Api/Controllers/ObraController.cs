@@ -32,14 +32,14 @@ namespace Teatro_dos_facetas.Controller
             return obra;
         } 
         [HttpPost]
-        public IActionResult Create(Obras obra)
+        public IActionResult Create([FromBody] Obras obra)
         {
             _obraService.Add(obra);
             return CreatedAtAction(nameof(Get), new { id = obra.id }, obra);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Obras obra)
+        public IActionResult Update(int id, [FromBody] Obras obra)
         {
             if (id != obra.id)
                 return BadRequest();

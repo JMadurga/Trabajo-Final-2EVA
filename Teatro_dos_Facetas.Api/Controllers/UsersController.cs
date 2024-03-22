@@ -24,14 +24,20 @@ namespace Teatro_dos_facetas.Controller
         [HttpGet("{id}")]
         public ActionResult<Users> Get(int id)
         {
-            var user = _userService.Get(id);
-
-            if (user == null)
+            try
+            {
+                var user = _userService.Get(id);
+                return user;
+            }
+            catch (System.Exception)
+            {
+                                
                 return NotFound();
+                throw;
+            }
 
-            return user;
         } 
-                [HttpPost]
+        [HttpPost]
         public IActionResult Create(Users user)
         {
             _userService.Add(user);
@@ -41,30 +47,47 @@ namespace Teatro_dos_facetas.Controller
         [HttpPut("{id}")]
         public IActionResult Update(int id, Users user)
         {
-            if (id != user.id)
-                return BadRequest();
+            try
+            {
+                if (id != user.id)
+                    return BadRequest();
 
-            var existingUser = _userService.Get(id);
-            if (existingUser == null)
-                return NotFound();
+                var existingUser = _userService.Get(id);
 
-            _userService.Update(user);
+                if (existingUser == null)
+                    return NotFound();
 
-            return NoContent();
+                _userService.Update(user);
+
+                return NoContent();
+            }
+            catch (System.Exception)
+            {
+                // Handle the exception here
+                return StatusCode(500, "An error occurred while updating the user.");
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var user = _userService.Get(id);
+            try
+            {
+                var user = _userService.Get(id);
 
-            if (user == null)
-                return NotFound();
+                if (user == null)
+                    return NotFound();
 
-            _userService.Delete(id);
+                _userService.Delete(id);
 
-            return NoContent();
-        }   
+                return NoContent();
+            }
+            catch (System.Exception)
+            {
+                // Handle the exception here
+                return StatusCode(500, "An error occurred while deleting the user.");
+            }
+        } 
     }
     
 }

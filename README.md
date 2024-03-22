@@ -2,10 +2,11 @@
 
 # Comandos-necesarios
     Comando para realizar un plan de migración:
-    dotnet ef migrations add Migraciones -p ./Teatro_dos_Facetas.Data/Teatro_dos_Facetas.Data.csproj -s ./Teatro_dos_Facetas.Api/Teatro_dos_Facetas.Api.csproj
-
+    dotnet ef migrations add NombreDeLaMigracion -p Ruta/Al/Proyecto/Con/DbContext -s Ruta/Al/Proyecto/DeInicio
+    dotnet ef migrations add InitialCreate -p ./Data/BankApp.Data.csproj -s ./API/BankApp.API.csproj
+    
     Update el plan de migración:
-    dotnet ef database update  -p ./Data/Data.csproj -s ./Api/Api.csproj
+    dotnet ef database update  -p ./Teatro_dos_Facetas.Data/Teatro_dos_Facetas.Data.csproj -s ./Teatro_dos_Facetas.Api/Teatro_dos_Facetas.Api.csproj
 
     Lanzamineto Compose
     `docker-compose up --build --force-recreate -d`
@@ -15,6 +16,7 @@
 
     dotnet new classlib -n Teatro_dos_Facetas.Data
     dotnet sln add Teatro_dos_Facetas.Data
+
 
     dotnet new classlib -n Teatro_dos_Facetas.Business
     dotnet sln add Teatro_dos_Facetas.Business

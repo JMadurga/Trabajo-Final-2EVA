@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Teatro_dos_Facetas.Model\Teatro_dos_facetas.Model.csproj" />
+    <ProjectReference Include="..\Teatro_dos_facetas.Model\Teatro_dos_facetas.Model.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
