@@ -31,14 +31,14 @@ services:
             - backend
         build:
           context: .
-          dockerfile: Teatro_dos_Facetas.Api/Dockerfile
+          dockerfile: ./Dockerfile
         depends_on:
             - db    #API without db running is useless
 
-   # web:
-        #container_name: webContainer
-   #     image: web:1.0
-    #    ports:
-     #       - 9000:8080 
-      #  depends_on:
-       #     - api
+#    # web:
+#         #container_name: webContainer
+#    #     image: web:1.0
+#     #    ports:
+#      #       - 9000:8080 
+#       #  depends_on:
+#        #     - api
