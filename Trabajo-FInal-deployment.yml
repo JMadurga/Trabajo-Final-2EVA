@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: Teatro-Final-kubernetes
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app:   Teatro-Final-kubernetes
+
+  template:
+    metadata:
+      labels:
+        app: Teatro-Final-kubernetes
+
+    spec:
+      containers:
+      - name: Teatro-Final-kubernetes
+        image: jmadurga/trabajo-final-2eva-api:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "80m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
