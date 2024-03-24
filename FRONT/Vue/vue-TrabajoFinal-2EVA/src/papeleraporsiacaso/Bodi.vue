@@ -98,4 +98,4 @@ const comprar = (obra: any) => {
     }
   }
   
-  </style>
+  </style>@/stores/obraStore
