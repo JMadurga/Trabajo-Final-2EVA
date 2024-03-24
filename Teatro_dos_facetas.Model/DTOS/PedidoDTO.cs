@@ -8,11 +8,9 @@ public class PedidoCreateDTO
     public int pedidoId { get; set; }
     [Required]
     public int userId { get; set; }
-
+    [Required]
+    public int obraId { get; set; }
+    
     [Required]
     public int sesionId { get; set; }
-
-    [Required]
-    public int asientoId { get; set; }
-    
 }
