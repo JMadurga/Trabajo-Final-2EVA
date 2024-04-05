@@ -184,18 +184,22 @@ const agregarSVG = (numSVGs: number) => {
     // Crea los paths dentro del grupo g
     var path2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path2.setAttribute("d", "M8.9 30.5h6v8h-6z");
+    path2.setAttribute("id", "4");
     group1.appendChild(path2);
 
     var path3 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path3.setAttribute("d", "M49.1 30.5h6v8h-6z");
+    path3.setAttribute("id", "4");
     group1.appendChild(path3);
 
     var path4 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path4.setAttribute("d", "M14.6 50.9h6V61h-6z");
+    path4.setAttribute("id", "4");
     group1.appendChild(path4);
 
     var path5 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path5.setAttribute("d", "M43.4 50.9h6V61h-6z");
+    path5.setAttribute("id", "4");
     group1.appendChild(path5);
 
     svgElement.appendChild(group1);
@@ -214,10 +218,12 @@ const agregarSVG = (numSVGs: number) => {
     // Crea los paths dentro del grupo g
     var path7 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path7.setAttribute("d", "M23 58.9c-.2-.5-.8-1-1.3-1h-8c-.6 0-1.1.4-1.3 1L10.9 63c-.2.5.1 1 .7 1h12c.6 0 .9-.4.7-1L23 58.9");
+    path7.setAttribute("id", "4");
     group2.appendChild(path7);
 
     var path8 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path8.setAttribute("d", "M53.1 63l-1.4-4.1c-.2-.5-.8-1-1.3-1h-8c-.6 0-1.1.4-1.3 1L39.7 63c-.2.5.1 1 .7 1h12c.5 0 .8-.4.7-1");
+    path8.setAttribute("id", "4");
     group2.appendChild(path8);
 
     svgElement.appendChild(group2);
@@ -234,10 +240,12 @@ const agregarSVG = (numSVGs: number) => {
 
     var path10 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path10.setAttribute("d", "M15.5 29.2l-.3-2.1c-.2-1.1-1.1-2-2.1-2h-2.7c-1 0-1.9.9-2.1 2L8 29.2c-.2 1.1.5 2 1.5 2H14c1 0 1.7-.9 1.5-2");
+    path10.setAttribute("id", "4");
     group3.appendChild(path10);
 
     var path11 = document.createElementNS("http://www.w3.org/2000/svg", "path");
     path11.setAttribute("d", "M55.8 29.2l-.3-2.1c-.2-1.1-1.1-2-2.1-2h-2.7c-1 0-1.9.9-2.1 2l-.3 2.1c-.2 1.1.5 2 1.5 2h4.5c1 0 1.6-.9 1.5-2");
+    path11.setAttribute("id", "4");
     group3.appendChild(path11);
 
     var path12 = document.createElementNS("http://www.w3.org/2000/svg", "path");
@@ -246,6 +254,7 @@ const agregarSVG = (numSVGs: number) => {
 
     svgElement.appendChild(group3);
     svgElement.addEventListener('click', () => cambiarColor(svgElement));
+    svgElement.addEventListener('click', () => animarSVG(svgElement));
 
     const texto = document.createElementNS("http://www.w3.org/2000/svg", "text");
     texto.setAttribute("x", "30"); // Centra el texto en el eje X (ajusta si tu SVG es de diferente tamaño)
@@ -258,6 +267,7 @@ const agregarSVG = (numSVGs: number) => {
     svgElement.appendChild(texto);
 
     gridContainer.appendChild(svgElement);
+    
 
     
 /*
@@ -285,6 +295,34 @@ const agregarSVG = (numSVGs: number) => {
   } 
 };
 
+const animarSVG = (svgElement: SVGElement) => {
+    const asientoID = svgElement.getAttribute('data-asiento-id');
+    let transformOrigin = 'center center';
+    const elementos = svgElement.querySelectorAll('[id^="1"], [id^="2"], [id^="3"], [id^="4"]');
+    elementos.forEach((elemento) => {
+        if(elemento.getAttribute('scale') == '1') {
+            animateElement(elemento, 1, 1.2, 500, transformOrigin);
+        } else {
+            animateElement(elemento, 1.2, 1, 500, transformOrigin);
+        }
+    })
+
+    function animateElement(
+    element: Element, // Cambiado a SVGElement para reflejar el uso correcto con elementos SVG
+    fromScale: number, 
+    toScale: number, 
+    duration: number, 
+    transformOrigin: string
+    ) {
+        // Para elementos SVG, es mejor utilizar setAttribute para transformar propiedades
+        element.setAttribute('style', `transition: transform ${duration}ms; transform-origin: ${transformOrigin};`);
+        element.setAttribute('transform', `scale(${fromScale})`);
+        setTimeout(() => {
+            element.setAttribute('transform', `scale(${toScale})`);
+        }, duration);
+    }
+}
+
 const cambiarColor = (svgElement: Element) => {
     const asientoID = svgElement.getAttribute('data-asiento-id'); // Asegúrate de haber asignado este atributo al crear el SVG
     const obra = obraSeleccionada?.title;
@@ -292,63 +330,67 @@ const cambiarColor = (svgElement: Element) => {
     const precio = obraSeleccionada?.price;
     if (asientoID) {
         items.value.push({
-        obra: obra, // Modifica según corresponda
-        fecha: fecha, // Modifica según corresponda
-        precio: precio, // Modifica según corresponda
-        asiento: asientoID, // Aquí usamos el ID del asiento que hemos guardado
+            obra: obra, // Modifica según corresponda
+            fecha: fecha, // Modifica según corresponda
+            precio: precio, // Modifica según corresponda
+            asiento: asientoID, // Aquí usamos el ID del asiento que hemos guardado
         });
     }
     
-const elementos = svgElement.querySelectorAll('[id^="1"], [id^="2"], [id^="3"]');
+    const elementos = svgElement.querySelectorAll('[id^="1"], [id^="2"], [id^="3"]');
     elementos.forEach((elemento) => {
-    // Cambiar entre los tres colores alternos
-    if(elemento.getAttribute('fill') == '#c4c4c4' || elemento.getAttribute('fill') == '#949494' || elemento.getAttribute('fill') == '#5e5e5e'){
-        var currentFill = elemento.getAttribute('fill');
-        if (currentFill === null) {
-            currentFill = '';
-        }
-        let newFill = '';
-        switch (currentFill) {
-            case '#c4c4c4':
-                newFill = '#ffa6d0';
-                break;
-            case '#949494':
-                newFill = '#f558a3';
-                break;
-            case '#5e5e5e':
-                newFill = '#C72271';
-                break;
-        }
-        if (newFill) {
-            elemento.setAttribute('fill', newFill);
-        }
-    } else if(elemento.getAttribute('fill') == '#ffa6d0' || elemento.getAttribute('fill') == '#f558a3' || elemento.getAttribute('fill') == '#C72271'){
-        var newFill = elemento.getAttribute('fill');
-        currentFill = '';
-        switch(newFill) {
-            case '#ffa6d0':
-                currentFill = '#c4c4c4';
-                break;
-            case '#f558a3':
-                currentFill = '#949494';
-                break;
-            case '#C72271':
-                currentFill = '#5e5e5e';
-                break;
-        }                    
-        elemento.setAttribute('fill', currentFill);
-        if (currentFill == '#c4c4c4' || currentFill == '#949494' || currentFill == '#5e5e5e') {
-            const asientoID = svgElement.getAttribute('data-asiento-id'); // Asegúrate de haber asignado este atributo
-            if (asientoID) {
-                // Encuentra el índice del item en la lista que coincide con el asientoID
-                const index = items.value.findIndex(item => item.asiento === asientoID);
-                if (index !== -1) {
-                // Elimina el item de la lista si se encuentra
-                items.value.splice(index, 1);
+        setTimeout(() => { // Usar setTimeout para cambiar el color después de 500 ms
+            if(elemento.getAttribute('fill') == '#c4c4c4' || elemento.getAttribute('fill') == '#949494' || elemento.getAttribute('fill') == '#5e5e5e'){
+                var currentFill = elemento.getAttribute('fill');
+                if (currentFill === null) {
+                    currentFill = '';
+                }
+                let newFill = '';
+                switch (currentFill) {
+                    case '#c4c4c4':
+                        newFill = '#ffa6d0';
+                        break;
+                    case '#949494':
+                        newFill = '#f558a3';
+                        break;
+                    case '#5e5e5e':
+                        newFill = '#C72271';
+                        break;
+                }
+                if (newFill) {
+                    elemento.setAttribute('fill', newFill);
+                }
+            } else if(elemento.getAttribute('fill') == '#ffa6d0' || elemento.getAttribute('fill') == '#f558a3' || elemento.getAttribute('fill') == '#C72271'){
+                var newFill = elemento.getAttribute('fill');
+                currentFill = '';
+                switch(newFill) {
+                    case '#ffa6d0':
+                        currentFill = '#c4c4c4';
+                        break;
+                    case '#f558a3':
+                        currentFill = '#949494';
+                        break;
+                    case '#C72271':
+                        currentFill = '#5e5e5e';
+                        break;
+                }                    
+                elemento.setAttribute('fill', currentFill);
+                if (currentFill == '#c4c4c4' || currentFill == '#949494' || currentFill == '#5e5e5e') {
+                    const asientoID = svgElement.getAttribute('data-asiento-id');
+                    if (asientoID) {
+                        const index = items.value.findIndex(item => item.asiento === asientoID);
+                        if (index !== -1) {
+                            items.value.splice(index, 1);
+                        }
+                    }
                 }
             }
-        }
-    } /*else if(elemento.getAttribute('fill') == '#f9ffb8' || elemento.getAttribute('fill') == '#d6de7c' || elemento.getAttribute('fill') == '#E6F457'){
+        }, 500); // Espera 500 ms antes de cambiar el color
+    });
+};
+
+
+/*else if(elemento.getAttribute('fill') == '#f9ffb8' || elemento.getAttribute('fill') == '#d6de7c' || elemento.getAttribute('fill') == '#E6F457'){
         var newFill = elemento.getAttribute('fill');
         currentFill = '';
         switch(newFill) {
@@ -379,8 +421,7 @@ const elementos = svgElement.querySelectorAll('[id^="1"], [id^="2"], [id^="3"]')
         }                    
         elemento.setAttribute('fill', currentFill);
     }*/
-  });
-};
+
 
 onMounted(() => {
   agregarSVG(70); // Llama a la función agregarSVG con el número de SVGs que deseas generar
