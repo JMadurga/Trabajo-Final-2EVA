@@ -18,6 +18,6 @@ namespace Teatro_dos_facetas.Model
         [Required]
         public string synopsis{get; set ;}
 
-        public List<SesionObra> SesionObras { get; set; }
+        public List<Sesion> sesiones {get; set;}
     }
 }

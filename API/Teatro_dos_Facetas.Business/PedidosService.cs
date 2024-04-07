@@ -14,6 +14,35 @@ namespace Teatro_dos_Facetas.Business
             _pedidoRepository = pedidoRepository;
         }
 
+        public Pedidos PedidosDtoToPedidos (PedidoCreateDTO pedidoDto)
+        {
+            var pedido = new Pedidos
+            {
+                userId = pedidoDto.userId,
+                sesionId = pedidoDto.sesionId,
+                pedidoAsientos = pedidoDto.asientosId.Select(asientoId => new PedidosAsiento
+                {
+                    asientoId = asientoId
+                }).ToList()
+            };
+
+            return pedido;
+        }
+
+
+        public   PedidoCreateDTO PedidosToPedidoCreateDTO (Pedidos pedidos)
+        {
+            var pedidoDto = new PedidoCreateDTO
+            {
+                userId = pedidos.userId,
+                sesionId = pedidos.sesionId,
+                asientosId = pedidos.pedidoAsientos.Select(pa => pa.asientoId).ToList()
+            };
+            
+            
+            return pedidoDto;
+        }
+
         public List<Pedidos> GetAll() => _pedidoRepository.AllPedidos;
 
         public Pedidos GetPedidoById(int id)

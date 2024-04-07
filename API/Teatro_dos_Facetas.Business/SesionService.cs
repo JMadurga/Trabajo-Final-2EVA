@@ -18,10 +18,13 @@ namespace Teatro_dos_Facetas.Business
        
 
 
-        public List<Sesion> GetAll() => _sesionRepository.AllSesiones;
-        public Sesion GetSesionById(int id)
+        public List<SesionDTO> GetAll() { return _sesionRepository.AllSesiones.Select(s => SesionToSesionDto(s)).ToList();}
+        
+        public SesionDTO GetSesionById(int id)
         {
-            return _sesionRepository.GetSesion(id);
+            var sesion = SesionToSesionDto(_sesionRepository.GetSesion(id));
+
+            return sesion;
         }
         
         public Sesion SesionDtoToSesion(SesionDTO sesionDto)
@@ -29,16 +32,11 @@ namespace Teatro_dos_Facetas.Business
             var sesion = new Sesion
             {
                 id = sesionDto.sesionId,
-                date = sesionDto.date,
-                    
-                SesionObras = new List<SesionObra> { new SesionObra
-                    {
-                        sesionId = sesionDto.sesionId,
-                        obraId = sesionDto.obraId
-                    }
-                } 
-
+                date = sesionDto.date,               
+                obraId = sesionDto.obraId,
+                
             };
+
                 return sesion;
         }
 
@@ -48,7 +46,7 @@ namespace Teatro_dos_Facetas.Business
             {
                 sesionId = sesion.id,
                 date = sesion.date,
-                obraId = sesion.SesionObras.Select(so => so.obraId).FirstOrDefault(),
+                obraId = sesion.obraId,
                 asientosId = sesion.SesionAsientos.Select(sa => sa.asientoId).ToList() 
                
             };
@@ -60,12 +58,7 @@ namespace Teatro_dos_Facetas.Business
 
         public void CreateSesion(Sesion sesion)
         {
-            for (int i = 1; i <= 40; i++)
-            {
-                sesion.SesionAsientos[i].sesionId = sesion.id;
-            }
 
-            
             _sesionRepository.AddSesion(sesion);
         }
 

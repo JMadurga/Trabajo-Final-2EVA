@@ -29,10 +29,8 @@ namespace Teatro_dos_facetas.Api.Controllers
             if (sesion == null)
             {
                 return NotFound();
-            }
-
-            var sesionDto = _sesionService.SesionToSesionDto(sesion);
-            return Ok(sesionDto);
+            };
+            return Ok(sesion);
         }
 
 

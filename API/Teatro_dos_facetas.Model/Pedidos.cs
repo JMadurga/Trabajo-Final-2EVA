@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.VisualBasic.FileIO;
 
 namespace Teatro_dos_facetas.Model
 {
@@ -13,10 +14,16 @@ namespace Teatro_dos_facetas.Model
 
         public DateTime date {get; set;}
 
-   
-        public List<PedidoUser> pedidoUser{get; set;}
+        [ForeignKey("userId")]
+        public int userId {get; set;}
 
-        public List<PedidoSesion> pedidoSesion{get; set;} 
+        public Users user {get; set;}
+
+        [ForeignKey("sesionId")]
+        public int sesionId {get; set;}
+
+        
+        public Sesion sesion {get; set;}   
 
         public List<PedidosAsiento> pedidoAsientos {get; set;}
 

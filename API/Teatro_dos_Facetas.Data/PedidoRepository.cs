@@ -14,6 +14,8 @@ namespace Teatro_dos_Facetas.Data
         {
             _context = context;
         }
+
+        
         public List<Pedidos> AllPedidos => _context.Pedidos.ToList();
 
         public void AddPedido(Pedidos pedido)

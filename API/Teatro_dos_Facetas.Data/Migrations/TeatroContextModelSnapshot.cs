@@ -403,36 +403,6 @@ namespace Teatrodosfacetas.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Teatro_dos_facetas.Model.PedidoSesion", b =>
-                {
-                    b.Property<int>("pedidoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("sesionID")
-                        .HasColumnType("int");
-
-                    b.HasKey("pedidoId", "sesionID");
-
-                    b.HasIndex("sesionID");
-
-                    b.ToTable("PedidoSesion");
-                });
-
-            modelBuilder.Entity("Teatro_dos_facetas.Model.PedidoUser", b =>
-                {
-                    b.Property<int>("pedidoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("userId")
-                        .HasColumnType("int");
-
-                    b.HasKey("pedidoId", "userId");
-
-                    b.HasIndex("userId");
-
-                    b.ToTable("PedidoUser");
-                });
-
             modelBuilder.Entity("Teatro_dos_facetas.Model.Pedidos", b =>
                 {
                     b.Property<int>("id")
@@ -441,13 +411,28 @@ namespace Teatrodosfacetas.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int?>("Sesionid")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("sesionId")
+                        .HasColumnType("int");
 
                     b.Property<double>("total")
                         .HasColumnType("float");
 
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("Sesionid");
+
+                    b.HasIndex("sesionId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("Pedidos");
                 });
@@ -478,7 +463,12 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("obraId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("obraId");
 
                     b.ToTable("Sesiones");
 
@@ -486,32 +476,38 @@ namespace Teatrodosfacetas.Data.Migrations
                         new
                         {
                             id = 1,
-                            date = new DateTime(2024, 4, 3, 19, 49, 6, 832, DateTimeKind.Local).AddTicks(5821)
+                            date = new DateTime(2024, 4, 7, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6607),
+                            obraId = 1
                         },
                         new
                         {
                             id = 2,
-                            date = new DateTime(2024, 4, 4, 19, 49, 6, 832, DateTimeKind.Local).AddTicks(5871)
+                            date = new DateTime(2024, 4, 8, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6646),
+                            obraId = 2
                         },
                         new
                         {
                             id = 3,
-                            date = new DateTime(2024, 4, 5, 19, 49, 6, 832, DateTimeKind.Local).AddTicks(5875)
+                            date = new DateTime(2024, 4, 9, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6655),
+                            obraId = 3
                         },
                         new
                         {
                             id = 4,
-                            date = new DateTime(2024, 4, 6, 19, 49, 6, 832, DateTimeKind.Local).AddTicks(5876)
+                            date = new DateTime(2024, 4, 10, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6657),
+                            obraId = 4
                         },
                         new
                         {
                             id = 5,
-                            date = new DateTime(2024, 4, 7, 19, 49, 6, 832, DateTimeKind.Local).AddTicks(5878)
+                            date = new DateTime(2024, 4, 11, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6658),
+                            obraId = 5
                         },
                         new
                         {
                             id = 6,
-                            date = new DateTime(2024, 4, 8, 19, 49, 6, 832, DateTimeKind.Local).AddTicks(5879)
+                            date = new DateTime(2024, 4, 12, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6660),
+                            obraId = 6
                         });
                 });
 
@@ -523,54 +519,11 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Property<int>("sesionId")
                         .HasColumnType("int");
 
-                    b.HasKey("asientoId");
+                    b.HasKey("asientoId", "sesionId");
+
+                    b.HasIndex("sesionId");
 
                     b.ToTable("SesionAsientos");
-                });
-
-            modelBuilder.Entity("Teatro_dos_facetas.Model.SesionObra", b =>
-                {
-                    b.Property<int>("obraId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("sesionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("obraId");
-
-                    b.ToTable("SesionObras");
-
-                    b.HasData(
-                        new
-                        {
-                            obraId = 1,
-                            sesionId = 1
-                        },
-                        new
-                        {
-                            obraId = 2,
-                            sesionId = 2
-                        },
-                        new
-                        {
-                            obraId = 3,
-                            sesionId = 3
-                        },
-                        new
-                        {
-                            obraId = 4,
-                            sesionId = 4
-                        },
-                        new
-                        {
-                            obraId = 5,
-                            sesionId = 5
-                        },
-                        new
-                        {
-                            obraId = 6,
-                            sesionId = 6
-                        });
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Users", b =>
@@ -645,40 +598,25 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Navigation("sesion");
                 });
 
-            modelBuilder.Entity("Teatro_dos_facetas.Model.PedidoSesion", b =>
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Pedidos", b =>
                 {
-                    b.HasOne("Teatro_dos_facetas.Model.Pedidos", "pedido")
-                        .WithMany("pedidoSesion")
-                        .HasForeignKey("pedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Teatro_dos_facetas.Model.Sesion", null)
+                        .WithMany("pedidos")
+                        .HasForeignKey("Sesionid");
 
                     b.HasOne("Teatro_dos_facetas.Model.Sesion", "sesion")
-                        .WithMany("pedidoSesion")
-                        .HasForeignKey("sesionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("pedido");
-
-                    b.Navigation("sesion");
-                });
-
-            modelBuilder.Entity("Teatro_dos_facetas.Model.PedidoUser", b =>
-                {
-                    b.HasOne("Teatro_dos_facetas.Model.Pedidos", "pedido")
-                        .WithMany("pedidoUser")
-                        .HasForeignKey("pedidoId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany()
+                        .HasForeignKey("sesionId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Teatro_dos_facetas.Model.Users", "user")
-                        .WithMany("pedidoUsers")
+                        .WithMany("pedidos")
                         .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("pedido");
+                    b.Navigation("sesion");
 
                     b.Navigation("user");
                 });
@@ -702,6 +640,17 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Navigation("pedido");
                 });
 
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Sesion", b =>
+                {
+                    b.HasOne("Teatro_dos_facetas.Model.Obras", "obra")
+                        .WithMany("sesiones")
+                        .HasForeignKey("obraId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("obra");
+                });
+
             modelBuilder.Entity("Teatro_dos_facetas.Model.SesionAsiento", b =>
                 {
                     b.HasOne("Teatro_dos_facetas.Model.Asientos", "asiento")
@@ -712,30 +661,11 @@ namespace Teatrodosfacetas.Data.Migrations
 
                     b.HasOne("Teatro_dos_facetas.Model.Sesion", "sesion")
                         .WithMany("SesionAsientos")
-                        .HasForeignKey("asientoId")
+                        .HasForeignKey("sesionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("asiento");
-
-                    b.Navigation("sesion");
-                });
-
-            modelBuilder.Entity("Teatro_dos_facetas.Model.SesionObra", b =>
-                {
-                    b.HasOne("Teatro_dos_facetas.Model.Obras", "obra")
-                        .WithMany("SesionObras")
-                        .HasForeignKey("obraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Teatro_dos_facetas.Model.Sesion", "sesion")
-                        .WithMany("SesionObras")
-                        .HasForeignKey("obraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("obra");
 
                     b.Navigation("sesion");
                 });
@@ -754,30 +684,24 @@ namespace Teatrodosfacetas.Data.Migrations
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Obras", b =>
                 {
-                    b.Navigation("SesionObras");
+                    b.Navigation("sesiones");
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Pedidos", b =>
                 {
                     b.Navigation("pedidoAsientos");
-
-                    b.Navigation("pedidoSesion");
-
-                    b.Navigation("pedidoUser");
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Sesion", b =>
                 {
                     b.Navigation("SesionAsientos");
 
-                    b.Navigation("SesionObras");
-
-                    b.Navigation("pedidoSesion");
+                    b.Navigation("pedidos");
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Users", b =>
                 {
-                    b.Navigation("pedidoUsers");
+                    b.Navigation("pedidos");
                 });
 #pragma warning restore 612, 618
         }

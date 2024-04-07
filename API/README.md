@@ -3,7 +3,7 @@
 # Comandos-necesarios
     Comando para realizar un plan de migración:
     dotnet ef migrations add NombreDeLaMigracion -p Ruta/Al/Proyecto/Con/DbContext -s Ruta/Al/Proyecto/DeInicio
-    dotnet ef migrations add NewCreate -p ./Teatro_dos_Facetas.Data/Teatro_dos_Facetas.Data.csproj -s ./Teatro_dos_Facetas.Api/Teatro_dos_Facetas.Api.csproj
+    dotnet ef migrations add NewCreate3 -p ./Teatro_dos_Facetas.Data/Teatro_dos_Facetas.Data.csproj -s ./Teatro_dos_Facetas.Api/Teatro_dos_Facetas.Api.csproj
     
     Update el plan de migración:
     dotnet ef database update  -p ./Teatro_dos_Facetas.Data/Teatro_dos_Facetas.Data.csproj -s ./Teatro_dos_Facetas.Api/Teatro_dos_Facetas.Api.csproj

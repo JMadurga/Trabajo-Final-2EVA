@@ -94,53 +94,50 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.Property(s => s.date).IsRequired();
 
         // Relación  SesionObras
-        entity.HasMany(s => s.SesionObras)
-              .WithOne(so => so.sesion)
-              .HasForeignKey(so => so.obraId);
+        entity.HasOne(s => s.obra)
+            .WithMany(so => so.sesiones)
+            .HasForeignKey(so => so.obraId);
+        
+        entity.HasMany(s => s.pedidos)
+            .WithOne(sa => sa.sesion)
+            .HasForeignKey(sa => sa.sesionId);
 
-        // Relación  SesionAsientos
-        entity.HasMany(s => s.SesionAsientos)
-              .WithOne(sa => sa.sesion)
-              .HasForeignKey(sa => sa.asientoId);
     });
 
-    modelBuilder.Entity<SesionObra>(entity =>
-    {
-        entity.HasKey(s => s.obraId);
-        // Relación SesionObras - Obras
-         entity.HasOne(so => so.obra)
-               .WithMany(o => o.SesionObras)
-              .HasForeignKey(so => so.obraId);
-    });
+    // modelBuilder.Entity<SesionObra>(entity =>
+    // {
+    //     entity.HasKey(s => s.obraId);
+    //     // Relación SesionObras - Obras
+    //      entity.HasOne(so => so.obra)
+    //            .WithMany(o => o.SesionObras)
+    //           .HasForeignKey(so => so.obraId);
+    // });
 
     modelBuilder.Entity<SesionAsiento>(entity =>
     {
-        entity.HasKey(s => s.asientoId);
-        // Relación SesionAsientos - Asientos
-        entity.HasOne(sa => sa.asiento)
-              .WithMany(a => a.SesionAsientos)
-              .HasForeignKey(sa => sa.asientoId);
+        entity.HasKey( s => new { s.asientoId,  s.sesionId});
+    
 
     }); 
 
 
     modelBuilder.Entity<Sesion>().HasData(
-        new Sesion {id = 1, date = DateTime.Now},
-        new Sesion {id = 2, date = DateTime.Now.AddDays(1)},
-        new Sesion {id = 3, date = DateTime.Now.AddDays(2)},
-        new Sesion {id = 4, date = DateTime.Now.AddDays(3)},
-        new Sesion {id = 5, date = DateTime.Now.AddDays(4)},
-        new Sesion {id = 6, date = DateTime.Now.AddDays(5)}
+        new Sesion {id = 1, date = DateTime.Now, obraId = 1},
+        new Sesion {id = 2, date = DateTime.Now.AddDays(1), obraId = 2},
+        new Sesion {id = 3, date = DateTime.Now.AddDays(2), obraId = 3},
+        new Sesion {id = 4, date = DateTime.Now.AddDays(3), obraId = 4},
+        new Sesion {id = 5, date = DateTime.Now.AddDays(4), obraId = 5},
+        new Sesion {id = 6, date = DateTime.Now.AddDays(5), obraId = 6}
     );
 
-    modelBuilder.Entity<SesionObra>().HasData(
-        new SesionObra {sesionId = 1, obraId = 1},
-        new SesionObra {sesionId = 2, obraId = 2},
-        new SesionObra {sesionId = 3, obraId = 3},
-        new SesionObra {sesionId = 4, obraId = 4},
-        new SesionObra {sesionId = 5, obraId = 5},
-        new SesionObra {sesionId = 6, obraId = 6}
-    );
+    // modelBuilder.Entity<SesionObra>().HasData(
+    //     new SesionObra {sesionId = 1, obraId = 1},
+    //     new SesionObra {sesionId = 2, obraId = 2},
+    //     new SesionObra {sesionId = 3, obraId = 3},
+    //     new SesionObra {sesionId = 4, obraId = 4},
+    //     new SesionObra {sesionId = 5, obraId = 5},
+    //     new SesionObra {sesionId = 6, obraId = 6}
+    // );
 
 
     // Configuración de Usuarios
@@ -151,6 +148,10 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         entity.Property(o => o.mail).IsRequired();
         entity.Property(o => o.password).IsRequired();
         entity.Property(o => o.phone).IsRequired();
+
+        entity.HasMany(o => o.pedidos)
+            .WithOne(p => p.user)
+            .HasForeignKey(p => p.userId);
     });
 
     modelBuilder.Entity<Users>().HasData(
@@ -167,55 +168,25 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
             entity.Property(p => p.total).IsRequired();
 
             // Relación PedidoUsuario
-            entity.HasMany(p => p.pedidoUser)
-                .WithOne(pu => pu.pedido)
-                .HasForeignKey(p => p.userId);
-
+                entity.HasOne(s => s.user)
+                    .WithMany(so => so.pedidos)
+                    .HasForeignKey(so => so.userId);
+        
             // Relación PedidoSesion
-            entity.HasMany(p => p.pedidoSesion)
-                .WithOne(ps => ps.pedido)
-                .HasForeignKey(p => p.sesionID);
-
+                entity.HasOne(s => s.sesion)
+                    .WithMany()
+                    .OnDelete(DeleteBehavior.Restrict);
+                    
+                    
             // Relación PedidoAsiento
-            entity.HasMany(p => p.pedidoAsientos)
-                .WithOne(pa => pa.pedido)
-                .HasForeignKey(p => p.asientoId);
+
         });
 
-    modelBuilder.Entity<PedidoUser>(entity =>
-        {
-            entity.HasKey(pu => new { pu.pedidoId, pu.userId });
-
-            entity.HasOne(pu => pu.pedido)
-                .WithMany(p => p.pedidoUser)
-                .HasForeignKey(pu => pu.pedidoId);
-
-            entity.HasOne(pu => pu.user)
-                .WithMany(u => u.pedidoUsers)
-                .HasForeignKey(pu => pu.userId);
-        });
-
-    modelBuilder.Entity<PedidoSesion>(entity =>
-        {
-            entity.HasKey(ps => new { ps.pedidoId, ps.sesionID });
-            entity.HasOne(ps => ps.pedido)
-                .WithMany(p => p.pedidoSesion)
-                .HasForeignKey(ps => ps.pedidoId);
-            entity.HasOne(ps => ps.sesion)
-                .WithMany(s => s.pedidoSesion)
-                .HasForeignKey(ps => ps.sesionID);
-        });
 
     modelBuilder.Entity<PedidosAsiento>(entity =>
         {
             entity.HasKey(pa => new { pa.pedidoId, pa.asientoId });
-            entity.HasOne(pa => pa.pedido)
-                .WithMany(p => p.pedidoAsientos)
-                .HasForeignKey(pa => pa.pedidoId);
 
-            entity.HasOne(pa => pa.asientos)
-                .WithMany(a => a.pedidoAsientos)
-                .HasForeignKey(pa => pa.asientoId);
         });
 
 
@@ -229,13 +200,13 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         public DbSet<Asientos> Asientos { get; set; }
         public DbSet<Obras> Obras { get; set; }
         public DbSet<Sesion> Sesiones { get; set; }
-        public DbSet<SesionObra> SesionObras { get; set; }
+        // public DbSet<SesionObra> SesionObras { get; set; }
         public DbSet<SesionAsiento> SesionAsientos { get; set; }
         public DbSet<Users> Users { get; set; }
         public DbSet<Pedidos> Pedidos { get; set; }
         public DbSet<PedidosAsiento> PedidoAsientos { get; set; }
-        public DbSet<PedidoSesion> PedidoSesion { get; set; }
-        public DbSet<PedidoUser> PedidoUser { get; set; }
+        // public DbSet<PedidoSesion> PedidoSesion { get; set; }
+        // public DbSet<PedidoUser> PedidoUser { get; set; }
 
     }
 }

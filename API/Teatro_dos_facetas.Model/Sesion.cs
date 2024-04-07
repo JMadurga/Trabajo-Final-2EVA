@@ -13,12 +13,20 @@ namespace Teatro_dos_facetas.Model
         public DateTime date {get; set;}
 
         [Required]
-        public List<SesionObra> SesionObras {get; set;}
-        
-        [Required]
-        public List<SesionAsiento> SesionAsientos{get; set;}
+        [ForeignKey("obraId")]
+        public int obraId {get; set;}
 
-        public List<PedidoSesion> pedidoSesion{get; set;}
+        public Obras obra {get; set;}
+        
+        
+        public List<SesionAsiento> SesionAsientos{get; set;} = new List<SesionAsiento>();
+
+
+        public List<Pedidos> pedidos{get; set;}
+
+        public override string ToString(){
+            return $"id: {id}, date: {date}, SesionAsientos: {string.Join("\t", SesionAsientos)}";
+        }
 
     }
 }

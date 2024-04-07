@@ -6,7 +6,7 @@ public class SesionDTO
 {
     [Key]
     public int sesionId {get; set;}
-    
+
     [Required]
     public DateTime date {get; set;}
 
@@ -16,5 +16,7 @@ public class SesionDTO
     [Required]
      public List<int> asientosId {get; set;}
 
-    
+    public override string ToString(){
+        return $"sesionId: {sesionId}, date: {date}, obraId: {obraId}, asientosId: {string.Join("\t", asientosId)}";
+    }
 }

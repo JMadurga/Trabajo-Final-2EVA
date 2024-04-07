@@ -20,3 +20,14 @@ D:\Javi-Calse\Trabajo-Final-2EVA\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\T
 D:\Javi-Calse\Trabajo-Final-2EVA\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\refint\Teatro_dos_facetas.Model.dll
 D:\Javi-Calse\Trabajo-Final-2EVA\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\Teatro_dos_facetas.Model.pdb
 D:\Javi-Calse\Trabajo-Final-2EVA\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\ref\Teatro_dos_facetas.Model.dll
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\bin\Debug\net7.0\Teatro_dos_facetas.Model.deps.json
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\bin\Debug\net7.0\Teatro_dos_facetas.Model.dll
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\bin\Debug\net7.0\Teatro_dos_facetas.Model.pdb
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\Teatro_dos_facetas.Model.GeneratedMSBuildEditorConfig.editorconfig
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\Teatro_dos_facetas.Model.AssemblyInfoInputs.cache
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\Teatro_dos_facetas.Model.AssemblyInfo.cs
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\Teatro_dos_facetas.Model.csproj.CoreCompileInputs.cache
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\Teatro_dos_facetas.Model.dll
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\refint\Teatro_dos_facetas.Model.dll
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\Teatro_dos_facetas.Model.pdb
+D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_facetas.Model\obj\Debug\net7.0\ref\Teatro_dos_facetas.Model.dll
