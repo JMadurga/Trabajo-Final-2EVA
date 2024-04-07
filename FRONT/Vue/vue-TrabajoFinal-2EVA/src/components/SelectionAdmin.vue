@@ -2,61 +2,117 @@
   <div class="flex">
       <div class="left">
           <p>NOMBRE DE USUARIO</p>
-          <v-btn size="x-large" block>OBRAS</v-btn>
-          <v-btn size="x-large" block>SESIONES</v-btn>
-          <v-btn size="x-large" block>USUARIOS</v-btn>
+          <v-btn size="x-large" block @click="ObrasVisible">OBRAS</v-btn>
+          <v-btn size="x-large" block @click="SesionesVisible">SESIONES</v-btn>
+          <v-btn size="x-large" block @click="UsuariosVisible">USUARIOS</v-btn>
       </div>
       <div class="right">
           <v-table>
               <thead>
-              <tr>
+              <tr v-show="ObrasisVisible">
+                  <th class="text-left">Obra</th>
+                  <th class="text-left">Descripcion</th>
+                  <th class="text-left">Actions</th>
+              </tr>
+              <tr v-show="SesionesisVisible">
+                  <th class="text-left">Sesion</th>
+                  <th class="text-left">Descripcion</th>
+                  <th class="text-left">Actions</th>
+              </tr>
+              <tr v-show="UsuariosisVisible">
                   <th class="text-left">Name</th>
-                  <th class="text-left">Calories</th>
+                  <th class="text-left">Surname</th>
                   <th class="text-left">Actions</th>
               </tr>
               </thead>
               <tbody>
-              <tr v-for="item in desserts" :key="item.name">
+              <tr v-show="ObrasisVisible" v-for="item in obrasStore.Obras" :key="item.NombreObra">
+                  <td>{{ item.NombreObra }}</td>
+                  <td>{{ item.calories }}</td>
+                  <td>
+                    <v-btn @click="obrasStore.editObra(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
+                    <v-btn @click="obrasStore.deleteObras(item.id)">delete</v-btn>
+                  </td>
+              </tr>
+              <tr v-show="SesionesisVisible" v-for="item in sesionesStore.Sesiones" :key="item.name">
                   <td>{{ item.name }}</td>
                   <td>{{ item.calories }}</td>
-                  <td><v-btn @click="deleteDessert(item.name)">delete</v-btn></td>
+                  <td>
+                    <v-btn @click="sesionesStore.editSesion(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
+                    <v-btn @click="sesionesStore.deleteSesiones(item.id)">delete</v-btn>
+                  </td>
+              </tr>
+              <tr v-show="UsuariosisVisible" v-for="item in usuariosStore.Usuarios" :key="item.name">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.calories }}</td>
+                  <td>
+                    <v-btn @click="usuariosStore.editUsuario(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
+                    <v-btn @click="usuariosStore.deleteUsuarios(item.id)">delete</v-btn>
+                  </td>
               </tr>
               </tbody>
           </v-table>
-          <div class="form-container">
-              <input type="text" v-model="newItem.name" placeholder="Name" />
-              <input type="number" v-model="newItem.calories" placeholder="Calories" />
-              <v-btn @click="addDessert">Add</v-btn>
+          <div class="form-container" v-show="ObrasisVisible">
+              <input type="text" v-model="obrasStore.newObra.NombreObra" placeholder="Name" />
+              <input type="number" v-model="obrasStore.newObra.calories" placeholder="Calories" />
+              <v-btn @click="obrasStore.addObras">Add</v-btn>
+          </div>
+          <div class="form-container" v-if="obrasStore.editingObra">
+            <input type="text" v-model="obrasStore.editingObra.NombreObra" placeholder="Name" />
+            <input type="number" v-model="obrasStore.editingObra.calories" placeholder="Calories" />
+            <v-btn @click="obrasStore.updateObra">Update</v-btn>
+          </div>
+          <div class="form-container" v-show="SesionesisVisible">
+              <input type="text" v-model="sesionesStore.newSesion.name" placeholder="Name" />
+              <input type="number" v-model="sesionesStore.newSesion.calories" placeholder="Calories" />
+              <v-btn @click="sesionesStore.addSesiones">Add</v-btn>
+          </div>
+          <div class="form-container" v-show="UsuariosisVisible">
+              <input type="text" v-model="usuariosStore.newUsuario.name" placeholder="Name" />
+              <input type="number" v-model="usuariosStore.newUsuario.calories" placeholder="Calories" />
+              <v-btn @click="usuariosStore.addUsuarios">Add</v-btn>
           </div>
       </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { reactive, ref } from 'vue';
 
-let desserts = reactive([
-    { name: 'Frozen Yogurt', calories: 159 },
-    { name: 'Ice cream sandwich', calories: 237 },
-])
+import { useObrasStore } from '@/stores/ObrasStore';
+import { useSesionesStore } from '@/stores/SesionesStore';
+import { useUsuariosStore } from '@/stores/UsuariosStore';
 
-let newItem = ref({ name: '', calories: 0 })
+const obrasStore = useObrasStore();
+const sesionesStore = useSesionesStore();
+const usuariosStore = useUsuariosStore();
 
-const addDessert = () => {
-    desserts.push({ ...newItem.value })
-    newItem.value = { name: '', calories: 0 }
+//-------------------------------------------------------------------
+
+const ObrasisVisible = ref(false);
+const SesionesisVisible = ref(false);
+const UsuariosisVisible = ref(false);
+
+function ObrasVisible() {
+  ObrasisVisible.value = !ObrasisVisible.value;
+  SesionesisVisible.value = false;
+  UsuariosisVisible.value = false;
 }
-
-const deleteDessert = (name: string) => {
-    const index = desserts.findIndex(item => item.name === name)
-    if (index !== -1) {
-        desserts.splice(index, 1)
-    }
+function SesionesVisible() {
+  SesionesisVisible.value = !SesionesisVisible.value;
+  ObrasisVisible.value = false;
+  UsuariosisVisible.value = false;
+}
+function UsuariosVisible() {
+  UsuariosisVisible.value = !UsuariosisVisible.value;
+  SesionesisVisible.value = false;
+  ObrasisVisible.value = false;
 }
 </script>
 
 
 <style scoped>
+
 .text-left {
   font-size: 20px;
   color: #333;
