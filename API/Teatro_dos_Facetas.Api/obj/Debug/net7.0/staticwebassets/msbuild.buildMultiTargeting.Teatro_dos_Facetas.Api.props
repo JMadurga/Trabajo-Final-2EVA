@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Teatro_dos_Facetas.Api.props" />
+</Project>
