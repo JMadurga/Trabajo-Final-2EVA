@@ -3,6 +3,10 @@ using Teatro_dos_facetas.Data;
 using Microsoft.EntityFrameworkCore;
 using Teatro_dos_Facetas.Business;
 using Teatro_dos_Facetas.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

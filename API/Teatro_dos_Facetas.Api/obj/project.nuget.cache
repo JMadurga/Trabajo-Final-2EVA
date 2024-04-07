@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OyU4C2AVDnKPkvq3MhOxKRwPx+swuLepR8Tmu1cuDL7sOOCu4/PTBSV5niYe2S2OQrCLbLuB7YT+2XxG57s/nA==",
+  "dgSpecHash": "3sXjph8NGav+FIhHRJ/JkxnckBaDrf1Txj173nuzC7/Os9xjHkcuBdW1pWnKlQWn91EHtHKldtjqh8bhmENbwQ==",
   "success": true,
   "projectFilePath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Api\\Teatro_dos_Facetas.Api.csproj",
   "expectedPackageFiles": [
@@ -10,6 +10,7 @@
     "C:\\Users\\javit\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\javit\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\javit\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",
+    "C:\\Users\\javit\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\javit\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.13\\microsoft.aspnetcore.openapi.7.0.13.nupkg.sha512",
     "C:\\Users\\javit\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.0\\microsoft.aspnetcore.razor.language.6.0.0.nupkg.sha512",
     "C:\\Users\\javit\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\5.0.0\\microsoft.bcl.asyncinterfaces.5.0.0.nupkg.sha512",
