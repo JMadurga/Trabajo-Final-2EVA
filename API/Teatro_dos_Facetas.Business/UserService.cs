@@ -16,8 +16,7 @@ namespace Teatro_dos_facetas.Business
         
         public UserCreateDTO UserToDTO (Users user){
             return new UserCreateDTO
-            {
-                userId = user.id,
+            {   
                 name = user.name,
                 email = user.mail,
                 password = user.password,
@@ -27,11 +26,21 @@ namespace Teatro_dos_facetas.Business
         public Users UserDtoToUser (UserCreateDTO userdto){
             return new Users
             {
-                id = userdto.userId,
+                id = userdto.id,
                 name = userdto.name,
                 mail = userdto.email,
                 password = userdto.password,
                 phone = userdto.phone
+            };
+           
+        }
+
+        public Users LoginDtoinToUser (LoginDtoIn userdto){
+            return new Users
+            {
+                mail = userdto.mail,
+                password = userdto.password,
+               
             };
            
         }
