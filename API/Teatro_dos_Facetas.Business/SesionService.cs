@@ -15,7 +15,8 @@ namespace Teatro_dos_Facetas.Business
             _sesionRepository = sesionRepository;
         }
 
-        // Aquí puedes agregar los métodos de tu servicio, por ejemplo:
+       
+
 
         public List<Sesion> GetAll() => _sesionRepository.AllSesiones;
         public Sesion GetSesionById(int id)
@@ -23,22 +24,66 @@ namespace Teatro_dos_Facetas.Business
             return _sesionRepository.GetSesion(id);
         }
         
+        public Sesion SesionDtoToSesion(SesionDTO sesionDto)
+        {
+            var sesion = new Sesion
+            {
+                id = sesionDto.sesionId,
+                date = sesionDto.date,
+                    
+                SesionObras = sesionDto.sesionObras.Select(soDto => new SesionObra 
+                        { 
+                            sesionId= soDto.SesionId, 
+                            obraId = soDto.ObraId 
+
+                        }).ToList(),
+              
+                SesionAsientos = sesionDto.sesionAsientos.Select(saDto => new SesionAsiento 
+                        { 
+                            sesionId = saDto.SesionId, 
+                            asientoId = saDto.AsientoId 
+
+                        }).ToList(),
+                };
+
+                return sesion;
+        }
+    public SesionDTO SesionToSesionDto(Sesion sesion)
+        {
+            var sesionDto = new SesionDTO
+            {
+                sesionId = sesion.id,
+                date = sesion.date,
+
+                sesionObras = sesion.SesionObras.Select(so => new SesionObraDTO
+                {
+                    ObraId = so.obraId 
+                }).ToList(),
+
+                sesionAsientos = sesion.SesionAsientos.Select(sa => new SesionAsientoDTO
+                {
+                    AsientoId = sa.asientoId 
+                }).ToList(),
+            };
+
+            return sesionDto;
+        }
 
         public void CreateSesion(Sesion sesion)
         {
-            // Aquí puedes agregar lógica adicional antes de guardar la sesión en el repositorio
+            
             _sesionRepository.AddSesion(sesion);
         }
 
         public void UpdateSesion(Sesion sesion)
         {
-            // Aquí puedes agregar lógica adicional antes de actualizar la sesión en el repositorio
+            
             _sesionRepository.ChangeSesion(sesion);
         }
 
         public void DeleteSesion(int id)
         {
-            // Aquí puedes agregar lógica adicional antes de eliminar la sesión del repositorio
+           
             _sesionRepository.RemoveSesion(id);
         }
     }

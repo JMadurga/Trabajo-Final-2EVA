@@ -12,6 +12,29 @@ namespace Teatro_dos_facetas.Business
         {
             _usuarioRepository = usuarioRepository;
         }
+
+        
+        public UserCreateDTO UserToDTO (Users user){
+            return new UserCreateDTO
+            {
+                userId = user.id,
+                name = user.name,
+                email = user.mail,
+                password = user.password,
+            };
+           
+        }
+        public Users UserDtoToUser (UserCreateDTO userdto){
+            return new Users
+            {
+                id = userdto.userId,
+                name = userdto.name,
+                mail = userdto.email,
+                password = userdto.password,
+                phone = userdto.phone
+            };
+           
+        }
         public List<Users> GetAll() => _usuarioRepository.AllUser;
 
         public Users? Get(int id) => _usuarioRepository.GetUser(id);

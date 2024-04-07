@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Teatro_dos_facetas.Data;
 
@@ -11,9 +12,11 @@ using Teatro_dos_facetas.Data;
 namespace Teatrodosfacetas.Data.Migrations
 {
     [DbContext(typeof(TeatroContext))]
-    partial class TeatroContextModelSnapshot : ModelSnapshot
+    [Migration("20240403174906_NewCreate")]
+    partial class NewCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

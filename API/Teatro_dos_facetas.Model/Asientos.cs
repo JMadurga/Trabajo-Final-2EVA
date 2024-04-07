@@ -16,6 +16,8 @@ namespace Teatro_dos_facetas.Model
         public double price {get; set;} 
 
         
-        //public List<SesionAsiento> SesionAsientos { get; set; }
+        public List<SesionAsiento> SesionAsientos { get; set; }
+
+
     }
 }

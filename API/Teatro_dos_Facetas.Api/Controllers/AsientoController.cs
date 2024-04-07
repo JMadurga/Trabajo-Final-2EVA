@@ -17,30 +17,35 @@ namespace Teatro_dos_facetas.Controller
         {
             _asientoService = asientoService;
         }
-        
+
         [HttpGet]
         public ActionResult<List<Asientos>> GetAll() => _asientoService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Asientos> Get(int id)
+        public ActionResult<AsientosDTO> Get(int id)
         {
             var asiento = _asientoService.Get(id);
-
             if (asiento == null)
                 return NotFound();
 
-            return asiento;
+             var asientosDTO = _asientoService.AsientoToDTO(asiento);
+        
+
+            return asientosDTO;
         } 
         [HttpPost]
-        public IActionResult Create(Asientos asiento)
+        public IActionResult Create(AsientosDTO asientodto)
         {
+            var asiento = _asientoService.AsientoDtoToAsiento(asientodto);
             _asientoService.Add(asiento);
             return CreatedAtAction(nameof(Get), new { id = asiento.id }, asiento);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Asientos asiento)
+        public IActionResult Update(int id, AsientosDTO asientosDTO)
         {
+
+            var asiento = _asientoService.AsientoDtoToAsiento(asientosDTO);
             if (id != asiento.id)
                 return BadRequest();
 

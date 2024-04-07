@@ -1,7 +1,7 @@
 namespace Teatro_dos_facetas.Model
 {
     
-    public class PedidoAsiento
+    public class PedidosAsiento
     {
         public int pedidoId { get; set; }
         public Pedidos pedido { get; set; }

@@ -7,11 +7,15 @@ namespace Teatro_dos_facetas.Model
         [Key]
         public int id {get; set;}
 
-        public PedidoUser pedidoUser{get; set;}
+        public double total {get; set;}
 
-        public PedidoSesion pedidoSesion{get; set;} 
+        public DateTime date {get; set;}
 
-        public List<Asientos> pedidoAsientos {get; set;}
+        public List<PedidoUser> pedidoUser{get; set;}
+
+        public List<PedidoSesion> pedidoSesion{get; set;} 
+
+        public List<PedidosAsiento> pedidoAsientos {get; set;}
 
     }
 }

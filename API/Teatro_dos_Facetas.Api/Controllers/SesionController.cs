@@ -23,27 +23,32 @@ namespace Teatro_dos_facetas.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetSesionById(int id)
+        public IActionResult  GetSesionById(int id)
         {
             var sesion = _sesionService.GetSesionById(id);
             if (sesion == null)
             {
                 return NotFound();
             }
-            return Ok(sesion);
+
+            var sesionDto = _sesionService.SesionToSesionDto(sesion);
+            return Ok(sesionDto);
         }
 
 
         [HttpPost]
-        public IActionResult CreateSesion([FromBody] Sesion sesion)
+        public IActionResult CreateSesion([FromBody] SesionDTO sesiondto)
         {
+
+            var sesion = _sesionService.SesionDtoToSesion(sesiondto);
             _sesionService.CreateSesion(sesion);
             return CreatedAtAction(nameof(GetSesionById), new { id = sesion.id }, sesion);
         }
 
         [HttpPut]
-        public IActionResult UpdateSesion([FromBody] Sesion sesion)
+        public IActionResult UpdateSesion([FromBody] SesionDTO sesiondto)
         {
+            var sesion = _sesionService.SesionDtoToSesion(sesiondto);
             _sesionService.UpdateSesion(sesion);
             return NoContent();
         }

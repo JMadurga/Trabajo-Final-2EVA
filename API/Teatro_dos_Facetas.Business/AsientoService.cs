@@ -12,6 +12,24 @@ namespace Teatro_dos_facetas.Business
         {
             _asientoRepository = asientoRepository;
         }
+            public AsientosDTO AsientoToDTO (Asientos asientos){
+            return new AsientosDTO
+            {
+                asientoId = asientos.id,
+                isFree = asientos.isFree,
+                price = asientos.price,
+            };
+           
+        }
+        public Asientos AsientoDtoToAsiento (AsientosDTO asientosDTO){
+            return new Asientos            {
+                id = asientosDTO.asientoId,
+                isFree = asientosDTO.isFree,
+                price = asientosDTO.price,
+    
+            };
+           
+        }
         public List<Asientos> GetAll() => _asientoRepository.AllAsientos;
 
         public Asientos? Get(int id) => _asientoRepository.GetAsiento(id);

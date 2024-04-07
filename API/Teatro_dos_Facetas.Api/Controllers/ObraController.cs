@@ -17,30 +17,36 @@ namespace Teatro_dos_facetas.Controller
         {
             _obraService = obraService;
         }
-        
+
+
+
         [HttpGet]
         public ActionResult<List<Obras>> GetAll() => _obraService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Obras> Get(int id)
+        public ActionResult<ObrasDTO> Get(int id)
         {
             var obra = _obraService.Get(id);
 
             if (obra == null)
-                return NotFound();
+                        return NotFound();
 
-            return obra;
+            var obraDto = _obraService.ObrasToDTO(obra);
+       
+            return obraDto;
         } 
         [HttpPost]
-        public IActionResult Create([FromBody] Obras obra)
+        public IActionResult Create([FromBody] ObrasDTO obraDto)
         {
+            var obra = _obraService.ObrasDtoToObra(obraDto);
             _obraService.Add(obra);
             return CreatedAtAction(nameof(Get), new { id = obra.id }, obra);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, [FromBody] Obras obra)
+        public IActionResult Update(int id, [FromBody] ObrasDTO obradto)
         {
+            var obra = _obraService.ObrasDtoToObra(obradto);
             if (id != obra.id)
                 return BadRequest();
 

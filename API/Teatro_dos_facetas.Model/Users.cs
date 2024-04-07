@@ -14,5 +14,7 @@ namespace Teatro_dos_facetas.Model
         public string password{get; set;}
         [Required]
         public int phone{get; set;}
+
+        public List<PedidoUser> pedidoUsers { get; set; }
     }
 }

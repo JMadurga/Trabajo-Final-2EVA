@@ -11,5 +11,7 @@ namespace Teatro_dos_facetas.Model
 
         public List<Asientos> asientosOcupados {get; set;}
 
+        public List<PedidosAsiento> pedidoAsientos { get; set; }
+
     }
 }

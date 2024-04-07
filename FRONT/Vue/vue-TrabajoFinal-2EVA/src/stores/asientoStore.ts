@@ -9,7 +9,7 @@ const asientoStore = reactive({
     asientos: [] as Asiento[],
     fetchAsientos: async () => {
         try {
-            const response = await fetch('http://localhost:8001/asientos');
+            const response = await fetch('http://localhost:8001/Asiento');
             const data = await response.json();
             asientoStore.asientos = data;
         } catch (error) {
@@ -18,12 +18,12 @@ const asientoStore = reactive({
     },
     reservarAsiento: async (id: number, ocupado: boolean) => {
         try {
-            const response = await fetch(`http://localhost:8001/asientos/${id}`, {
+            const response = await fetch(`http://localhost:8001/Asiento/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ ocupado }),
+                body: JSON.stringify({ id, ocupado }),
             });
             if (response.ok) {
                 // Actualizar el estado del asiento reservado

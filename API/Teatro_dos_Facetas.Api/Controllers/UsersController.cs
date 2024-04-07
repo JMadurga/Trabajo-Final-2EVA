@@ -3,6 +3,9 @@ using Teatro_dos_facetas.Business;
 using Teatro_dos_facetas.Data;
 using Teatro_dos_facetas.Model;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Teatro_dos_facetas.Controller
 {
@@ -17,17 +20,25 @@ namespace Teatro_dos_facetas.Controller
         {
             _userService = userService;
         }
-        
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
+
+        public UsersController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        {
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
         [HttpGet]
         public ActionResult<List<Users>> GetAll() => _userService.GetAll();
 
         [HttpGet("{id}")]
-        public ActionResult<Users> Get(int id)
+        public ActionResult<UserCreateDTO> Get(int id)
         {
+
             try
             {
-                var user = _userService.Get(id);
-                return user;
+                return _userService.UserToDTO(_userService.Get(id));
             }
             catch (System.Exception)
             {
@@ -38,17 +49,20 @@ namespace Teatro_dos_facetas.Controller
 
         } 
         [HttpPost]
-        public IActionResult Create(Users user)
+        public IActionResult Create(UserCreateDTO userdto)
         {
+            var user = _userService.UserDtoToUser(userdto);
+
             _userService.Add(user);
             return CreatedAtAction(nameof(Get), new { id = user.id }, user);
         }
 
         [HttpPut("{id}")]
-        public IActionResult Update(int id, Users user)
+        public IActionResult Update(int id, UserCreateDTO userdto)
         {
             try
             {
+                var user = _userService.UserDtoToUser(userdto);
                 if (id != user.id)
                     return BadRequest();
 
@@ -88,6 +102,7 @@ namespace Teatro_dos_facetas.Controller
                 return StatusCode(500, "An error occurred while deleting the user.");
             }
         } 
+
     }
     
 }
