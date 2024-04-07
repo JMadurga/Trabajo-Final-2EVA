@@ -20,14 +20,7 @@ namespace Teatro_dos_facetas.Controller
         {
             _userService = userService;
         }
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
-
-        public UsersController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
-        {
-            _userManager = userManager;
-            _signInManager = signInManager;
-        }
+            
 
         [HttpGet]
         public ActionResult<List<Users>> GetAll() => _userService.GetAll();
