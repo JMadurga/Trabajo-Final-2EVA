@@ -6,13 +6,15 @@ public class SesionDTO
 {
     [Key]
     public int sesionId {get; set;}
+    
     [Required]
     public DateTime date {get; set;}
 
     [Required]
-    public List<SesionObraDTO> sesionObras {get; set;}
+    public int obraId {get; set;}
 
     [Required]
-    public List<SesionAsientoDTO> sesionAsientos {get; set;}
+     public List<int> asientosId {get; set;}
+
     
 }

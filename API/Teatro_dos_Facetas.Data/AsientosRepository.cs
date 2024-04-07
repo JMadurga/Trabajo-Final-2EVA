@@ -15,6 +15,7 @@ namespace Teatro_dos_facetas.Data{
         }
         public void AddAsiento(Asientos asiento)
         {
+            
             _context.Asientos.Add(asiento);
             SaveChanges();
         }

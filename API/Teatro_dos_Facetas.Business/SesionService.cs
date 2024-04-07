@@ -31,46 +31,40 @@ namespace Teatro_dos_Facetas.Business
                 id = sesionDto.sesionId,
                 date = sesionDto.date,
                     
-                SesionObras = sesionDto.sesionObras.Select(soDto => new SesionObra 
-                        { 
-                            sesionId= soDto.SesionId, 
-                            obraId = soDto.ObraId 
+                SesionObras = new List<SesionObra> { new SesionObra
+                    {
+                        sesionId = sesionDto.sesionId,
+                        obraId = sesionDto.obraId
+                    }
+                } 
 
-                        }).ToList(),
-              
-                SesionAsientos = sesionDto.sesionAsientos.Select(saDto => new SesionAsiento 
-                        { 
-                            sesionId = saDto.SesionId, 
-                            asientoId = saDto.AsientoId 
-
-                        }).ToList(),
-                };
-
+            };
                 return sesion;
         }
+
     public SesionDTO SesionToSesionDto(Sesion sesion)
         {
             var sesionDto = new SesionDTO
             {
                 sesionId = sesion.id,
                 date = sesion.date,
-
-                sesionObras = sesion.SesionObras.Select(so => new SesionObraDTO
-                {
-                    ObraId = so.obraId 
-                }).ToList(),
-
-                sesionAsientos = sesion.SesionAsientos.Select(sa => new SesionAsientoDTO
-                {
-                    AsientoId = sa.asientoId 
-                }).ToList(),
+                obraId = sesion.SesionObras.Select(so => so.obraId).FirstOrDefault(),
+                asientosId = sesion.SesionAsientos.Select(sa => sa.asientoId).ToList() 
+               
             };
-
+            
             return sesionDto;
         }
+            
+    
 
         public void CreateSesion(Sesion sesion)
         {
+            for (int i = 1; i <= 40; i++)
+            {
+                sesion.SesionAsientos[i].sesionId = sesion.id;
+            }
+
             
             _sesionRepository.AddSesion(sesion);
         }
