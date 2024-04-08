@@ -16,27 +16,29 @@ namespace Teatro_dos_facetas.Data{
         }
         public void AddSesion(Sesion sesion)
         {
-            
-           
-            List<SesionAsiento> sesionAsientos = new List<SesionAsiento>();
-            foreach (var asiento in _context.Asientos.ToList())
-            {
-                sesionAsientos.Add(new SesionAsiento
-                {
-                    asientoId = asiento.id,
-                });
-            }
             _context.Sesiones.Add(sesion);
 
             SaveChanges();
+            
+            foreach (var asiento in _context.Asientos.ToList())
+            {
+                _context.SesionAsientos.Add(new SesionAsiento
+                {
+                    sesionId = sesion.id,
+                    asientoId = asiento.id,
+                });
+                SaveChanges();
+            }
+         
+  
         }
         public Sesion GetSesion(int id)
         {
             return _context.Sesiones.FirstOrDefault(sesion => sesion.id == id);
         }
-        public Sesion GetSesionAsientos()
+        public List<SesionAsiento> GetSesionAsientos()
         {
-            return _context.SesionAsientos;
+            return _context.SesionAsientos.ToList();
         }
 
         public void ChangeSesion(Sesion sesion)

@@ -58,6 +58,7 @@
                         text="COMPRAR"
                         variant="flat"
                         :disabled="!obraSeleccionada || items.length === 0"
+                        @onClick="addItem"
                     ></v-btn>
                     </template>
 
@@ -132,14 +133,15 @@
 </style>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { useObraSeleccionadaStore } from '@/stores/obraSeleccionada';
+import { ObraStore } from '@/stores/obraStore';
+import { PedidoStore } from '@/stores/pedidosStore';
 
-const obraSeleccionadaStore = useObraSeleccionadaStore(); // Instanciamos la store
+const obraSeleccionadaStore = ObraStore(); // Instanciamos la store
 
 // Obtenemos la obra seleccionada de la store
-const obraSeleccionada = obraSeleccionadaStore.obraSeleccionada;
+const obraElegida = obraSeleccionadaStore.obraSeleccionada;
 const svgCounter = ref(0);
-
+const pedidoStore = PedidoStore(); // Instanciamos la store
 const agregarSVG = (numSVGs: number) => {
   const gridContainer = document.getElementById('gridContainer');
   const centerCont = document.getElementsByClassName('center-cont');
@@ -389,38 +391,6 @@ const cambiarColor = (svgElement: Element) => {
     });
 };
 
-
-/*else if(elemento.getAttribute('fill') == '#f9ffb8' || elemento.getAttribute('fill') == '#d6de7c' || elemento.getAttribute('fill') == '#E6F457'){
-        var newFill = elemento.getAttribute('fill');
-        currentFill = '';
-        switch(newFill) {
-            case '#f9ffb8':
-                currentFill = '#ffa6d0';
-                break;
-            case '#d6de7c':
-                currentFill = '#f558a3';
-                break;
-            case '#E6F457':
-                currentFill = '#C72271';
-                break;
-        }                    
-        elemento.setAttribute('fill', currentFill);
-    } else if(elemento.getAttribute('fill') == '#ffa6d0' || elemento.getAttribute('fill') == '#f558a3' || elemento.getAttribute('fill') == '#C72271'){
-        newFill = elemento.getAttribute('fill');
-        currentFill = '';
-        switch(newFill) {
-            case '#ffa6d0':
-                currentFill = '#c4c4c4';
-                break;
-            case '#f558a3':
-                currentFill = '#949494';
-                break;
-            case '#C72271':
-                currentFill = '#5e5e5e';
-                break;
-        }                    
-        elemento.setAttribute('fill', currentFill);
-    }*/
 
 
 onMounted(() => {

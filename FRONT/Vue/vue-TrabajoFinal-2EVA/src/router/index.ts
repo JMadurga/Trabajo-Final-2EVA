@@ -6,6 +6,7 @@ import pruebas from '../views/pruebasresp.vue'
 import promo from '../views/Promociones.vue'
 import compras from '../views/Compras.vue'
 import admin from '../views/Admin.vue'
+import Register from '../views/Register.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/admin',
       name: 'admin',
       component: admin
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
     }
 
   ]

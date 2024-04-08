@@ -43,6 +43,29 @@ namespace Teatro_dos_facetas.Data{
             _context.Users.Remove(user);
             SaveChanges();
         }
+
+        public UserCreateDTO AddUserFromCredentials(UserCreateDTO userDtoIn) {
+            if (GetUserByCorreo(userDtoIn.email) != null)
+            {
+                throw new KeyNotFoundException("User already exists.");
+            }
+            var user = new Users { name = userDtoIn.name, mail = userDtoIn.email, password = userDtoIn.password, phone = userDtoIn.phone};
+            AddUser(user); 
+            return new UserCreateDTO { id = user.id, name = user.name, email = user.mail, phone = user.phone};
+        }
+        
+        public UserCreateDTO GetUserFromCredentials(LoginDtoIn loginDtoIn) {
+            var user = GetUserByCorreo(loginDtoIn.mail);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+            if (user.password != loginDtoIn.password)
+            {
+                throw new KeyNotFoundException("Password incorrect.");
+            }
+            return new UserCreateDTO { id = user.id, name = user.name, email = user.mail, phone = user.phone};
+        }
         public void SaveChanges()
         {
             _context.SaveChanges();

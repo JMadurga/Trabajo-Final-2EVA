@@ -23,7 +23,7 @@ namespace Teatro_dos_Facetas.Business
         public SesionDTO GetSesionById(int id)
         {
             var sesion = SesionToSesionDto(_sesionRepository.GetSesion(id));
-
+            sesion.asientosId = _sesionRepository.GetSesionAsientos().Where(sa => sa.sesionId == id).Select(sa => sa.asientoId).ToList();
             return sesion;
         }
         

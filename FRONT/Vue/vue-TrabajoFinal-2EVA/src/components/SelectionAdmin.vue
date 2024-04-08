@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
       <div class="left">
-          <p>NOMBRE DE USUARIO</p>
+          <p>{{usuariosStore.user?.name}}</p>
           <v-btn size="x-large" block @click="ObrasVisible">OBRAS</v-btn>
           <v-btn size="x-large" block @click="SesionesVisible">SESIONES</v-btn>
           <v-btn size="x-large" block @click="UsuariosVisible">USUARIOS</v-btn>
@@ -9,7 +9,7 @@
       <div class="right">
           <v-table>
               <thead>
-              <tr v-show="ObrasisVisible">
+              <tr v-show="ObrasisVisible" v>
                   <th class="text-left">Obra</th>
                   <th class="text-left">Descripcion</th>
                   <th class="text-left">Actions</th>
@@ -26,51 +26,62 @@
               </tr>
               </thead>
               <tbody>
-              <tr v-show="ObrasisVisible" v-for="item in obrasStore.Obras" :key="item.NombreObra">
-                  <td>{{ item.NombreObra }}</td>
-                  <td>{{ item.calories }}</td>
+              <tr v-show="ObrasisVisible" v-for="item in obrasStore.obras" :key="item.id">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.title }}</td>
                   <td>
-                    <v-btn @click="obrasStore.editObra(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
-                    <v-btn @click="obrasStore.deleteObras(item.id)">delete</v-btn>
+                    <v-btn @click="obrasStore.actualizarObra(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
+                    <v-btn @click="removeObra(item.id!)">delete</v-btn>
                   </td>
               </tr>
-              <tr v-show="SesionesisVisible" v-for="item in sesionesStore.Sesiones" :key="item.name">
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.calories }}</td>
+              <tr v-show="SesionesisVisible" v-for="item in sesionesStore.sessions" :key="item.id">
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.obra }}</td>
+                  <td>{{ item.date }}</td>
                   <td>
-                    <v-btn @click="sesionesStore.editSesion(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
-                    <v-btn @click="sesionesStore.deleteSesiones(item.id)">delete</v-btn>
+                    <v-btn @click="sesionesStore.updateSesion(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
+                    <v-btn @click="sesionesStore.removeSesion(item.id!)">delete</v-btn>
                   </td>
               </tr>
-              <tr v-show="UsuariosisVisible" v-for="item in usuariosStore.Usuarios" :key="item.name">
+              <tr v-show="UsuariosisVisible" v-for="item in usuariosStore.users" :key="item.name">
                   <td>{{ item.name }}</td>
-                  <td>{{ item.calories }}</td>
+                  <td>{{ item.email }}</td>
                   <td>
-                    <v-btn @click="usuariosStore.editUsuario(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
-                    <v-btn @click="usuariosStore.deleteUsuarios(item.id)">delete</v-btn>
+                    <v-btn @click="usuariosStore.updateUser(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
+                    <v-btn @click="usuariosStore.removeUser(item.id!)">delete</v-btn>
                   </td>
               </tr>
               </tbody>
           </v-table>
           <div class="form-container" v-show="ObrasisVisible">
-              <input type="text" v-model="obrasStore.newObra.NombreObra" placeholder="Name" />
-              <input type="number" v-model="obrasStore.newObra.calories" placeholder="Calories" />
-              <v-btn @click="obrasStore.addObras">Add</v-btn>
+              <input type="text" v-model="newObra.title" placeholder="Titulo" />
+              <input type="text" v-model="newObra.categoria" placeholder="categoria" />
+              <input type="text" v-model="newObra.synopsis" placeholder="synopsis">
+              <v-btn @click="addObra()">Add</v-btn> 
           </div>
-          <div class="form-container" v-if="obrasStore.editingObra">
-            <input type="text" v-model="obrasStore.editingObra.NombreObra" placeholder="Name" />
-            <input type="number" v-model="obrasStore.editingObra.calories" placeholder="Calories" />
-            <v-btn @click="obrasStore.updateObra">Update</v-btn>
+          <div class="form-container" v-if="ObrasisVisible">
+            <input type="text" v-model="newObra.title" placeholder="Titulo" />
+            <input type="text" v-model="newObra.categoria" placeholder="Categoria" />
+            <input type="text" v-model="newObra.synopsis" placeholder="synopsis" />
+            <v-btn @click="updateObra()">Update</v-btn>
           </div>
           <div class="form-container" v-show="SesionesisVisible">
-              <input type="text" v-model="sesionesStore.newSesion.name" placeholder="Name" />
-              <input type="number" v-model="sesionesStore.newSesion.calories" placeholder="Calories" />
-              <v-btn @click="sesionesStore.addSesiones">Add</v-btn>
+              <input type="text" v-model="newSesion.obra" placeholder="obra" />            
+              <v-btn @click="addSesiones">Add</v-btn>
           </div>
           <div class="form-container" v-show="UsuariosisVisible">
-              <input type="text" v-model="usuariosStore.newUsuario.name" placeholder="Name" />
-              <input type="number" v-model="usuariosStore.newUsuario.calories" placeholder="Calories" />
-              <v-btn @click="usuariosStore.addUsuarios">Add</v-btn>
+              <input type="text" v-model="newUsuario.name" placeholder="Name" />
+              <input type="text" v-model="newUsuario.email" placeholder="Email" />
+              <input type="text" v-model="newUsuario.password" placeholder="Password" />
+              <input type="number" v-model="newUsuario.phone" placeholder="Phone" />
+              <v-btn @click="addUser">Update</v-btn>
+          </div>
+          <div class="form-container" v-show="UsuariosisVisible">
+              <input type="text" v-model="newUsuario.name" placeholder="Name" />
+              <input type="text" v-model="newUsuario.email" placeholder="Email" />
+              <input type="text" v-model="newUsuario.password" placeholder="Password" />
+              <input type="number" v-model="newUsuario.phone" placeholder=" Phone">
+              <v-btn @click="addUser()">Add</v-btn>
           </div>
       </div>
   </div>
@@ -79,14 +90,43 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
 
-import { useObrasStore } from '@/stores/ObrasStore';
-import { useSesionesStore } from '@/stores/SesionesStore';
-import { useUsuariosStore } from '@/stores/UsuariosStore';
 
-const obrasStore = useObrasStore();
-const sesionesStore = useSesionesStore();
-const usuariosStore = useUsuariosStore();
+import  {ObraStore}  from '@/stores/obraStore';
+import  {SesionStore} from '@/stores/sesionStore'; // cammbiar store 
+import { UserStore } from '@/stores/userStore';
 
+
+const obrasStore = ObraStore();
+const sesionesStore = SesionStore();
+const usuariosStore = UserStore();
+const newObra = ref({ title: "", categoria: "", synopsis: "" });
+const newUsuario = ref({ name: "", email: "", password: "", phone:0 });
+const newSesion = ref({ obra: "", date: Date.now() });
+
+
+function addObra() {
+  obrasStore.crearObra(newObra.value);
+}
+ function addSesiones() {
+  sesionesStore.addSession(newSesion.value);
+ }
+function updateObra() {
+
+  obrasStore.actualizarObra(newObra.value);
+}
+
+function removeObra(id: number) {
+  obrasStore.eliminarObra(id);
+}
+
+function addUser() {
+  usuariosStore.addUser(newUsuario.value);
+} 
+
+
+obrasStore.cargarObras();
+sesionesStore.fetchSessions();  
+usuariosStore.fetchUsers();  
 //-------------------------------------------------------------------
 
 const ObrasisVisible = ref(false);

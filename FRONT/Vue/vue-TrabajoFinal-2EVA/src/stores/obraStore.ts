@@ -1,12 +1,10 @@
 import { defineStore } from 'pinia';
 
 interface Obra {
-  id: number;
+  id?: number;
   title: string;
-  subtitle: string;
-  content: string;
-  imgSrc: string;
-  price: number;
+  categoria: string;
+  synopsis: string;
 }
 
 export const ObraStore = defineStore({

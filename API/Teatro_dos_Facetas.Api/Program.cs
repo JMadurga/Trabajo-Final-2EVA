@@ -36,6 +36,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
+
 // builder.Services.AddControllers();
 var app = builder.Build();
 
@@ -44,6 +45,15 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 
+app.UseAuthorization();
+app.UseCors(options =>
+{
+    options.WithOrigins("http://localhost:5173")  
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .AllowCredentials();
+});
+app.MapControllers();
 
 app.UseHttpsRedirection();
 

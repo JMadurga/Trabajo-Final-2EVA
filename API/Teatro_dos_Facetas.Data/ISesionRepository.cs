@@ -7,7 +7,7 @@ namespace Teatro_dos_facetas.Data
         List<Sesion> AllSesiones { get; }
         void AddSesion(Sesion sesion);
         Sesion GetSesion(int id);
-        
+        List<SesionAsiento> GetSesionAsientos();
         void ChangeSesion(Sesion sesion);
         void RemoveSesion(int id);
         void SaveChanges();

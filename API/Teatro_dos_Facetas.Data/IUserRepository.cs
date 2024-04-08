@@ -10,6 +10,9 @@ namespace Teatro_dos_facetas.Data
         Users GetUserByCorreo (string correo);
         void ChangeUser(Users user);
         void RemoveUser(int id); 
+        UserCreateDTO GetUserFromCredentials(LoginDtoIn loginDtoIn);
+        UserCreateDTO AddUserFromCredentials(UserCreateDTO userDtoIn);
+        
         void SaveChanges();   
     }
 

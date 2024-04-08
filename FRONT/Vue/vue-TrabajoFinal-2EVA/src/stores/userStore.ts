@@ -1,14 +1,18 @@
 import { defineStore } from 'pinia';
 
 interface User {
-    id: number;
-    name: string;
+    id?: number;
+    name?: string;
     email: string;
+    password: string;
+    phone?:number;
 }
 
 export const UserStore = defineStore('userStore', {
     state: () => ({
         users: [] as User[],
+        token: '',
+        user: null as User | null,
     }),
     actions: {
         async fetchUsers() {
@@ -22,7 +26,7 @@ export const UserStore = defineStore('userStore', {
         },
         async addUser(user: User) {
             try {
-                const response = await fetch('http://localhost:8001/Users', {
+                const response = await fetch('http://localhost:8001/Users/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -63,6 +67,33 @@ export const UserStore = defineStore('userStore', {
                 console.error('Failed to update user:', error);
             }
         },
+
+        async loginUser(user: User) {
+            try {
+                const response = await fetch('http://localhost:8001/Users/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(user),
+                });
+                const data = await response.json();
+
+                if (data) {
+                    const dataString = JSON.stringify(data);
+                    localStorage.setItem('token', dataString);
+                    const firstDot = dataString.indexOf('.');
+                    const secondDot = dataString.indexOf('.', firstDot + 1);
+                    user = JSON.parse(atob(dataString.slice(0, firstDot)));
+                    localStorage.setItem('user', JSON.stringify(user));
+                    this.token = data;
+                } else {
+                    console.log('Login failed');
+                }
+            } catch (error) {
+                console.error('Failed to login user:', error);
+            }
+        }
     },
 });
 

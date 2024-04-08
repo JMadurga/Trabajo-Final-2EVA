@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Teatro_dos_Facetas.Business;
 
 namespace Teatro_dos_facetas.Controller
 {
@@ -15,10 +16,12 @@ namespace Teatro_dos_facetas.Controller
     {
 
         private readonly UserService _userService;
+        private readonly AuthService _authService;
 
-        public UsersController(UserService userService)
+        public UsersController(UserService userService, AuthService authService)
         {
             _userService = userService;
+            _authService = authService;
         }
             
 
@@ -95,6 +98,44 @@ namespace Teatro_dos_facetas.Controller
                 return StatusCode(500, "An error occurred while deleting the user.");
             }
         } 
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginDtoIn loginDtoIn)
+        {
+            try
+            {
+                var user = _authService.Login(loginDtoIn);
+
+                if (user == null)
+                    return NotFound();
+
+                return Ok(user);
+            }
+            catch (System.Exception)
+            {
+                // Handle the exception here
+                return StatusCode(500, "An error occurred while logging in.");
+            }
+        }
+
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] UserCreateDTO userDtoIn)
+        {
+            try
+            {
+                var user = _authService.Register(userDtoIn);
+
+                if (user == null)
+                    return BadRequest();
+
+                return Ok();
+            }
+            catch (System.Exception)
+            {
+                // Handle the exception here
+                return StatusCode(500, "An error occurred while registering the user.");
+            }
+        }
 
     }
     

@@ -8,11 +8,11 @@ namespace Teatro_dos_facetas.Model
     {
         [ForeignKey("sesion")]
         public int sesionId { get; set; }
-        public Sesion sesion { get; set; }
+        
 
         [ForeignKey("asiento")]
         public int asientoId { get; set; }
-        public Asientos asiento { get; set; }
+       
 
     }
 }

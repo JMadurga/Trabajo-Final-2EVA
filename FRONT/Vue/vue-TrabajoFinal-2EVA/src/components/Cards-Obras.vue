@@ -1,9 +1,9 @@
 <template>
     <div class="cards-area">
       <v-card width="300px" v-for="card in cards" :key="card.id">
-        <v-img :src="card.imgSrc" height="200px" cover></v-img>
-        <v-card-title>{{ card.title }}</v-card-title>
-        <v-card-subtitle>{{ card.subtitle }}</v-card-subtitle>
+        
+        <v-card-title>{{ card.obra }}</v-card-title>
+        <v-card-subtitle>{{ card.date }}</v-card-subtitle>
         <v-card-actions>
           <RouterLink to="/compras"><v-btn color="blue darken-4" variant="text" @click="comprar(card)">Comprar</v-btn></RouterLink>
         </v-card-actions>
@@ -13,35 +13,45 @@
               <v-expansion-panel-title collapse-icon="mdi-minus" expand-icon="mdi-plus">
               Más información
               </v-expansion-panel-title>
-              <v-expansion-panel-text> {{ card.content }} </v-expansion-panel-text>
+              <v-expansion-panel-text> {{  }} </v-expansion-panel-text>
             </v-expansion-panel>
           </v-expansion-panels>
         </v-card-actions>
       </v-card>
     </div>
 </template>
+
 <script setup lang="ts">
   import { ref } from 'vue';
-
-  import { useObraSeleccionadaStore } from '@/stores/obraSeleccionada';
-
+  import sesionStore, { type Session } from '@/stores/sesionStore'; 
+  import  {ObraStore}  from '@/stores/obraStore';
+  import { SesionStore } from '@/stores/sesionStore';
 // Importamos la store que hemos definido
 
-const obraSeleccionadaStore = useObraSeleccionadaStore(); // Instanciamos la store
+const obraSeleccionadaStore = ObraStore();
+const sesionSeleccionadaStore = SesionStore();
 
-const cards = ref([
-  { id: 1, price: 12, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 2, price: 12, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 3, price: 12, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 4, price: 12, title: 'Romeo y Julieta', subtitle: '27 de Septiembre 2024', content: 'Descripción de Romeo y Julieta...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 5, price: 12, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 6, price: 12, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 7, price: 12, title: 'Hamlet', subtitle: '1 de Octubre 2024', content: 'Descripción de Hamlet...', imgSrc: 'ruta/a/la/imagen.jpg' },
-  { id: 8, price: 12, title: 'Macbeth', subtitle: '15 de Octubre 2024', content: 'Descripción de Macbeth...', imgSrc: 'ruta/a/la/imagen.jpg' }
-]);
+obraSeleccionadaStore.cargarObras();
+sesionSeleccionadaStore.fetchSessions();
+// Instanciamos la store
+
+const obras = obraSeleccionadaStore.obras
+const cards = ref<Session []>([]);
+
+  function ponerInfo(){
+  sesionSeleccionadaStore.sessions.forEach( async (sesion: any) => {
+     const obra =  await obraSeleccionadaStore.obtenerObra(sesion.obra);
+    cards.value.push({
+      id: sesion.id,
+      obra: obra.title,
+      date: sesion.date,
+      asientos: sesion.asientos
+    });
+  });
+}
 
 const comprar = (obra: any) => {
-  obraSeleccionadaStore.seleccionarObra(obra);
+  obraSeleccionadaStore.obtenerObra(obra);
 };
   </script>
   <style scoped>
