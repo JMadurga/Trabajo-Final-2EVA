@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: trabajofinal-kubernetes
+  name: teatro-final-kubernetes
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: trabajofinal-kubernetes
+    app: teatro-final-kubernetes

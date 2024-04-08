@@ -2,22 +2,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: Teatro-Final-kubernetes
+  name: teatro-final-kubernetes
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app:   Teatro-Final-kubernetes
+      app:   teatro-final-kubernetes
 
   template:
     metadata:
       labels:
-        app: Teatro-Final-kubernetes
+        app: teatro-final-kubernetes
 
     spec:
       containers:
-      - name: Teatro-Final-kubernetes
-        image: jmadurga/trabajo-final-2eva-api:latest
+      - name: teatro-final-kubernetes
+        image: jmadurga/api-api
         ports:
         - containerPort: 80
         resources:
