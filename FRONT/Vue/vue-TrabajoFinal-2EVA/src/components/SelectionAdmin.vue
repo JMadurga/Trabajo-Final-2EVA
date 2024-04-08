@@ -28,7 +28,7 @@
               <tbody>
               <tr v-show="ObrasisVisible" v-for="item in obrasStore.Obras" :key="item.NombreObra">
                   <td>{{ item.NombreObra }}</td>
-                  <td>{{ item.calories }}</td>
+                  <td>{{ item.synopsis }}</td>
                   <td>
                     <v-btn @click="obrasStore.editObra(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
                     <v-btn @click="obrasStore.deleteObras(item.id)">delete</v-btn>
@@ -54,12 +54,12 @@
           </v-table>
           <div class="form-container" v-show="ObrasisVisible">
               <input type="text" v-model="obrasStore.newObra.NombreObra" placeholder="Name" />
-              <input type="number" v-model="obrasStore.newObra.calories" placeholder="Calories" />
+              <input type="text" v-model="obrasStore.newObra.synopsis" placeholder="Synopsis" />
               <v-btn @click="obrasStore.addObras">Add</v-btn>
           </div>
           <div class="form-container" v-if="obrasStore.editingObra">
             <input type="text" v-model="obrasStore.editingObra.NombreObra" placeholder="Name" />
-            <input type="number" v-model="obrasStore.editingObra.calories" placeholder="Calories" />
+            <input type="text" v-model="obrasStore.editingObra.synopsis" placeholder="Synopsis" />
             <v-btn @click="obrasStore.updateObra">Update</v-btn>
           </div>
           <div class="form-container" v-show="SesionesisVisible">
