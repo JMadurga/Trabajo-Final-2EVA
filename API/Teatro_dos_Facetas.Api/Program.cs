@@ -22,6 +22,8 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<SesionService>();
 builder.Services.AddControllers();
 builder.Services.AddScoped<PedidosService>();
+builder.Services.AddControllers();
+builder.Services.AddScoped<AuthService>();
 
 var connectionString = builder.Configuration.GetConnectionString("ServerDB");
 builder.Services.AddDbContext<TeatroContext>(options => options.UseSqlServer(connectionString));

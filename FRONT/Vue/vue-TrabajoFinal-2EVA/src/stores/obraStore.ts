@@ -15,7 +15,7 @@ export const ObraStore = defineStore({
   actions: {
     async cargarObras() {
       try {
-        const response = await fetch('http://localhost:8001/obras');
+        const response = await fetch('http://localhost:8001/Obra');
         const obras = await response.json();
         this.obras = obras;
       } catch (error) {
@@ -24,7 +24,7 @@ export const ObraStore = defineStore({
     },
     async obtenerObra(id: number) {
       try {
-        const response = await fetch(`http://localhost:8001/obras/${id}`);
+        const response = await fetch(`http://localhost:8001/Obra/${id}`);
         const obra = await response.json();
         return obra;
       } catch (error) {
@@ -34,7 +34,7 @@ export const ObraStore = defineStore({
     },
     async crearObra(obra: Obra) {
       try {
-        const response = await fetch('http://localhost:8001/obras', {
+        const response = await fetch('http://localhost:8001/Obra', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -53,7 +53,7 @@ export const ObraStore = defineStore({
     },
     async actualizarObra(obra: Obra) {
       try {
-        const response = await fetch(`http://localhost:8001/obras/${obra.id}`, {
+        const response = await fetch(`http://localhost:8001/Obra/${obra.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ export const ObraStore = defineStore({
     },
     async eliminarObra(id: number) {
       try {
-        const response = await fetch(`http://localhost:8001/obras/${id}`, {
+        const response = await fetch(`http://localhost:8001/Obra/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {

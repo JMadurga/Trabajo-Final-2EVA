@@ -1,4 +1,4 @@
-<template>
+<template >
     <div class="cards-area">
       <v-card width="300px" v-for="card in cards" :key="card.id">
         
@@ -38,7 +38,9 @@ sesionSeleccionadaStore.fetchSessions();
 const obras = obraSeleccionadaStore.obras
 const cards = ref<Session []>([]);
 
-  function ponerInfo(){
+
+  
+
   sesionSeleccionadaStore.sessions.forEach( async (sesion: any) => {
      const obra =  await obraSeleccionadaStore.obtenerObra(sesion.obra);
     cards.value.push({
@@ -48,7 +50,8 @@ const cards = ref<Session []>([]);
       asientos: sesion.asientos
     });
   });
-}
+
+console.log(cards.value);
 
 const comprar = (obra: any) => {
   obraSeleccionadaStore.obtenerObra(obra);

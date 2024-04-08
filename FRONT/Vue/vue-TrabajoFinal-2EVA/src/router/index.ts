@@ -7,6 +7,7 @@ import promo from '../views/Promociones.vue'
 import compras from '../views/Compras.vue'
 import admin from '../views/Admin.vue'
 import Register from '../views/Register.vue'
+import SelectionAdmin from '@/components/SelectionAdmin.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,7 +46,13 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/admin',
+      name: 'admin',
+      component: SelectionAdmin
     }
+
 
   ]
 })

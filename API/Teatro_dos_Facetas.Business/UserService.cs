@@ -38,7 +38,7 @@ namespace Teatro_dos_facetas.Business
         public Users LoginDtoinToUser (LoginDtoIn userdto){
             return new Users
             {
-                mail = userdto.mail,
+                mail = userdto.email,
                 password = userdto.password,
                
             };

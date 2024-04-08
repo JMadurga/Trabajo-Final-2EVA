@@ -84,12 +84,14 @@ export const UserStore = defineStore('userStore', {
                     localStorage.setItem('token', dataString);
                     const firstDot = dataString.indexOf('.');
                     const secondDot = dataString.indexOf('.', firstDot + 1);
-                    user = JSON.parse(atob(dataString.slice(0, firstDot)));
+                     user = JSON.parse(atob(dataString.slice(firstDot + 1, secondDot)));
                     localStorage.setItem('user', JSON.stringify(user));
                     this.token = data;
+                    window.location.href = '/admin';
                 } else {
                     console.log('Login failed');
                 }
+                
             } catch (error) {
                 console.error('Failed to login user:', error);
             }

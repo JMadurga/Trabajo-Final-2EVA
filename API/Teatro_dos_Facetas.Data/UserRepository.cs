@@ -55,13 +55,15 @@ namespace Teatro_dos_facetas.Data{
         }
         
         public UserCreateDTO GetUserFromCredentials(LoginDtoIn loginDtoIn) {
-            var user = GetUserByCorreo(loginDtoIn.mail);
+            var user = GetUserByCorreo(loginDtoIn.email);
             if (user == null)
             {
+                
                 throw new KeyNotFoundException("User not found.");
             }
             if (user.password != loginDtoIn.password)
             {
+                
                 throw new KeyNotFoundException("Password incorrect.");
             }
             return new UserCreateDTO { id = user.id, name = user.name, email = user.mail, phone = user.phone};

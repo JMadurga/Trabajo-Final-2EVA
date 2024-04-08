@@ -111,9 +111,10 @@ namespace Teatro_dos_facetas.Controller
 
                 return Ok(user);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
                 // Handle the exception here
+                Console.WriteLine(e);
                 return StatusCode(500, "An error occurred while logging in.");
             }
         }

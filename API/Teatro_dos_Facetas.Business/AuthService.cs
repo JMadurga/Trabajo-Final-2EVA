@@ -32,17 +32,14 @@ namespace Teatro_dos_Facetas.Business
         }
 
         public string GenerateToken(UserCreateDTO userDTO) {
-            var key = Encoding.UTF8.GetBytes(_configuration["JWT:SecretKey"]); 
+            var key = Encoding.UTF8.GetBytes("user_nuevo_123456789"); 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Issuer = _configuration["JWT:ValidIssuer"],
-                Audience = _configuration["JWT:ValidAudience"],
                 Subject = new ClaimsIdentity(new Claim[] 
                     {
                         new Claim(ClaimTypes.NameIdentifier, Convert.ToString(userDTO.id)),
                         new Claim(ClaimTypes.Name, userDTO.name),
                         new Claim(ClaimTypes.Email, userDTO.email),
-                        new Claim(ClaimTypes.MobilePhone, Convert.ToString(userDTO.phone)),
                         new Claim("myCustomClaim", "myCustomClaimValue"),
                         // add other claims
                     }),
