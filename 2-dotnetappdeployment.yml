@@ -33,6 +33,6 @@ spec:
     spec:
       containers:
       - name: docker-compose-dotnet-core-and-mssql-app
-        image: 381492085613.dkr.ecr.us-east-1.amazonaws.com/demo:docker-compose-dotnet-core-and-mssql-app
+        image: jmadurga/api-api
         ports:
         - containerPort: 80

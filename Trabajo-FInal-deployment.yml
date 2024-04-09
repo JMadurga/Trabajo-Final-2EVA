@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: teatro-final-kubernetes
-        image: jmadurga/api-api
+        image: //imagen del front dockerizada
         ports:
         - containerPort: 80
         resources:

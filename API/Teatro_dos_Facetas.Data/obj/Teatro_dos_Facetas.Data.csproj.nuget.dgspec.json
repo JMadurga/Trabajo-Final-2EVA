@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj": {}
+    "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj": {}
   },
   "projects": {
-    "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj": {
+    "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
+        "projectUniqueName": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
         "projectName": "Teatro_dos_Facetas.Data",
-        "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
+        "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
         "packagesPath": "C:\\Users\\javit\\.nuget\\packages\\",
-        "outputPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_Facetas.Data\\obj\\",
+        "outputPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\javit\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj": {
-                "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj"
+              "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj": {
+                "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj"
               }
             }
           }
@@ -77,14 +77,14 @@
         }
       }
     },
-    "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj": {
+    "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj",
+        "projectUniqueName": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj",
         "projectName": "Teatro_dos_facetas.Model",
-        "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj",
+        "projectPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_facetas.Model\\Teatro_dos_facetas.Model.csproj",
         "packagesPath": "C:\\Users\\javit\\.nuget\\packages\\",
-        "outputPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA-1\\API\\Teatro_dos_facetas.Model\\obj\\",
+        "outputPath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_facetas.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\javit\\AppData\\Roaming\\NuGet\\NuGet.Config"
