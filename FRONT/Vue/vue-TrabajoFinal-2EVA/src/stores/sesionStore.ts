@@ -8,27 +8,24 @@ import { defineStore } from 'pinia';
     asientos?: number[];
 }
 
-const sesionStore = reactive({
-    sessions: [] as Session[],
-    loading: false,
-    error: null as string | null,
-});
 
 export const SesionStore = defineStore('sesionStore', {
     state: () => ({
         sessions: [] as Session[],
+        loading: false,
+        error: null as string | null,
     }),
     actions: {
         async  fetchSessions() {
             try {
-                sesionStore.loading = true;
+                this.loading = true;
                 const response = await fetch('http://localhost:8001/Sesion');
                 const data = await response.json();
-                sesionStore.sessions = data;
+                this.sessions = data;
             } catch (error) {
-                sesionStore.error = error as string;
+                this.error = error as string;
             } finally {
-                sesionStore.loading = false;
+                this.loading = false;
             }
         },
 
@@ -42,7 +39,7 @@ export const SesionStore = defineStore('sesionStore', {
                     body: JSON.stringify(session),
                 });
                 const data = await response.json();
-                sesionStore.sessions.push(data);
+                this.sessions.push(data);
             } catch (error) {
                 console.error('Failed to add session:', error);
             }
@@ -52,7 +49,7 @@ export const SesionStore = defineStore('sesionStore', {
                 await fetch(`http://localhost:8001/Sesion/${sesionId}`, {
                     method: 'DELETE',
                 });
-                sesionStore.sessions = sesionStore.sessions.filter(session => session.id !== sesionId);
+                this.sessions = this.sessions.filter(session => session.id !== sesionId);
 
             } catch (error) {
                 console.error('Failed to remove sesion:', error);
@@ -68,9 +65,9 @@ export const SesionStore = defineStore('sesionStore', {
                     body: JSON.stringify(updatedSesion),
                 });
                 const data = await response.json();
-                const index = sesionStore.sessions.findIndex(session => session.id === updatedSesion.id);
+                const index = this.sessions.findIndex(session => session.id === updatedSesion.id);
                 if (index !== -1) {
-                    sesionStore.sessions[index] = data;
+                    this.sessions[index] = data;
                 }
             } catch (error) {
                 console.error('Failed to update sesion:', error);
@@ -82,4 +79,4 @@ export const SesionStore = defineStore('sesionStore', {
 
 
 export default {
-    sesionStore};
+    SesionStore};

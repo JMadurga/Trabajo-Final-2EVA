@@ -26,14 +26,14 @@
   import sesionStore, { type Session } from '@/stores/sesionStore'; 
   import  {ObraStore}  from '@/stores/obraStore';
   import { SesionStore } from '@/stores/sesionStore';
-// Importamos la store que hemos definido
+
 
 const obraSeleccionadaStore = ObraStore();
 const sesionSeleccionadaStore = SesionStore();
 
 obraSeleccionadaStore.cargarObras();
 sesionSeleccionadaStore.fetchSessions();
-// Instanciamos la store
+
 
 const obras = obraSeleccionadaStore.obras
 const cards = ref<Session []>([]);
