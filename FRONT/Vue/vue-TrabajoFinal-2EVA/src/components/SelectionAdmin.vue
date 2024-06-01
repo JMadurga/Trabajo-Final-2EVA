@@ -1,10 +1,13 @@
 <template>
   <div class="flex">
-      <div class="left">
+      <div>
+        <img src="../media/logoadmin.png" alt="">
+        <div class="left">
           <p>{{usuariosStore.user?.name}}</p>
           <v-btn size="x-large" block @click="ObrasVisible">OBRAS</v-btn>
           <v-btn size="x-large" block @click="SesionesVisible">SESIONES</v-btn>
           <v-btn size="x-large" block @click="UsuariosVisible">USUARIOS</v-btn>
+        </div>
       </div>
       <div class="right">
           <v-table>
@@ -12,17 +15,33 @@
               <tr v-show="ObrasisVisible" v>
                   <th class="text-left">Obra</th>
                   <th class="text-left">Descripcion</th>
-                  <th class="text-left">Actions</th>
+                  <th class="text-left">Categoría</th>
+                  <th style="width: 80px">
+                    <v-btn icon @click="toggle">
+                      <v-icon>{{ icon }}</v-icon>
+                    </v-btn>
+                  </th>
               </tr>
               <tr v-show="SesionesisVisible">
                   <th class="text-left">Sesion</th>
                   <th class="text-left">Descripcion</th>
-                  <th class="text-left">Actions</th>
+                  <th style="width: 80px">
+                    <v-btn icon @click="toggle">
+                      <v-icon>{{ icon }}</v-icon>
+                    </v-btn>
+                  </th>
               </tr>
               <tr v-show="UsuariosisVisible">
-                  <th class="text-left">Name</th>
-                  <th class="text-left">Surname</th>
-                  <th class="text-left">Actions</th>
+                  <th class="text-left">Nombre</th>
+                  <th class="text-left">Apellidos</th>
+                  <th class="text-left">Mail</th>
+                  <th class="text-left">Telefono</th>
+                  <th class="text-left">Contraseña</th>
+                  <th style="width: 80px">
+                    <v-btn icon @click="toggle">
+                      <v-icon>{{ icon }}</v-icon>
+                    </v-btn>
+                  </th>
               </tr>
               </thead>
               <tbody>
@@ -53,7 +72,44 @@
               </tr>
               </tbody>
           </v-table>
-          <div class="form-container" v-show="ObrasisVisible">
+          <div class="form-container" v-show="ObrasisVisible" v-if="visible">
+            <v-fade-transition>
+              <div>
+                <v-form ref="form">
+                  <v-text-field label="Obra" v-model="inputObra"></v-text-field>
+                  <v-text-field label="Descripción" v-model="inputDescObra"></v-text-field>
+                  <v-text-field label="Categoría" v-model="inputCateg"></v-text-field>
+                  <v-btn color="primary" @click="addObrap">Añadir</v-btn>
+                </v-form>
+              </div>
+            </v-fade-transition>
+          </div>
+          <div class="form-container" v-show="SesionesisVisible" v-if="visible">
+            <v-fade-transition>
+              <div>
+                <v-form ref="form">
+                  <v-text-field label="Sesion" v-model="inputObra"></v-text-field>
+                  <v-text-field label="Descripción" v-model="inputDescObra"></v-text-field>
+                  <v-btn color="primary" @click="addSesp">Añadir</v-btn>
+                </v-form>
+              </div>
+            </v-fade-transition>
+          </div>
+          <div class="form-container" v-show="UsuariosisVisible" v-if="visible">
+            <v-fade-transition>
+              <div>
+                <v-form ref="form">
+                  <v-text-field label="Nombre" v-model="inputNmUsu"></v-text-field>
+                  <v-text-field label="Apellidos" v-model="inputSrUsu"></v-text-field>
+                  <v-text-field label="Mail" v-model="inputMlUsu"></v-text-field>
+                  <v-text-field label="Telefono" v-model="inputTlUsu"></v-text-field>
+                  <v-text-field label="Constraseña" v-model="inputPsUsu"></v-text-field>
+                  <v-btn color="primary" @click="addUsup">Añadir</v-btn>
+                </v-form>
+              </div>
+            </v-fade-transition>
+          </div>
+          <!--<div class="form-container" v-show="ObrasisVisible">
               <input type="text" v-model="newObra.title" placeholder="Titulo" />
               <input type="text" v-model="newObra.categoria" placeholder="categoria" />
               <input type="text" v-model="newObra.synopsis" placeholder="synopsis">
@@ -64,8 +120,8 @@
             <input type="text" v-model="newObra.categoria" placeholder="Categoria" />
             <input type="text" v-model="newObra.synopsis" placeholder="synopsis" />
             <v-btn @click="updateObra()">Update</v-btn>
-          </div>
-          <div class="form-container" v-show="SesionesisVisible">
+          </div>-->
+          <!--<div class="form-container" v-show="SesionesisVisible">
               <input type="text" v-model="newSesion.obra" placeholder="obra" />            
               <v-btn @click="addSesiones">Add</v-btn>
           </div>
@@ -75,21 +131,56 @@
               <input type="text" v-model="newUsuario.password" placeholder="Password" />
               <input type="number" v-model="newUsuario.phone" placeholder="Phone" />
               <v-btn @click="addUser">Update</v-btn>
-          </div>
-          <div class="form-container" v-show="UsuariosisVisible">
+          </div>-->
+          <!--<div class="form-container" v-show="UsuariosisVisible">
               <input type="text" v-model="newUsuario.name" placeholder="Name" />
               <input type="text" v-model="newUsuario.email" placeholder="Email" />
               <input type="text" v-model="newUsuario.password" placeholder="Password" />
               <input type="number" v-model="newUsuario.phone" placeholder=" Phone">
               <v-btn @click="addUser()">Add</v-btn>
-          </div>
+          </div>-->
       </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { ref, computed } from 'vue';
+import { VBtn, VIcon, VTextField, VForm, VFadeTransition } from 'vuetify/components';
 
+const visible = ref(false);
+const inputObra = ref('');
+const inputDescObra = ref('');
+const inputCateg = ref('');
+
+const inputSes = ref('');
+const inputDescSes = ref('');
+
+const inputNmUsu = ref('');
+const inputSrUsu = ref('');
+const inputMlUsu = ref('');
+const inputTlUsu = ref('');
+const inputPsUsu = ref('');
+
+const toggle = () => {
+  visible.value = !visible.value;
+};
+
+const addObrap = () => {
+  console.log(inputObra.value, inputDescObra.value, inputCateg.value);
+  toggle();
+};
+
+const addSesp = () => {
+  console.log(inputSes.value, inputDescSes.value);
+  toggle();
+};
+
+const addUsup = () => {
+  console.log(inputNmUsu.value, inputSrUsu.value, inputMlUsu.value, inputTlUsu.value, inputPsUsu.value);
+  toggle();
+};
+
+const icon = computed(() => visible.value ? 'mdi-minus' : 'mdi-plus');
 
 import  {ObraStore}  from '@/stores/obraStore';
 import  {SesionStore} from '@/stores/sesionStore'; // cammbiar store 
