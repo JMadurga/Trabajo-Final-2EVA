@@ -18,6 +18,7 @@ namespace Teatro_dos_Facetas.Business
         {
             var pedido = new Pedidos
             {
+                id = pedidoDto.pedidoId,
                 userId = pedidoDto.userId,
                 sesionId = pedidoDto.sesionId,
                 pedidoAsientos = pedidoDto.asientosId.Select(asientoId => new PedidosAsiento
@@ -34,6 +35,7 @@ namespace Teatro_dos_Facetas.Business
         {
             var pedidoDto = new PedidoCreateDTO
             {
+                pedidoId = pedidos.id, 
                 userId = pedidos.userId,
                 sesionId = pedidos.sesionId,
                 asientosId = pedidos.pedidoAsientos.Select(pa => pa.asientoId).ToList()

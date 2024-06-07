@@ -24,21 +24,21 @@ namespace Teatro_dos_Facetas.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Pedidos> GetPedido(int id)
+        public ActionResult<PedidoCreateDTO> GetPedido(int id)
         {
             var pedido = _pedidosService.GetPedidoById(id);
             if (pedido == null)
             {
                 return NotFound();
             }
-            return Ok(pedido);
+            return Ok(_pedidosService.PedidosToPedidoCreateDTO(pedido));
         }
 
         [HttpPost]
-        public ActionResult<Pedidos> CreatePedido(Pedidos pedido)
+        public ActionResult<Pedidos> CreatePedido(PedidoCreateDTO pedido)
         {
-            _pedidosService.CreatePedido(pedido);
-            return CreatedAtAction(nameof(GetPedido), new { id = pedido.id }, pedido);
+            _pedidosService.CreatePedido(_pedidosService.PedidosDtoToPedidos(pedido));
+            return CreatedAtAction(nameof(GetPedido), pedido);
         }
 
         [HttpPut("{id}")]

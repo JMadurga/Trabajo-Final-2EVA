@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 
-interface Pedido {
-  id?: number;
-  User: number;
-  Sesion: Number;
-  asientos: number[];
+export interface Pedido {
+  pedidoId?: number;
+  userId: number;
+  sesionId: Number;
+  asientosId: number[];
+  isEditing?:boolean;
 }
 
 export const PedidoStore = defineStore({
@@ -15,7 +16,7 @@ export const PedidoStore = defineStore({
   actions: {
         async cargarPedidos() {
             try {
-                const response = await fetch('http://localhost:8001/Pedido');
+                const response = await fetch('http://localhost:8001/Pedidos');
                 const data = await response.json();
                 this.pedidos = data;
             } catch (error) {
@@ -24,7 +25,7 @@ export const PedidoStore = defineStore({
         },
         async addPedido(pedido: Pedido) {
             try {
-                const response = await fetch('http://localhost:8001/Pedido', {
+                const response = await fetch('http://localhost:8001/Pedidos', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -39,10 +40,10 @@ export const PedidoStore = defineStore({
         },
         async removePedido(pedidoId: number) {
             try {
-                await fetch(`http://localhost:8001/Pedido/${pedidoId}`, {
+                await fetch(`http://localhost:8001/Pedidos/${pedidoId}`, {
                     method: 'DELETE',
                 });
-                this.pedidos = this.pedidos.filter(pedido => pedido.id !== pedidoId);
+                this.pedidos = this.pedidos.filter(pedido => pedido.pedidoId !== pedidoId);
 
             } catch (error) {
                 console.error('Failed to remove pedido:', error);

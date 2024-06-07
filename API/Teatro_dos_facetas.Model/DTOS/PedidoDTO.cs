@@ -5,6 +5,7 @@ namespace Teatro_dos_facetas.Model; // BankApp.DTO
 public class PedidoCreateDTO
 {
 
+    public int pedidoId{get; set;}
     
     public int userId { get; set; }
     

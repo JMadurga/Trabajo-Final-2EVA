@@ -1,7 +1,7 @@
 <template>
   <div class="flex">
       <div>
-        <img src="../media/logoadmin.png" alt="">
+        <img src="../media/logoadmin.png" alt="" >
         <div class="left">
           <p>{{usuariosStore.user?.name}}</p>
           <v-btn size="x-large" block @click="ObrasVisible">OBRAS</v-btn>
@@ -12,65 +12,121 @@
       <div class="right">
           <v-table>
               <thead>
-              <tr v-show="ObrasisVisible" v>
-                  <th class="text-left">Obra</th>
-                  <th class="text-left">Descripcion</th>
-                  <th class="text-left">Categoría</th>
-                  <th style="width: 80px">
-                    <v-btn icon @click="toggle">
-                      <v-icon>{{ icon }}</v-icon>
-                    </v-btn>
-                  </th>
-              </tr>
-              <tr v-show="SesionesisVisible">
-                  <th class="text-left">Sesion</th>
-                  <th class="text-left">Descripcion</th>
-                  <th style="width: 80px">
-                    <v-btn icon @click="toggle">
-                      <v-icon>{{ icon }}</v-icon>
-                    </v-btn>
-                  </th>
-              </tr>
-              <tr v-show="UsuariosisVisible">
-                  <th class="text-left">Nombre</th>
-                  <th class="text-left">Apellidos</th>
-                  <th class="text-left">Mail</th>
-                  <th class="text-left">Telefono</th>
-                  <th class="text-left">Contraseña</th>
-                  <th style="width: 80px">
-                    <v-btn icon @click="toggle">
-                      <v-icon>{{ icon }}</v-icon>
-                    </v-btn>
-                  </th>
-              </tr>
+                <tr v-show="ObrasisVisible" v>
+                    <th class="text-left">Id</th>
+                    <th class="text-left">Nombre</th>
+                    <th class="text-left">Categoria</th>
+                    <th class="text-left">Synopsis</th>
+                    <th class="text-left">Acciones</th>
+                    <th style="width: 80px">
+                      <v-btn icon @click="toggle">
+                        <v-icon>{{ icon }}</v-icon>
+                      </v-btn>
+                    </th>
+                </tr>
+                <tr v-show="SesionesisVisible">
+                    <th class="text-left">Sesion</th>
+                    <th class="text-left">Descripcion</th>
+                    <th class="text-left">Fecha</th>
+                    <th class="text-left">Acciones</th>
+                    <th style="width: 80px">
+                      <v-btn icon @click="toggle">
+                        <v-icon>{{ icon }}</v-icon>
+                      </v-btn>
+                    </th>
+                </tr>
+                <tr v-show="UsuariosisVisible">
+                    <th class="text-left">Nombre</th>
+                    <th class="text-left">Email</th>
+                    <th class="text-left">Contraseña</th>
+                    <th class="text-left">Telefono</th>
+                    <th class="text-left">Acciones</th>
+                    <th style="width: 80px">
+                      <v-btn icon @click="toggle">
+                        <v-icon>{{ icon }}</v-icon>
+                      </v-btn>
+                    </th>
+                </tr>
               </thead>
-              <tbody>
+            <tbody>
               <tr v-show="ObrasisVisible" v-for="item in obrasStore.obras" :key="item.id">
-                  <td>{{ item.id }}</td>
-                  <td>{{ item.title }}</td>
-                  <td>
-                    <v-btn @click="obrasStore.actualizarObra(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
-                    <v-btn @click="removeObra(item.id!)">delete</v-btn>
-                  </td>
+                <td v-if="item.isEditing">
+                  <input v-model="item.id" />
+                </td>
+                <td v-else>{{ item.id }}</td>
+                <td v-if="item.isEditing">
+                  <input v-model="item.name" />
+                </td>
+                <td v-else>{{ item.name }}</td>
+                <td v-if="item.isEditing">
+                  <input v-model="item.categoria" />
+                </td>
+                <td v-else>{{ item.categoria }}</td>
+                <td v-if="item.isEditing">
+                  <input v-model="item.synopsis" />
+                </td>
+                <td v-else>{{ item.synopsis }}</td>
+                <td>
+                  <v-btn @click="toggleEdit(item, 'obraStore')" style="margin-right: 10px;">
+                    {{ item.isEditing ? 'save' : 'Edit' }}
+                  </v-btn>
+                  <v-btn @click="obrasStore.eliminarObra(item.id!)">delete</v-btn>
+                </td>
               </tr>
-              <tr v-show="SesionesisVisible" v-for="item in sesionesStore.sessions" :key="item.id">
-                  <td>{{ item.id }}</td>
-                  <td>{{ item.obra }}</td>
-                  <td>{{ item.date }}</td>
-                  <td>
-                    <v-btn @click="sesionesStore.updateSesion(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
-                    <v-btn @click="sesionesStore.removeSesion(item.id!)">delete</v-btn>
-                  </td>
+
+              <tr v-show="SesionesisVisible" v-for="item in sesionesStore.sessions" :key="item.sesionId">
+                <td v-if="item.isEditing">
+                  <input v-model="item.sesionId" />
+                </td>
+                <td v-else>{{ item.sesionId }}</td>
+
+                <td v-if="item.isEditing">
+                  <input v-model="item.obra" />
+                </td>
+                <td v-else>{{ item.obra }}</td>
+
+                <td v-if="item.isEditing">
+                  <input v-model="item.date" />
+                </td>
+                <td v-else>{{ new Date(item.date).toLocaleString() }}</td>
+
+                <td>
+                  <v-btn @click="toggleEdit(item, 'sesionStore')" style="margin-right: 10px;">
+                    {{ item.isEditing ? 'save' : 'edit' }}
+                  </v-btn>
+                  <v-btn @click="sesionesStore.removeSesion(item.sesionId!)">delete</v-btn>
+                </td>
               </tr>
+
               <tr v-show="UsuariosisVisible" v-for="item in usuariosStore.users" :key="item.name">
-                  <td>{{ item.name }}</td>
-                  <td>{{ item.email }}</td>
-                  <td>
-                    <v-btn @click="usuariosStore.updateUser(item)" style="margin-right: 10px;">edit</v-btn> <!-- Botón de edición -->
-                    <v-btn @click="usuariosStore.removeUser(item.id!)">delete</v-btn>
-                  </td>
+                <td v-if="item.isEditing">
+                  <input v-model="item.name" />
+                </td>
+                <td v-else>{{ item.name }}</td>
+
+                <td v-if="item.isEditing">
+                  <input v-model="item.mail" />
+                </td>
+                <td v-else>{{ item.mail }}</td>
+
+                <td v-if="item.isEditing">
+                  <input v-model="item.password" />
+                </td>
+                <td v-else>{{ item.password }}</td>
+
+                <td v-if="item.isEditing">
+                  <input v-model="item.phone" />
+                </td>
+                <td v-else>{{ item.phone }}</td>
+
+                <td>
+                  <v-btn @click="toggleEdit(item, 'usuariosStore')" style="margin-right: 10px;">
+                    {{ item.isEditing ? 'save' : 'edit' }}
+                  </v-btn>
+                  <v-btn @click="usuariosStore.removeUser(item.id!)">delete</v-btn>
+                </td>
               </tr>
-              </tbody>
+          </tbody>
           </v-table>
           <div class="form-container" v-show="ObrasisVisible" v-if="visible">
             <v-fade-transition>
@@ -79,7 +135,7 @@
                   <v-text-field label="Obra" v-model="inputObra"></v-text-field>
                   <v-text-field label="Descripción" v-model="inputDescObra"></v-text-field>
                   <v-text-field label="Categoría" v-model="inputCateg"></v-text-field>
-                  <v-btn color="primary" @click="addObrap">Añadir</v-btn>
+                  <v-btn color="primary" @click="addObra">Añadir</v-btn>
                 </v-form>
               </div>
             </v-fade-transition>
@@ -90,7 +146,7 @@
                 <v-form ref="form">
                   <v-text-field label="Sesion" v-model="inputObra"></v-text-field>
                   <v-text-field label="Descripción" v-model="inputDescObra"></v-text-field>
-                  <v-btn color="primary" @click="addSesp">Añadir</v-btn>
+                  <v-btn color="primary" @click="addSesiones">Añadir</v-btn>
                 </v-form>
               </div>
             </v-fade-transition>
@@ -104,7 +160,7 @@
                   <v-text-field label="Mail" v-model="inputMlUsu"></v-text-field>
                   <v-text-field label="Telefono" v-model="inputTlUsu"></v-text-field>
                   <v-text-field label="Constraseña" v-model="inputPsUsu"></v-text-field>
-                  <v-btn color="primary" @click="addUsup">Añadir</v-btn>
+                  <v-btn color="primary" @click="addUser">Añadir</v-btn>
                 </v-form>
               </div>
             </v-fade-transition>
@@ -144,101 +200,114 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { VBtn, VIcon, VTextField, VForm, VFadeTransition } from 'vuetify/components';
+  import { ref, computed } from 'vue';
+  import { VBtn, VIcon, VTextField, VForm, VFadeTransition } from 'vuetify/components';
 
-const visible = ref(false);
-const inputObra = ref('');
-const inputDescObra = ref('');
-const inputCateg = ref('');
+  const visible = ref(false);
+  const inputObra = ref('');
+  const inputDescObra = ref('');
+  const inputCateg = ref('');
 
-const inputSes = ref('');
-const inputDescSes = ref('');
+  const inputSes = ref('');
+  const inputDescSes = ref('');
 
-const inputNmUsu = ref('');
-const inputSrUsu = ref('');
-const inputMlUsu = ref('');
-const inputTlUsu = ref('');
-const inputPsUsu = ref('');
+  const inputNmUsu = ref('');
+  const inputSrUsu = ref('');
+  const inputMlUsu = ref('');
+  const inputTlUsu = ref('');
+  const inputPsUsu = ref('');
 
-const toggle = () => {
-  visible.value = !visible.value;
-};
-
-const addObrap = () => {
-  console.log(inputObra.value, inputDescObra.value, inputCateg.value);
-  toggle();
-};
-
-const addSesp = () => {
-  console.log(inputSes.value, inputDescSes.value);
-  toggle();
-};
-
-const addUsup = () => {
-  console.log(inputNmUsu.value, inputSrUsu.value, inputMlUsu.value, inputTlUsu.value, inputPsUsu.value);
-  toggle();
-};
-
-const icon = computed(() => visible.value ? 'mdi-minus' : 'mdi-plus');
-
-import  {ObraStore}  from '@/stores/obraStore';
-import  {SesionStore} from '@/stores/sesionStore'; // cammbiar store 
-import { UserStore } from '@/stores/userStore';
+  const toggle = () => {
+    visible.value = !visible.value;
+  };
 
 
-const obrasStore = ObraStore();
-const sesionesStore = SesionStore();
-const usuariosStore = UserStore();
-const newObra = ref({ title: "", categoria: "", synopsis: "" });
-const newUsuario = ref({ name: "", email: "", password: "", phone:0 });
-const newSesion = ref({ obra: "", date: Date.now() });
+  const icon = computed(() => visible.value ? 'mdi-minus' : 'mdi-plus');
+
+  import  {ObraStore}  from '@/stores/obraStore';
+  import  {SesionStore} from '@/stores/sesionStore'; // cammbiar store 
+  import { UserStore } from '@/stores/userStore';
+  import { defineComponent}  from 'vue';
+  import type { User } from '@/stores/userStore';
+  import type { Obra } from '@/stores/obraStore';
+  import type { Session } from '@/stores/sesionStore';
+
+  const obrasStore = ObraStore();
+  const sesionesStore = SesionStore();
+  const usuariosStore = UserStore();
+  const newObra = ref({ name: "", categoria: "", synopsis: ""});
+  const newUsuario = ref({ name: "", mail: "", password: "", phone:0 });
+  const newSesion = ref({ obra: "", date: Date.now() });
+  obrasStore.cargarObras();
+  sesionesStore.fetchSessionsObra();  
+  usuariosStore.fetchUsers();  
+
+  
+
+  function addObra() {
+    newObra.value = { name:inputObra.value, categoria: inputCateg.value, synopsis:inputDescObra.value}
+    obrasStore.crearObra(newObra.value);
+  }
+  function addSesiones() {
+    newSesion.value = {obra:inputObra.value, date: Date.now()}
+    sesionesStore.addSession(newSesion.value);
+  }
+  function updateObra() {
+
+    obrasStore.actualizarObra(newObra.value);
+  }
+
+  function removeObra(id: number) {
+    obrasStore.eliminarObra(id);
+  }
+
+  function addUser() {
+    newUsuario.value = {name:inputNmUsu.value, mail:  inputMlUsu.value, password:inputPsUsu.value, phone: parseInt(inputTlUsu.value, 10)  }
+    usuariosStore.addUser(newUsuario.value);
+  } 
 
 
-function addObra() {
-  obrasStore.crearObra(newObra.value);
-}
- function addSesiones() {
-  sesionesStore.addSession(newSesion.value);
- }
-function updateObra() {
+  function  toggleEdit (item: User | Obra | Session , store: string) {
+        item.isEditing = !item.isEditing;
+        if (!item.isEditing) {
+          // Guardar cambios según el tipo de store
+          switch (store) {
+            case 'obrasStore':
+              obrasStore.actualizarObra(item as Obra);
+              break;
+            case 'sesionesStore':
+              sesionesStore.updateSesion(item as Session);
+              break;
+            case 'usuariosStore':
+              usuariosStore.updateUser(item as User);
+              break;
+            default:
+              console.warn('Store desconocido:', store);
+          }
+        }
+    }
+    
+  //-------------------------------------------------------------------
 
-  obrasStore.actualizarObra(newObra.value);
-}
+  const ObrasisVisible = ref(false);
+  const SesionesisVisible = ref(false);
+  const UsuariosisVisible = ref(false);
 
-function removeObra(id: number) {
-  obrasStore.eliminarObra(id);
-}
-
-function addUser() {
-  usuariosStore.addUser(newUsuario.value);
-} 
-
-
-obrasStore.cargarObras();
-sesionesStore.fetchSessions();  
-usuariosStore.fetchUsers();  
-//-------------------------------------------------------------------
-
-const ObrasisVisible = ref(false);
-const SesionesisVisible = ref(false);
-const UsuariosisVisible = ref(false);
-
-function ObrasVisible() {
-  ObrasisVisible.value = !ObrasisVisible.value;
-  SesionesisVisible.value = false;
-  UsuariosisVisible.value = false;
-}
-function SesionesVisible() {
-  SesionesisVisible.value = !SesionesisVisible.value;
-  ObrasisVisible.value = false;
-  UsuariosisVisible.value = false;
-}
-function UsuariosVisible() {
-  UsuariosisVisible.value = !UsuariosisVisible.value;
-  SesionesisVisible.value = false;
-  ObrasisVisible.value = false;
-}
+  function ObrasVisible() {
+    ObrasisVisible.value = !ObrasisVisible.value;
+    SesionesisVisible.value = false;
+    UsuariosisVisible.value = false;
+  }
+  function SesionesVisible() {
+    SesionesisVisible.value = !SesionesisVisible.value;
+    ObrasisVisible.value = false;
+    UsuariosisVisible.value = false;
+  }
+  function UsuariosVisible() {
+    UsuariosisVisible.value = !UsuariosisVisible.value;
+    SesionesisVisible.value = false;
+    ObrasisVisible.value = false;
+  }
 </script>
 
 

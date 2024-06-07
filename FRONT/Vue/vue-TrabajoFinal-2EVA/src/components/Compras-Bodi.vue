@@ -4,9 +4,9 @@
         <div>
             <h2>Detalles de la obra seleccionada</h2>
             <div v-if="obraSeleccionada">
-            <p><strong>Título:</strong> {{ obraSeleccionada.title }}</p>
-            <p><strong>Fecha:</strong> {{ obraSeleccionada.subtitle }}</p>
-            <p><strong>Descripción:</strong> {{ obraSeleccionada.content }}</p>
+            <p><strong>Título:</strong> {{ obraSeleccionada.name }}</p>
+            <p><strong>Fecha:</strong> {{ fechaSesion?.toLocaleString()}}</p>
+            <p><strong>Descripción:</strong> {{ obraSeleccionada.synopsis }}</p>
             <!-- Puedes mostrar cualquier otra información de la obra aquí -->
             </div>
             <div v-else>
@@ -76,7 +76,7 @@
                             style="background-color: #C72271;"
                             color="white"
                             text="REALIZAR COMPRA"
-                            @click="isActive.value = false"
+                            @click="isActive.value = false, buyItem()"
                         ></v-btn>
                         <v-btn
                             text="SEGUIR COMPRANDO"
@@ -133,13 +133,36 @@
 </style>
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
-import { ObraStore } from '@/stores/obraStore';
+import { ObraStore, type Obra } from '@/stores/obraStore';
 import { PedidoStore } from '@/stores/pedidosStore';
 
 const obraSeleccionadaStore = ObraStore(); // Instanciamos la store
 
 // Obtenemos la obra seleccionada de la store
-const obraElegida = obraSeleccionadaStore.obraSeleccionada;
+const obraSeleccionada = ref< Obra | null>(null);
+let  fechaSesion: Date|null =  null
+let SesionId = 0 
+const price = 10
+
+const cargarObraSeleccionada = async () => {
+  await obraSeleccionadaStore.cargarObras; 
+  const obraData = localStorage.getItem('ObraSesion');
+  
+  if (obraData) {
+    const parsedData = JSON.parse(obraData);
+    const obraId = parsedData.obraId;
+    fechaSesion = new Date(parsedData.date)
+    SesionId = parsedData.sesionId
+    const obra = await obraSeleccionadaStore.obtenerObra(obraId) ;
+    if (obra ) {
+        obraSeleccionada.value = obra  
+    }
+  }
+};
+
+onMounted(() => {
+  cargarObraSeleccionada();
+});
 const svgCounter = ref(0);
 const pedidoStore = PedidoStore(); // Instanciamos la store
 const agregarSVG = (numSVGs: number) => {
@@ -161,7 +184,7 @@ const agregarSVG = (numSVGs: number) => {
     const columna = (i % asientosPorFila) + 1;
     // Crea el elemento SVG
     const svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svgElement.setAttribute("id", "svgElement" + svgCounter); // Usa el id autoincremental
+    svgElement.setAttribute("id", svgCounter.value.toString()); // Usa el id autoincremental
     svgElement.setAttribute("width", "60px");
     svgElement.setAttribute("height", "100px");
     svgElement.setAttribute("viewBox", "0 0 64 64");
@@ -326,10 +349,11 @@ const animarSVG = (svgElement: SVGElement) => {
 }
 
 const cambiarColor = (svgElement: Element) => {
-    const asientoID = svgElement.getAttribute('data-asiento-id'); // Asegúrate de haber asignado este atributo al crear el SVG
-    const obra = obraSeleccionada?.title;
-    const fecha = obraSeleccionada?.subtitle;
-    const precio = obraSeleccionada?.price;
+    const asientoID = svgElement.getAttribute('id'); // Asegúrate de haber asignado este atributo al crear el SVG
+    const obra = obraSeleccionada.value?.name;
+    const fecha = fechaSesion?.toLocaleString();
+    const precio = price;
+    console.log(asientoID)
     if (asientoID) {
         items.value.push({
             obra: obra, // Modifica según corresponda
@@ -426,6 +450,13 @@ const addItem = () => {
     input.model = '';
   });
 };
+
+const buyItem = () => {
+    const userId = JSON.parse(localStorage.getItem('user')||'').nameid
+    const newPedido = {userId:parseInt(userId, 10), sesionId : SesionId, asientosId: items.value.map(v => v.asiento) }
+    pedidoStore.addPedido(newPedido)
+
+}
 
 
 </script> 

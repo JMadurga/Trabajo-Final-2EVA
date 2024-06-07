@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 
-interface Obra {
+ export interface Obra {
   id?: number;
-  title: string;
+  name: string;
   categoria: string;
   synopsis: string;
+  isEditing?:boolean;
 }
 
 export const ObraStore = defineStore({
@@ -26,7 +27,7 @@ export const ObraStore = defineStore({
       try {
         const response = await fetch(`http://localhost:8001/Obra/${id}`);
         const obra = await response.json();
-        return obra;
+        return obra ;
       } catch (error) {
         console.error('Error obteniendo obra:', error);
         return null;

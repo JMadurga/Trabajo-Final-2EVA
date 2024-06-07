@@ -14,8 +14,13 @@
       <v-spacer></v-spacer>
 
       <v-btn color="pink-lighten-2" @click="loginUser">
-        Logeate o <RouterLink to="/register"> Registrate </RouterLink>
+        Logeate 
         <v-icon icon="mdi-chevron-right" end></v-icon>
+      </v-btn>      
+      <v-btn color="pink-lighten-2" >
+        <RouterLink to="/register">
+            Registrate 
+        </RouterLink>
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -31,6 +36,7 @@
   .v-card {
     margin-block: 14%;
     font-family: 'Lato', sans-serif;
+    text-decoration: none;
   }
 </style>
 <script setup lang="ts">
@@ -40,8 +46,6 @@ import { RouterLink, RouterView } from 'vue-router';
   
   const store = UserStore();
   
-
-
   const first = ref("");
   const email = ref("");
   const password = ref("");

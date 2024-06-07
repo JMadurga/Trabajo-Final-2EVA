@@ -1,11 +1,15 @@
 import { reactive } from 'vue';
 import { defineStore } from 'pinia';
+import {ObraStore  } from "@/stores/obraStore";
 
  export interface Session {
-    id?: number;
+    sesionId?: number;
+    obraId?: number;
     obra: string;
     date: number;
     asientos?: number[];
+    price? :number;
+    isEditing?:boolean;
 }
 
 
@@ -22,6 +26,30 @@ export const SesionStore = defineStore('sesionStore', {
                 const response = await fetch('http://localhost:8001/Sesion');
                 const data = await response.json();
                 this.sessions = data;
+            } catch (error) {
+                this.error = error as string;
+            } finally {
+                this.loading = false;
+            }
+        },
+
+        async  fetchSessionsObra() {
+            try {
+                
+                await this.fetchSessions();
+
+                this.sessions.forEach(  (sesion: any, i) => {  
+                    fetch(`http://localhost:8001/Obra/${sesion.obraId}`).then(value => value.json()).then((obra) => {
+                        this.sessions[i] = {
+                            
+                            ...this.sessions[i],
+                            obra : obra.name,
+                        };
+                        console.log(this.sessions)
+                     });
+                
+                  });
+                  
             } catch (error) {
                 this.error = error as string;
             } finally {
@@ -49,7 +77,7 @@ export const SesionStore = defineStore('sesionStore', {
                 await fetch(`http://localhost:8001/Sesion/${sesionId}`, {
                     method: 'DELETE',
                 });
-                this.sessions = this.sessions.filter(session => session.id !== sesionId);
+                this.sessions = this.sessions.filter(session => session.sesionId !== sesionId);
 
             } catch (error) {
                 console.error('Failed to remove sesion:', error);
@@ -57,7 +85,7 @@ export const SesionStore = defineStore('sesionStore', {
         },
         async updateSesion(updatedSesion: Session) {  
             try {
-                const response = await fetch(`http://localhost:8001/Sesion/${updatedSesion.id}`, {
+                const response = await fetch(`http://localhost:8001/Sesion/${updatedSesion.sesionId}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -65,7 +93,7 @@ export const SesionStore = defineStore('sesionStore', {
                     body: JSON.stringify(updatedSesion),
                 });
                 const data = await response.json();
-                const index = this.sessions.findIndex(session => session.id === updatedSesion.id);
+                const index = this.sessions.findIndex(session => session.sesionId === updatedSesion.sesionId);
                 if (index !== -1) {
                     this.sessions[index] = data;
                 }

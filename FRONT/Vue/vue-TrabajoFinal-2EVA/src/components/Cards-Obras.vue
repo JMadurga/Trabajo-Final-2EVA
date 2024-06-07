@@ -1,9 +1,8 @@
 <template >
     <div class="cards-area">
-      <v-card width="300px" v-for="card in cards" :key="card.id">
-        
-        <v-card-title>{{ card.obra }}</v-card-title>
-        <v-card-subtitle>{{ card.date }}</v-card-subtitle>
+       <v-card width="300px" v-for="card in sesionSeleccionadaStore.sessions" :key="card.sesionId">
+        <v-card-title>{{ card.obra}}</v-card-title>
+        <v-card-subtitle>{{ new Date (card.date).toLocaleString() }}</v-card-subtitle>
         <v-card-actions>
           <RouterLink to="/compras"><v-btn color="blue darken-4" variant="text" @click="comprar(card)">Comprar</v-btn></RouterLink>
         </v-card-actions>
@@ -17,7 +16,7 @@
             </v-expansion-panel>
           </v-expansion-panels>
         </v-card-actions>
-      </v-card>
+      </v-card> 
     </div>
 </template>
 
@@ -32,32 +31,21 @@ const obraSeleccionadaStore = ObraStore();
 const sesionSeleccionadaStore = SesionStore();
 
 obraSeleccionadaStore.cargarObras();
-sesionSeleccionadaStore.fetchSessions();
+sesionSeleccionadaStore.fetchSessionsObra();
 
+console.log(sesionSeleccionadaStore.sessions)
 
 const obras = obraSeleccionadaStore.obras
-const cards = ref<Session []>([]);
+const cards  = ref<Session []>([]);
+
+ const comprar = (sesion: Session) => {
+
+      localStorage.setItem('ObraSesion', JSON.stringify(sesion));
+ };
+</script>
 
 
-  
-
-  sesionSeleccionadaStore.sessions.forEach( async (sesion: any) => {
-     const obra =  await obraSeleccionadaStore.obtenerObra(sesion.obra);
-    cards.value.push({
-      id: sesion.id,
-      obra: obra.title,
-      date: sesion.date,
-      asientos: sesion.asientos
-    });
-  });
-
-console.log(cards.value);
-
-const comprar = (obra: any) => {
-  obraSeleccionadaStore.obtenerObra(obra);
-};
-  </script>
-  <style scoped>
+<style scoped>
   .cards-area {
     display: grid;
     grid-template-columns: auto auto auto auto;

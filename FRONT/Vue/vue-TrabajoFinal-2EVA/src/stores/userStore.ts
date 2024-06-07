@@ -1,11 +1,12 @@
 import { defineStore } from 'pinia';
 
-interface User {
+export interface User {
     id?: number;
     name?: string;
-    email: string;
+    mail: string;
     password: string;
     phone?:number;
+    isEditing?:boolean;
 }
 
 export const UserStore = defineStore('userStore', {
@@ -68,7 +69,7 @@ export const UserStore = defineStore('userStore', {
             }
         },
 
-        async loginUser(user: User) {
+        async loginUser(user: {email :string; password : string}) {
             try {
                 const response = await fetch('http://localhost:8001/Users/login', {
                     method: 'POST',
@@ -77,17 +78,22 @@ export const UserStore = defineStore('userStore', {
                     },
                     body: JSON.stringify(user),
                 });
-                const data = await response.json();
+                const data = await response.text();
 
                 if (data) {
-                    const dataString = JSON.stringify(data);
+                    const dataString = data;
                     localStorage.setItem('token', dataString);
                     const firstDot = dataString.indexOf('.');
                     const secondDot = dataString.indexOf('.', firstDot + 1);
                      user = JSON.parse(atob(dataString.slice(firstDot + 1, secondDot)));
                     localStorage.setItem('user', JSON.stringify(user));
                     this.token = data;
-                    window.location.href = '/admin';
+                    if (user.email === 'teatrodosfacetas@gmail.com') {
+                      window.location.href = '/admin';  
+                    }else{
+                        window.location.href = '/';  
+                    }
+                    
                 } else {
                     console.log('Login failed');
                 }

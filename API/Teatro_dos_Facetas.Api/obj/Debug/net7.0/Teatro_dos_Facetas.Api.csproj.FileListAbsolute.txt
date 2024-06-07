@@ -872,3 +872,4 @@ D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_Facetas.Api\obj\Debug\net7.0\r
 D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_Facetas.Api\obj\Debug\net7.0\Teatro_dos_Facetas.Api.pdb
 D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_Facetas.Api\obj\Debug\net7.0\Teatro_dos_Facetas.Api.genruntimeconfig.cache
 D:\Javi-Calse\Trabajo-Final-2EVA-1\API\Teatro_dos_Facetas.Api\obj\Debug\net7.0\ref\Teatro_dos_Facetas.Api.dll
+D:\Javi-Calse\Trabajo-Final-2EVA\API\Teatro_dos_Facetas.Api\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

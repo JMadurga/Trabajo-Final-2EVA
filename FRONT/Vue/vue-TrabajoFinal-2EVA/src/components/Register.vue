@@ -16,8 +16,13 @@
         <v-spacer></v-spacer>
   
         <v-btn color="pink-lighten-2" @click="addUser">
-          COMPLETAR EL REGISTRO
+          REGISTRATE
           <v-icon icon="mdi-chevron-right" end></v-icon>
+        </v-btn>
+        <v-btn color="pink-lighten-2" >
+          <RouterLink to="/Login">
+              Logeate 
+          </RouterLink>
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -33,6 +38,7 @@
     .v-card {
       margin-block: 14%;
       font-family: 'Lato', sans-serif;
+      text-decoration: none;
     }
   </style>
   <script setup lang="ts">
@@ -51,10 +57,9 @@
   function addUser() {
     const user = {
       name: first.value,
-      email: email.value,
+      mail: email.value,
       password: password.value,
-      
-      
+ 
     };
     store.addUser(user);
   }
