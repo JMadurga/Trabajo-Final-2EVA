@@ -69,7 +69,7 @@ export const UserStore = defineStore('userStore', {
             }
         },
 
-        async loginUser(user: {email :string; password : string}) {
+        async loginUser(user: {mail :string; password : string}) {
             try {
                 const response = await fetch('http://localhost:8001/Users/login', {
                     method: 'POST',
@@ -88,7 +88,7 @@ export const UserStore = defineStore('userStore', {
                      user = JSON.parse(atob(dataString.slice(firstDot + 1, secondDot)));
                     localStorage.setItem('user', JSON.stringify(user));
                     this.token = data;
-                    if (user.email === 'teatrodosfacetas@gmail.com') {
+                    if (user.mail === 'teatrodosfacetas@gmail.com') {
                       window.location.href = '/admin';  
                     }else{
                         window.location.href = '/';  

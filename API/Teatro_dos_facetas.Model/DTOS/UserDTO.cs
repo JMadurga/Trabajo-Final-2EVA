@@ -11,7 +11,7 @@ public class UserCreateDTO
     public string name {get; set;}
     
     [Required]
-    public string email {get; set;}
+    public string mail {get; set;}
 
     [Required]
     public string password {get; set;}

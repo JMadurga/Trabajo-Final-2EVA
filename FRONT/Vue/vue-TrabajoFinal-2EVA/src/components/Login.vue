@@ -53,7 +53,7 @@ import { RouterLink, RouterView } from 'vue-router';
 
   function loginUser() {
     const user = {     
-      email: email.value,
+      mail: email.value,
       password: password.value,
       
     };

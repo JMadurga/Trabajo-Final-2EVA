@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ucTGqazacTxuPGUweS182T1JC7FpX7DgAdBU3rlK8LKHj8+o6D5a45yHAFM9Hi/EFjaRlyMdzroosoBiuAFZdQ==",
+  "dgSpecHash": "nfTemlOeEBiSD+eb09IATI9RHP+Rd+5bux8Gfz+PVbdX/en2vHePeUumGO8damPHj4LitGEe402pmWjlPHH0EA==",
   "success": true,
-  "projectFilePath": "D:\\Javi-Calse\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
+  "projectFilePath": "C:\\Users\\javit\\Trabajo-Final-2EVA\\API\\Teatro_dos_Facetas.Data\\Teatro_dos_Facetas.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\javit\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\javit\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

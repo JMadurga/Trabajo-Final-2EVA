@@ -39,7 +39,7 @@ namespace Teatro_dos_Facetas.Business
                     {
                         new Claim(ClaimTypes.NameIdentifier, Convert.ToString(userDTO.id)),
                         new Claim(ClaimTypes.Name, userDTO.name),
-                        new Claim(ClaimTypes.Email, userDTO.email),
+                        new Claim(ClaimTypes.Email, userDTO.mail),
                         new Claim("myCustomClaim", "myCustomClaimValue"),
                         // add other claims
                     }),

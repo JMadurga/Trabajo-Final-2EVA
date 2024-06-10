@@ -45,17 +45,17 @@ namespace Teatro_dos_facetas.Data{
         }
 
         public UserCreateDTO AddUserFromCredentials(UserCreateDTO userDtoIn) {
-            if (GetUserByCorreo(userDtoIn.email) != null)
+            if (GetUserByCorreo(userDtoIn.mail) != null)
             {
                 throw new KeyNotFoundException("User already exists.");
             }
-            var user = new Users { name = userDtoIn.name, mail = userDtoIn.email, password = userDtoIn.password, phone = userDtoIn.phone};
+            var user = new Users { name = userDtoIn.name, mail = userDtoIn.mail, password = userDtoIn.password, phone = userDtoIn.phone};
             AddUser(user); 
-            return new UserCreateDTO { id = user.id, name = user.name, email = user.mail, phone = user.phone};
+            return new UserCreateDTO { id = user.id, name = user.name, mail = user.mail, phone = user.phone};
         }
         
         public UserCreateDTO GetUserFromCredentials(LoginDtoIn loginDtoIn) {
-            var user = GetUserByCorreo(loginDtoIn.email);
+            var user = GetUserByCorreo(loginDtoIn.mail);
             if (user == null)
             {
                 
@@ -66,7 +66,7 @@ namespace Teatro_dos_facetas.Data{
                 
                 throw new KeyNotFoundException("Password incorrect.");
             }
-            return new UserCreateDTO { id = user.id, name = user.name, email = user.mail, phone = user.phone};
+            return new UserCreateDTO { id = user.id, name = user.name, mail = user.mail, phone = user.phone};
         }
         public void SaveChanges()
         {
