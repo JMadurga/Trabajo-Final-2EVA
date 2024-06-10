@@ -135,6 +135,7 @@
 import { onMounted, ref } from 'vue';
 import { ObraStore, type Obra } from '@/stores/obraStore';
 import { PedidoStore } from '@/stores/pedidosStore';
+import UserStore from '@/stores/userStore';
 
 const obraSeleccionadaStore = ObraStore(); // Instanciamos la store
 
@@ -453,11 +454,13 @@ const addItem = () => {
 
 const buyItem = () => {
     const userId = JSON.parse(localStorage.getItem('user')||'').nameid
-    const newPedido = {userId:parseInt(userId, 10), sesionId : SesionId, asientosId: items.value.map(v => v.asiento) }
-    pedidoStore.addPedido(newPedido)
-
+    const newPedido = {userId:parseInt(userId, 10), sesionId : SesionId, asientosId: items.value.map(v => parseInt(v.asiento)) }
+    if (userId == null || userId == undefined || userId === '') {
+        alert('El usuario no esta autenticado. Por favor, inicie sesion')
+    }else{
+        pedidoStore.addPedido(newPedido)
+    }
+    
 }
 
-
 </script> 
-@/stores/obraStore

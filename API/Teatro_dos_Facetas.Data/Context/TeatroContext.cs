@@ -100,7 +100,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
         
         entity.HasMany(s => s.pedidos)
             .WithOne(sa => sa.sesion)
-            .HasForeignKey(sa => sa.sesionId);
+            .HasForeignKey(sa => sa.SesionId);
 
     });
 

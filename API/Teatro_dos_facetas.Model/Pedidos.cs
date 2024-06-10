@@ -19,10 +19,9 @@ namespace Teatro_dos_facetas.Model
 
         public Users user {get; set;}
 
-        [ForeignKey("sesionId")]
-        public int sesionId {get; set;}
+        [ForeignKey("SesionId")]
+        public int SesionId {get; set;}
 
-        
         public Sesion sesion {get; set;}   
 
         public List<PedidosAsiento> pedidoAsientos {get; set;}

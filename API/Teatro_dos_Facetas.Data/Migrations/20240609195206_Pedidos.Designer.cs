@@ -12,8 +12,8 @@ using Teatro_dos_facetas.Data;
 namespace Teatrodosfacetas.Data.Migrations
 {
     [DbContext(typeof(TeatroContext))]
-    [Migration("20240319113436_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240609195206_Pedidos")]
+    partial class Pedidos
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,10 +33,18 @@ namespace Teatrodosfacetas.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
 
+                    b.Property<int?>("AsientosOcupadosid")
+                        .HasColumnType("int");
+
                     b.Property<bool>("isFree")
                         .HasColumnType("bit");
 
+                    b.Property<double>("price")
+                        .HasColumnType("float");
+
                     b.HasKey("id");
+
+                    b.HasIndex("AsientosOcupadosid");
 
                     b.ToTable("Asientos");
 
@@ -44,203 +52,261 @@ namespace Teatrodosfacetas.Data.Migrations
                         new
                         {
                             id = 1,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 2,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 3,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 4,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 5,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 6,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 7,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 8,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 9,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 10,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 11,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 12,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 13,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 14,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 15,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 16,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 17,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 18,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 19,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 20,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 21,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 22,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 23,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 24,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 25,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 26,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 27,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 28,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 29,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 30,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 31,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 32,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 33,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 34,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 35,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 36,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 37,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 38,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 39,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         },
                         new
                         {
                             id = 40,
-                            isFree = true
+                            isFree = true,
+                            price = 10.5
                         });
+                });
+
+            modelBuilder.Entity("Teatro_dos_facetas.Model.AsientosOcupados", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int>("sesionid")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("sesionid");
+
+                    b.ToTable("AsientosOcupados");
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Obras", b =>
@@ -340,6 +406,55 @@ namespace Teatrodosfacetas.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Pedidos", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<int?>("Sesionid")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("sesionId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("total")
+                        .HasColumnType("float");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("Sesionid");
+
+                    b.HasIndex("sesionId");
+
+                    b.HasIndex("userId");
+
+                    b.ToTable("Pedidos");
+                });
+
+            modelBuilder.Entity("Teatro_dos_facetas.Model.PedidosAsiento", b =>
+                {
+                    b.Property<int>("pedidoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("asientoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("pedidoId", "asientoId");
+
+                    b.HasIndex("asientoId");
+
+                    b.ToTable("PedidoAsientos");
+                });
+
             modelBuilder.Entity("Teatro_dos_facetas.Model.Sesion", b =>
                 {
                     b.Property<int>("id")
@@ -351,9 +466,52 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Property<DateTime>("date")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("obraId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
 
+                    b.HasIndex("obraId");
+
                     b.ToTable("Sesiones");
+
+                    b.HasData(
+                        new
+                        {
+                            id = 1,
+                            date = new DateTime(2024, 6, 9, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(75),
+                            obraId = 1
+                        },
+                        new
+                        {
+                            id = 2,
+                            date = new DateTime(2024, 6, 10, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(122),
+                            obraId = 2
+                        },
+                        new
+                        {
+                            id = 3,
+                            date = new DateTime(2024, 6, 11, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(128),
+                            obraId = 3
+                        },
+                        new
+                        {
+                            id = 4,
+                            date = new DateTime(2024, 6, 12, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(130),
+                            obraId = 4
+                        },
+                        new
+                        {
+                            id = 5,
+                            date = new DateTime(2024, 6, 13, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(132),
+                            obraId = 5
+                        },
+                        new
+                        {
+                            id = 6,
+                            date = new DateTime(2024, 6, 14, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(133),
+                            obraId = 6
+                        });
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.SesionAsiento", b =>
@@ -364,22 +522,16 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Property<int>("sesionId")
                         .HasColumnType("int");
 
-                    b.HasKey("asientoId");
+                    b.Property<int?>("Asientosid")
+                        .HasColumnType("int");
+
+                    b.HasKey("asientoId", "sesionId");
+
+                    b.HasIndex("Asientosid");
+
+                    b.HasIndex("sesionId");
 
                     b.ToTable("SesionAsientos");
-                });
-
-            modelBuilder.Entity("Teatro_dos_facetas.Model.SesionObra", b =>
-                {
-                    b.Property<int>("obraId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("sesionId")
-                        .HasColumnType("int");
-
-                    b.HasKey("obraId");
-
-                    b.ToTable("SesionObras");
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Users", b =>
@@ -436,42 +588,88 @@ namespace Teatrodosfacetas.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Teatro_dos_facetas.Model.SesionAsiento", b =>
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Asientos", b =>
                 {
-                    b.HasOne("Teatro_dos_facetas.Model.Asientos", "asiento")
-                        .WithMany("SesionAsientos")
-                        .HasForeignKey("asientoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasOne("Teatro_dos_facetas.Model.AsientosOcupados", null)
+                        .WithMany("asientosOcupados")
+                        .HasForeignKey("AsientosOcupadosid");
+                });
 
+            modelBuilder.Entity("Teatro_dos_facetas.Model.AsientosOcupados", b =>
+                {
                     b.HasOne("Teatro_dos_facetas.Model.Sesion", "sesion")
-                        .WithMany("SesionAsientos")
-                        .HasForeignKey("asientoId")
+                        .WithMany()
+                        .HasForeignKey("sesionid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("asiento");
 
                     b.Navigation("sesion");
                 });
 
-            modelBuilder.Entity("Teatro_dos_facetas.Model.SesionObra", b =>
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Pedidos", b =>
                 {
-                    b.HasOne("Teatro_dos_facetas.Model.Obras", "obra")
-                        .WithMany("SesionObras")
-                        .HasForeignKey("obraId")
+                    b.HasOne("Teatro_dos_facetas.Model.Sesion", null)
+                        .WithMany("pedidos")
+                        .HasForeignKey("Sesionid");
+
+                    b.HasOne("Teatro_dos_facetas.Model.Sesion", "sesion")
+                        .WithMany()
+                        .HasForeignKey("sesionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Teatro_dos_facetas.Model.Users", "user")
+                        .WithMany("pedidos")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Teatro_dos_facetas.Model.Sesion", "sesion")
-                        .WithMany("SesionObras")
+                    b.Navigation("sesion");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("Teatro_dos_facetas.Model.PedidosAsiento", b =>
+                {
+                    b.HasOne("Teatro_dos_facetas.Model.AsientosOcupados", "asientos")
+                        .WithMany("pedidoAsientos")
+                        .HasForeignKey("asientoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Teatro_dos_facetas.Model.Pedidos", "pedido")
+                        .WithMany("pedidoAsientos")
+                        .HasForeignKey("pedidoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("asientos");
+
+                    b.Navigation("pedido");
+                });
+
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Sesion", b =>
+                {
+                    b.HasOne("Teatro_dos_facetas.Model.Obras", "obra")
+                        .WithMany("sesiones")
                         .HasForeignKey("obraId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("obra");
+                });
 
-                    b.Navigation("sesion");
+            modelBuilder.Entity("Teatro_dos_facetas.Model.SesionAsiento", b =>
+                {
+                    b.HasOne("Teatro_dos_facetas.Model.Asientos", null)
+                        .WithMany("SesionAsientos")
+                        .HasForeignKey("Asientosid");
+
+                    b.HasOne("Teatro_dos_facetas.Model.Sesion", null)
+                        .WithMany("SesionAsientos")
+                        .HasForeignKey("sesionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Asientos", b =>
@@ -479,16 +677,33 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Navigation("SesionAsientos");
                 });
 
+            modelBuilder.Entity("Teatro_dos_facetas.Model.AsientosOcupados", b =>
+                {
+                    b.Navigation("asientosOcupados");
+
+                    b.Navigation("pedidoAsientos");
+                });
+
             modelBuilder.Entity("Teatro_dos_facetas.Model.Obras", b =>
                 {
-                    b.Navigation("SesionObras");
+                    b.Navigation("sesiones");
+                });
+
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Pedidos", b =>
+                {
+                    b.Navigation("pedidoAsientos");
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Sesion", b =>
                 {
                     b.Navigation("SesionAsientos");
 
-                    b.Navigation("SesionObras");
+                    b.Navigation("pedidos");
+                });
+
+            modelBuilder.Entity("Teatro_dos_facetas.Model.Users", b =>
+                {
+                    b.Navigation("pedidos");
                 });
 #pragma warning restore 612, 618
         }

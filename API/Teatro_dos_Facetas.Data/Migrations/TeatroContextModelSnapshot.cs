@@ -476,37 +476,37 @@ namespace Teatrodosfacetas.Data.Migrations
                         new
                         {
                             id = 1,
-                            date = new DateTime(2024, 4, 7, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6607),
+                            date = new DateTime(2024, 6, 9, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(75),
                             obraId = 1
                         },
                         new
                         {
                             id = 2,
-                            date = new DateTime(2024, 4, 8, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6646),
+                            date = new DateTime(2024, 6, 10, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(122),
                             obraId = 2
                         },
                         new
                         {
                             id = 3,
-                            date = new DateTime(2024, 4, 9, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6655),
+                            date = new DateTime(2024, 6, 11, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(128),
                             obraId = 3
                         },
                         new
                         {
                             id = 4,
-                            date = new DateTime(2024, 4, 10, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6657),
+                            date = new DateTime(2024, 6, 12, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(130),
                             obraId = 4
                         },
                         new
                         {
                             id = 5,
-                            date = new DateTime(2024, 4, 11, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6658),
+                            date = new DateTime(2024, 6, 13, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(132),
                             obraId = 5
                         },
                         new
                         {
                             id = 6,
-                            date = new DateTime(2024, 4, 12, 21, 55, 18, 174, DateTimeKind.Local).AddTicks(6660),
+                            date = new DateTime(2024, 6, 14, 21, 52, 6, 558, DateTimeKind.Local).AddTicks(133),
                             obraId = 6
                         });
                 });
@@ -519,7 +519,12 @@ namespace Teatrodosfacetas.Data.Migrations
                     b.Property<int>("sesionId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("Asientosid")
+                        .HasColumnType("int");
+
                     b.HasKey("asientoId", "sesionId");
+
+                    b.HasIndex("Asientosid");
 
                     b.HasIndex("sesionId");
 
@@ -653,21 +658,15 @@ namespace Teatrodosfacetas.Data.Migrations
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.SesionAsiento", b =>
                 {
-                    b.HasOne("Teatro_dos_facetas.Model.Asientos", "asiento")
+                    b.HasOne("Teatro_dos_facetas.Model.Asientos", null)
                         .WithMany("SesionAsientos")
-                        .HasForeignKey("asientoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Asientosid");
 
-                    b.HasOne("Teatro_dos_facetas.Model.Sesion", "sesion")
+                    b.HasOne("Teatro_dos_facetas.Model.Sesion", null)
                         .WithMany("SesionAsientos")
                         .HasForeignKey("sesionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("asiento");
-
-                    b.Navigation("sesion");
                 });
 
             modelBuilder.Entity("Teatro_dos_facetas.Model.Asientos", b =>
